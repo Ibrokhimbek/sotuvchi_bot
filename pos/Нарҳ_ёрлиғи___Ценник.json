@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Working with the Price Tag Module",
+    "parent_section": null,
+    "overall_goal": "To provide a step-by-step guide on how to search for products, configure print parameters, and manage templates for printing price tags in the Linko-POS Desktop system.",
+    "rag_description": "This documentation section provides instructions for the 'Price Tag' (Cennik) module in Linko-POS Desktop. It guides users through opening the module from the main menu, navigating the split-screen interface (product list vs. settings panel), and selecting products using search or brand filters. It covers essential configuration steps such as selecting the warehouse, price list, currency, and sticker quantity. Furthermore, it explains how to manage price tag templates, including choosing sizes (like 60x30 or 40x30), editing designs via the template editor, and saving customized layouts for printing. This section is crucial for users needing to generate physical labels for inventory management and retail display.",
+    "content": [
+      {
+        "step": "1. Opening the Price Tag Module",
+        "description": "Access the 'Price Tag' (Cennik) section from the left sidebar menu. The page is structured into two main parts: the left side contains the product list (displaying names, barcodes, stock levels, and prices), while the right side contains filters and printer settings, including template sizes, warehouse selection, price lists, currency, and the quantity count.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/258/image.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/258/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "2. Selecting Products to Print",
+        "description": "Use the 'Search' bar at the top to find products by name or barcode. You can narrow the list using filters like 'Product Type' or 'Brand'. Select the specific products you wish to print by clicking them in the list. Alternatively, use the 'Select all products for printing' checkbox to include all items currently displayed.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/258/telegram-cloud-photo-size-2-5335044080167227547-w.jpg"
+        ]
+      },
+      {
+        "step": "3. Configuring Print Parameters",
+        "description": "On the right panel, select the 'Warehouse' (e.g., 'Main') from which stock and prices should be pulled. Choose the appropriate 'Price List' (e.g., 'Sales Price') and set the 'Currency' (e.g., SUM). Finally, enter the required number of stickers per product in the 'Quantity' field.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/258/image%20%288%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/258/image%20%283%29.png"
+        ]
+      },
+      {
+        "step": "4. Managing Templates and Sizes",
+        "description": "Click the large blue size button (e.g., '60x30') to open the 'Price Tag Settings' window. Choose from standard templates (60x30, 30x20, etc.) in the left list and view the preview on the right. You can edit a template (font, barcode placement, PLU) by clicking the pencil icon, or create a new one via the 'Add' button. Click 'Save' to apply the selected template to your current print job.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/258/image%20%285%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/258/image%20%286%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/258/image%20%287%29.png"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,173 @@
+[
+  {
+    "title": "Completion requirements for Inventory Audit (Revision)",
+    "parent_section": "Ревизищ / Ревизищ",
+    "overall_goal": "Guide the user through the process of conducting a stock audit, including updating inventory levels and pricing in the Linko-POS system.",
+    "rag_description": "This documentation section details the inventory revision process within Linko-POS Desktop, a feature used to reconcile physical stock with system records and update product pricing. The process involves four main stages: accessing the Revision module via the side menu, configuring a 'Revision Check' by selecting the warehouse and specific parameters (retail price, stock balance, or purchase price), manually entering actual stock counts and new prices for individual products in the 'Inventory Product' window, and finalizing the session by sending the data and synchronizing with the database. This workflow ensures that both stock levels and financial values are accurately reflected in the system after a physical count.",
+    "content": [
+      {
+        "step": "Step 1. Access the Revision section",
+        "description": "Open the menu on the left side of the sales window and select the 'Revision' section from the list.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/77/image%20%286%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/77/image%20%287%29.png"
+        ]
+      },
+      {
+        "step": "Step 2. Create a 'Revision Check'",
+        "description": "In the revision window, select the necessary parameters: the specific Warehouse to be audited, the Currency, and the Price List (optional). Select the data you want to modify: 'Price' (retail selling price), 'Stock on hand' (inventory quantity), or 'Purchase price' (cost price). You can select one, multiple, or all three options. Click 'Create' to proceed.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/77/image%20%288%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Entering changes for products",
+        "description": "The window will display all products on the right side and items being modified on the left side. Click on the desired product to open the 'Inventory product' window. Enter the 'Actual stock' (physical count), 'Selling price' (new retail price), and 'Purchase price' (new cost price if it has changed). Click the 'Add' button to include these changes in the revision.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/77/image%20%282%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/77/image%20%283%29.png"
+        ]
+      },
+      {
+        "step": "Step 4. Finalizing the revision",
+        "description": "Once you have entered changes for all products, click the 'Send' button at the bottom of the screen. Finally, perform a synchronization to update the database with the new stock balances and prices.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/77/image%20%284%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Inventory Adjustment Process",
+    "parent_section": "Ревизирвание / Ревизия",
+    "overall_goal": "To update and correct product stock balances within the point-of-sale system to match the actual physical inventory in the warehouse.",
+    "rag_description": "This guide details the procedure for performing a stock revision in Linko-POS Desktop. The process involves navigating to the Revision module, creating a new revision check specifically for 'Stock balance' (Остаток на складе), and selecting products from the inventory list to update their quantities. Users learn how to input the actual physical counts into the system for individual products and finalize the revision by submitting the report. This action ensures the system's stock records are synchronized with the real warehouse levels. Key screens include the 'Check revision' window, the product selection list, and the 'Inventory product' entry form.",
+    "content": [
+      {
+        "step": "Step 1. Create a Revision Check",
+        "description": "Navigate to the 'Revision' section and click the 'Create check' (Создать чек) button. The 'Check revision' (Чек ревизии) window will appear. Select the type of adjustment you want to perform; in this case, choose 'Stock balance' (Остаток на складе). Click 'Create' (Создать) to proceed.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/51/image%20%284%29.png"
+        ]
+      },
+      {
+        "step": "Step 2. Adjust Stock Balances",
+        "description": "The next window displays a list of all products. Select the specific product you want to adjust by clicking on it. An 'Inventory product' (Инвентарный продукт) window will open. Enter the new actual quantity in the 'Stock balance' (Остаток на складе) field and click 'Add' (Добавить) to include this product in the revision list.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/51/image%20%285%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/51/image%20%286%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Confirm and Submit Changes",
+        "description": "You can repeat the previous step for multiple products. Once all necessary adjustments have been added to the list, click the 'Send' (Отправить) button at the bottom of the screen. The warehouse stock quantities for the selected items will be updated to the new values you entered.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/51/image%20%287%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Updating Product Prices via Revision",
+    "parent_section": "Ревизищ / Ревизищ",
+    "overall_goal": "Learn how to batch update product selling prices using the Revision module in Linko-POS Desktop.",
+    "rag_description": "This documentation section explains the systematic process of updating product selling prices using the Revision module in Linko-POS Desktop. It guides users through creating a revision receipt, selecting the 'Price' parameter, choosing specific items from the inventory list, and inputting new retail values. The guide details how to add multiple items to a change list and apply those updates simultaneously by sending the receipt. This workflow is essential for retailers who need to adjust pricing across their catalog efficiently while maintaining a record of the changes through the Revision interface.",
+    "content": [
+      {
+        "step": "Step 1: Preparing the Revision Receipt",
+        "description": "Navigate to the \"Revision\" section and click on \"Create receipt\" (Создать чек). This will open the \"Revision receipt\" (Чек ревизии) window. From the available options, select \"Price\" (Цена) to indicate you want to change the selling prices, then click the \"Create\" button.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/59/image%20%284%29.png"
+        ]
+      },
+      {
+        "step": "Step 2: Selecting Products and Entering New Prices",
+        "description": "In the next screen, a list of all products will appear. Click on the product whose price you want to change to open the \"Inventory product\" window. Enter the new desired selling price in the field \"Change price in 'Selling Price'\" and click the \"Add\" button. The item will then be added to the list of price updates.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/59/image%20%285%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/59/image%20%286%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/59/image%20%287%29.png"
+        ]
+      },
+      {
+        "step": "Step 3: Applying All Changes",
+        "description": "You can continue adding multiple products to the list in the same manner. Once you have finished entering all the price changes, click the \"Send\" (Отправить) button at the bottom. The selling prices for all selected products will be updated according to the new values you entered.",
+        "images": []
+      }
+    ]
+  },
+  {
+    "title": "Updating Purchase Prices via Revision Check",
+    "parent_section": "Ревизия / Ревизия",
+    "overall_goal": "To guide the user through the process of updating product cost prices in the Linko-POS system using the Revision Check feature.",
+    "rag_description": "This documentation section provides instructions on how to adjust product purchase prices (cost prices) within the Linko-POS Desktop Revision module. The process involves creating a 'Revision check,' specifically choosing the 'Purchase price' parameter for modification. Users learn how to navigate the inventory list, select specific products, enter new cost values in the local currency, and finalize the bulk update. This ensures accurate inventory valuation and financial reporting by allowing manual correction of cost prices for multiple items at once.",
+    "content": [
+      {
+        "step": "Step 1. Create a revision check",
+        "description": "Go to the 'Revision' section and click the 'Create check' button. The 'Revision check' window will appear. From the options provided, select 'Purchase price' (Закупочная цена) as the attribute you want to change, then click the 'Create' button.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/78/image%20%284%29.png"
+        ]
+      },
+      {
+        "step": "Step 2. Select products and enter new prices",
+        "description": "A list of all products will be displayed. Click on the product for which you want to change the purchase price. In the 'Inventory product' window that opens, enter the new price in the 'Purchase price' field (in sums). Click the 'Add' button to include this product in the list of pending price changes.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/78/image%20%285%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/78/image%20%287%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Confirm all changes",
+        "description": "You can add multiple products to the list following the same procedure. Once all necessary products have been updated in the list, click the 'Send' button at the bottom of the screen. The purchase prices for all selected products will be updated to the new values entered.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/78/image%20%288%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Completion requirements",
+    "parent_section": "Ревизия / Ревизия",
+    "overall_goal": "To update product inventory levels, selling prices, and cost prices by importing a bulk data file through the Revision module in Linko-POS.",
+    "rag_description": "This documentation section provides instructions for performing a stock revision using the Import feature in Linko-POS Desktop. The process involves navigating to the Revision module, selecting a warehouse and currency, and defining the specific data fields to be updated, such as Selling Price, Stock Balance, and Purchase Price. Users are guided through downloading a standardized Excel template, populating it with mandatory product data, and uploading the file back into the system to automate inventory synchronization. This workflow is designed to facilitate bulk updates to warehouse stock and pricing records efficiently.",
+    "content": [
+      {
+        "step": "1.1",
+        "description": "After entering the Revision section, a window will open. Here, select the required parameters including the warehouse, currency, and the specific fields you wish to modify—such as Price, Stock on Hand, and Purchase Price. Click the 'Create' button to proceed.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/195/image.png"
+        ]
+      },
+      {
+        "step": "1.2",
+        "description": "Once the main window opens, click the 'Import' button. In the popup window, click 'Download template' to save the file to your computer, and then open the saved template.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/195/image%20%281%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/195/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "1.3",
+        "description": "The template will open in a spreadsheet format. You must fill in the four mandatory columns: Name (product name), Price (selling price), Stock on Hand (the remaining quantity in the warehouse), and Purchase Price (the cost price of the item).",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/195/image%20%287%29.png"
+        ]
+      },
+      {
+        "step": "1.4",
+        "description": "After all necessary fields have been completed, save the file to your computer.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/195/image%20%285%29.png"
+        ]
+      },
+      {
+        "step": "1.5",
+        "description": "Return to the Import window in the POS system, click 'Select file', and choose the file you just saved. Click 'Save' to finalize the process. The product balances and cost prices will be updated automatically based on the values provided in the template.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/195/image%20%286%29.png"
+        ]
+      }
+    ]
+  }
+]

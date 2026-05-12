@@ -1,0 +1,72 @@
+[
+  {
+    "title": "General Settings Configuration",
+    "parent_section": "Сазаватавадар / Бастрайби",
+    "overall_goal": "To configure essential POS system parameters including printing hardware, interface scaling, and device-specific operation modes.",
+    "rag_description": "This documentation provides a guide on how to configure the general settings of the Linko-POS Desktop application. It covers navigating the side menu to access the 'Settings' module, selecting appropriate hardware for printing price tags and receipts, and adjusting the receipt tape width. Additionally, it explains how to use the interface scale slider for accessibility and how to toggle 'Computer Mode' to optimize the interface for either laptop/PC setups or monoblock/touchscreen devices (which requires an on-screen keyboard). Users can finalize their configuration by saving or canceling their changes.",
+    "content": [
+      {
+        "step": "Step 1: Accessing the Settings Menu",
+        "description": "Open the menu located on the left side of the screen. Scroll down and click on the 'Settings → Settings' (Настройки → Настройки) section. This action will open the general settings window.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/253/image.png"
+        ]
+      },
+      {
+        "step": "Step 2: Configuring Device and Interface Parameters",
+        "description": "In the 'Price Tag Printer' field, select the printer used for printing price tags. Under the 'Receipt Printer' and 'Size' fields, select the printer for receipts and specify the width of the receipt tape. Use the 'Scale' slider to increase or decrease the size of the application window. The 'Enable Computer Mode' button toggles the interface: when enabled, it is optimized for laptops and PCs; when disabled, it switches to monoblock/touchscreen mode where an on-screen keyboard appears for text entry. Click 'Save' to apply your settings or 'Cancel' to exit without saving.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/253/image%20%281%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/253/image%20%282%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Customer Management",
+    "parent_section": "Сазламалар / Настройки",
+    "overall_goal": "To provide instructions on how to access the client list, monitor customer debts, and add new client profiles to the Linko-POS system.",
+    "rag_description": "This section provides a comprehensive guide for managing customers within Linko-POS Desktop. It details the process of navigating to the 'Client List' under Settings, viewing customer details like Name, Phone Number, and Current Debt, and using sorting tools to organize entries. Additionally, it outlines the mandatory steps for adding a new customer, including filling out required fields like Name and Telephone Number, as well as managing initial debt balances and comments. This is a critical component for retail management and tracking customer-related financial data.",
+    "content": [
+      {
+        "step": "Step 1: Accessing the Client List",
+        "description": "From the left side menu, navigate to the 'Settings -> Client List' section. The interface will display a list containing the client's Name, Phone Number, Current Debt amount, and any specific Comments. You can use the arrow button next to the 'Debt' column to sort the list by the amount owed.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/255/image.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/255/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 2: Adding a New Client",
+        "description": "Click the 'Add client' button located on the right side of the window. In the resulting form, fill in the Name (required), Tel. Number (required), and optional Comments. If the customer has an existing balance, enter it in the 'Current Debt' field; otherwise, leave it at 0 SUM. Review the entered data and click 'Add' to finalize the registration.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/255/image%20%282%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/255/image%20%283%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Managing the Supplier List",
+    "parent_section": "Саздаваб / Настрайки",
+    "overall_goal": "To guide users through accessing the supplier database and successfully adding new vendors to the Linko-POS system.",
+    "rag_description": "This documentation section details the supplier management workflow in Linko-POS Desktop. It instructs users on how to navigate to the 'Supplier List' within the Settings menu and explains the significance of the displayed data fields, such as Name, Contact person, and Balance (including the interpretation of positive and negative balances). Additionally, it provides a step-by-step procedure for registering a new supplier, highlighting the mandatory 'Name' field and optional contact details and comments. This information is critical for maintaining an accurate vendor database for procurement and debt tracking.",
+    "content": [
+      {
+        "step": "Step 1: Accessing the Supplier List",
+        "description": "Navigate to the 'Settings → Supplier List' section from the left-hand menu. The window will display a table containing the following information: 'Name' (supplier's name), 'Tel. number' (phone number), 'Contact person', 'Balance' (shows current debt or surplus; a negative number indicates you owe the supplier, while a positive number indicates the supplier owes you), and 'Comments' (any specific notes like 'main supplier' or 'cash only').",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/256/image.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/256/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 2: Adding a New Supplier",
+        "description": "Click the 'Add supplier' button located on the right side of the window. In the entry form, fill in the required 'Name' field. Optional fields include 'Tel. number', 'Contact person', and 'Comments' (where you can specify delivery terms or contact times). After verifying the entered information, click the 'Add' button to save the new supplier to the system.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/256/image%20%282%29.png"
+        ]
+      }
+    ]
+  }
+]

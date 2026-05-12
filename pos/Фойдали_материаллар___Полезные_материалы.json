@@ -1,0 +1,243 @@
+[
+  {
+    "title": "What is POS_VISITOR_ID_FOR_BRANCH and why is it needed?",
+    "parent_section": "Файдаби бададар / Бададар / Файдаби бададар / Бададар",
+    "overall_goal": "Configure separate visitor IDs for each branch to avoid access errors during sales and shift closures.",
+    "rag_description": "This documentation section explains how to resolve 'You don't have access' errors in Linko-POS that occur when multiple branches attempt to use the same default 'guest customer' (visitor). To fix this, administrators must define branch-specific configurations (POS_VISITOR_ID_FOR_BRANCH_X) in the Admin Panel. The guide walks through navigating to the Configurations section, adding a new key with a specific branch ID as the value, and setting the data type to integer. This ensures that each branch correctly identifies its own guest customer, preventing permission conflicts during receipt printing and shift reconciliation.",
+    "content": [
+      {
+        "step": "1. Access the Admin Panel",
+        "description": "Log in to the Admin Panel using the credentials (login and password) provided to you.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/104/image.png"
+        ]
+      },
+      {
+        "step": "2. Navigate to Configurations",
+        "description": "Once logged in, scroll down to the 'Configurations' section. Click the 'Add' (Добавить) button to create a new configuration entry.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/104/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "3. Add POS_VISITOR_ID_FOR_BRANCH Configuration",
+        "description": "In the 'Add configuration' window, fill in the following fields for Branch #1: set 'Key' to POS_VISITOR_ID_FOR_BRANCH_1, 'Value' to 1, and 'Type' to integer. Click 'Save'. If you have a second branch, repeat the process by creating a new entry with 'Key' as POS_VISITOR_ID_FOR_BRANCH_2, 'Value' as 2, and 'Type' as integer. This links each branch to its own guest customer profile, eliminating errors during checkout and shift closing.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/104/image%20%282%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Changing POS mode (computer / monoblock)",
+    "parent_section": "Файдабади берувчи база / Все базу",
+    "overall_goal": "Configure the POS system interface to optimize it for either a standard computer with a physical keyboard or a touchscreen monoblock device.",
+    "rag_description": "This documentation section provides instructions on how to switch the Linko-POS interface mode between standard computer/laptop mode and monoblock (touchscreen) mode. It explains how users can navigate to the settings menu via their profile, locate the 'Enable computer mode' option, and understand the difference: enabling it for mouse/keyboard setups or disabling it for touchscreen devices with virtual keyboards. The section concludes with the save action to apply changes.",
+    "content": [
+      {
+        "step": "1. Open the profile menu",
+        "description": "Click on your profile (the area where the login name is written) located in the upper right corner of the screen.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/192/image.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/192/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "2. Navigate to Settings",
+        "description": "From the dropdown menu that appears, select the 'Settings' (Настройки) section.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/192/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "3. Configure the computer mode setting",
+        "description": "In the 'Settings' window, locate the checkbox 'Enable computer mode' (Включить режим компьютера). If the checkbox is checked, the POS operates in computer or laptop mode. If you uncheck it, the POS switches to monoblock mode, which is optimized for touchscreens and includes an on-screen keyboard.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/192/image%20%283%29.png"
+        ]
+      },
+      {
+        "step": "4. Save the changes",
+        "description": "To apply and save your changes, click the 'Save' (Сохранить) button located at the bottom of the window.",
+        "images": []
+      }
+    ]
+  },
+  {
+    "title": "Talent Verification",
+    "parent_section": "Фидайи баргарар / Важайдайшие давайдайшие / Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Фoйдали материаллар / Полезные материалы",
+    "overall_goal": "To determine whether your branch is operating on the new Talent-enabled server architecture or the legacy server architecture to ensure correct synchronization and maintenance procedures.",
+    "rag_description": "This guide details the process of identifying the server type (Talent vs. Non-Talent) for Linko-POS branches. Using the /api/v1/main/health_check/ endpoint, users can perform a health check through a web browser to determine their server's architecture. The section explains the functional differences: Talent servers (new architecture) allow for centralized configuration changes and global bug fixes that apply across all instances upon synchronization, whereas legacy (Non-Talent) servers require individual manual synchronization and branch-by-branch troubleshooting. This distinction is critical for system administrators managing multiple POS locations.",
+    "content": [
+      {
+        "step": "1. Access the Health Check API",
+        "description": "Open your web browser and navigate to the health check URL for your specific server by using the following template: https://servername.linko.uz/ru/api/v1/main/health_check/. You must replace 'servername' with the actual name of your branch's server.",
+        "images": []
+      },
+      {
+        "step": "2. Identify a Talent Server (New Architecture)",
+        "description": "If the browser response contains detailed status fields as shown in the image, your branch is using a Talent server. In this new architecture, any configuration changes or data updates made once will automatically propagate to all connected servers upon synchronization. Additionally, bug fixes applied to one server will resolve issues across the entire network.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/102/IMAGE%202025-09-29%20113533.jpg"
+        ]
+      },
+      {
+        "step": "3. Identify a Non-Talent Server (Legacy Architecture)",
+        "description": "If the browser response is minimal and only shows basic information as depicted in the image, you are using a legacy (Non-Talent) server. These servers operate independently, meaning synchronization must be performed manually for every individual server, and technical issues must be checked and fixed on a per-server basis.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/102/IMAGE%202025-09-29%20113549.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Linko-POS Light Version Configuration and Interface Management",
+    "parent_section": "Файдаиги архив / Все базу",
+    "overall_goal": "To configure the visibility of functional elements, menu items, and data fields within the Light version of the Linko-POS Desktop system.",
+    "rag_description": "This documentation provides a comprehensive overview of the customization options available for the Linko-POS Light version. It details how administrators can hide or display specific features during product synchronization and within the main point-of-sale interface. The section covers the visibility of UI elements such as header icons, shift management controls, and cash register (KKM) integrations. It also specifies the control over detailed product data fields (PLU, IKPU, VAT, cost, and stock balances) and the configuration of the various POS menus, including sales history, inventory revisions, supplier balances, and financial operations. This guide ensures that the POS environment can be simplified for operators by removing unnecessary complexity while maintaining access to critical business operations like returns, postings, and statistical analysis.",
+    "content": [
+      {
+        "step": "1. Header and Shift Synchronization Settings",
+        "description": "Configure the visibility of primary interface controls during the light sync process, including the plus icon on the header, shift management, and KKM (cash register) integrations.",
+        "images": [
+          "https://prnt.sc/Lv6JMJBNRgvU",
+          "https://prnt.sc/3G_Gc3VTU7fm",
+          "https://prnt.sc/JI9-N5hGddYv"
+        ]
+      },
+      {
+        "step": "2. Sales Interface Display Preferences",
+        "description": "Determine which data is visible to the cashier in the sales section, such as stock balances, client lists, and the option to sell on debt within the payment window.",
+        "images": [
+          "https://prnt.sc/UAk4wuChwgNV",
+          "https://prnt.sc/2bw5aERjvN2A",
+          "https://prnt.sc/OG_wmXaeylwH"
+        ]
+      },
+      {
+        "step": "3. History and Movement Logs Visibility",
+        "description": "Set the access levels for historical data logs, including shift history, supplier return history, supply history, and general product movement tracking within the goods section.",
+        "images": [
+          "https://prnt.sc/bTwLYyjHq6xs",
+          "https://prnt.sc/aOMoZ2DyFFiz",
+          "https://prnt.sc/f74zrYEFEs9O",
+          "https://prnt.sc/lXbGxm4jnd63"
+        ]
+      },
+      {
+        "step": "4. Product Creation and Metadata Fields",
+        "description": "Manage the specific input fields available when adding or editing products. This includes units of measurement, PLU codes, IKPU tax codes, package codes, markings, cost prices, initial stock levels, VAT (NDS) settings, and product markups or rounding rules.",
+        "images": [
+          "https://prnt.sc/OEAtMsM-4Gdb",
+          "https://prnt.sc/0eBfxa0_-qHq",
+          "https://prnt.sc/Pk1Zu-ympXuG",
+          "https://prnt.sc/T6rWMmmXOPm3",
+          "https://prnt.sc/EO8IMJezcB5C",
+          "https://prnt.sc/LNvX1PewKf9k",
+          "https://prnt.sc/4GTlYPlCCKM6",
+          "https://prnt.sc/88Fptl6DOG5E",
+          "https://prnt.sc/deiuBePt4E8w"
+        ]
+      },
+      {
+        "step": "5. POS Core Sales and Operations Menu",
+        "description": "Configure visibility for standard POS menu items such as the primary sales interface, online sales, returns, general history, order history, and inner return logs.",
+        "images": [
+          "https://prnt.sc/LRCAQOglvhWV",
+          "https://prnt.sc/ElIsaYYhU-CU",
+          "https://prnt.sc/c3wkjSHUKvVg",
+          "https://prnt.sc/69Lb4dbP2PNe",
+          "https://prnt.sc/VY4L3ZsN58_o",
+          "https://prnt.sc/X4itHJXWuHNt"
+        ]
+      },
+      {
+        "step": "6. Inventory and Audit Menu Management",
+        "description": "Enable or disable access to back-office functions within the POS menu, including supply history, inventory revision history, cash box management, posting/receiving (inventory arrival), and revision tools.",
+        "images": [
+          "https://prnt.sc/L2OBfLtZfaFy",
+          "https://prnt.sc/K-yMAZ2IXw-R",
+          "https://prnt.sc/6pXqMnrcOkB6",
+          "https://prnt.sc/KaxyFOVCFP7O",
+          "https://prnt.sc/2mz77EvIND1S"
+        ]
+      },
+      {
+        "step": "7. Data Lists and Analysis Menus",
+        "description": "Control access to general business data including performance statistics, product lists, price tag generation, client and supplier lists, and respective partner balance reports.",
+        "images": [
+          "https://prnt.sc/8vd7in6uBvaF",
+          "https://prnt.sc/Q_5QWUI2iola",
+          "https://prnt.sc/4eF2cyHvoQGt",
+          "https://prnt.sc/o7ZkMoDYDeW4",
+          "https://prnt.sc/8tRNWUzQ1ELX",
+          "https://prnt.sc/ptnCIKFFVZrs",
+          "https://prnt.sc/vBDh9Q1Rndns"
+        ]
+      },
+      {
+        "step": "8. Cash Desk Financial Operations",
+        "description": "Specific controls for manual cash operations within the system, covering the recording of cash arrivals, expenses, and internal transfers.",
+        "images": [
+          "https://prnt.sc/s6YOkhno1q9_",
+          "https://prnt.sc/TWMHrhuqXAti",
+          "https://prnt.sc/x_59RDkFPIyD"
+        ]
+      },
+      {
+        "step": "9. Quick Actions and Sales Permissions",
+        "description": "Configure shortcuts and operational rules, such as the ability to edit prices during sale, adding products or returns via the '+' button, and creating sales or cash entries. This also includes settings for sales without client selection, creating receipts when a shift is closed, viewing the last supply price, and accessing recommended purchases or ABC analysis.",
+        "images": [
+          "https://prnt.sc/QOGtF_LlCMxV",
+          "https://prnt.sc/QjvDLY1crRON",
+          "https://prnt.sc/KQ5QMUQa9w7t",
+          "https://prnt.sc/7-lv9JCh3gu6",
+          "https://prnt.sc/oqjOAQFVKou9",
+          "https://prnt.sc/YJq_dtqYJ0d6",
+          "https://prnt.sc/axRtuz-3dhJ9"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Completion Requirements",
+    "parent_section": "Файдави бериш / Все давайте / Файдави бериш",
+    "overall_goal": "To define the technical and operational prerequisites necessary for the successful installation and stable functioning of the Linko-POS Desktop system.",
+    "rag_description": "This section outlines the essential technical specifications and environmental requirements for Linko-POS Desktop. It covers hardware benchmarks such as RAM and CPU performance, software dependencies including supported Windows versions and the .NET Framework, and network stability needs for cloud synchronization. This guide ensures that the user's infrastructure is adequately prepared to handle point-of-sale operations without performance bottlenecks or compatibility issues.",
+    "content": [
+      {
+        "step": "1. Verify Hardware Compatibility",
+        "description": "Check that the terminal or computer meets the minimum hardware requirements: at least 4GB of RAM and a processor equivalent to an Intel Core i3 or higher to ensure smooth transaction processing.",
+        "images": []
+      },
+      {
+        "step": "2. Operating System and Framework Installation",
+        "description": "Ensure the system is running a supported version of Windows (Windows 10 or 11) and that Microsoft .NET Framework 4.7.2 or a more recent version is installed to support application logic.",
+        "images": []
+      },
+      {
+        "step": "3. Network and Peripheral Configuration",
+        "description": "Confirm a stable internet connection for real-time data synchronization and verify that all external devices such as fiscal printers, barcode scanners, and receipt printers are correctly connected and recognized by the OS.",
+        "images": []
+      }
+    ]
+  },
+  {
+    "title": "Currency Conversion Guides",
+    "parent_section": "Файдави будагидаги асбабаар / Все давайте загрузите Файдави будагидаги асбабаар",
+    "overall_goal": "Provide instructional video materials for converting account or transaction currencies between USD and SUM within the Linko-POS system.",
+    "rag_description": "This documentation section provides visual guides for users of the Linko-POS Desktop system to perform currency conversions. It specifically covers the process of converting financial values from USD to SUM and vice versa. These video tutorials are designed to help users manage multi-currency transactions, ensuring that point-of-sale operations and reporting reflect the correct currency values. The section serves as a practical resource for staff needing to navigate the currency exchange features within the software interface.",
+    "content": [
+      {
+        "step": "1. USD to SUM Conversion Video",
+        "description": "This tutorial video demonstrates the procedure for converting currency from US Dollars (USD) to Uzbekistani Som (SUM) within the POS interface.",
+        "images": []
+      },
+      {
+        "step": "2. SUM to USD Conversion Video",
+        "description": "This tutorial video demonstrates the procedure for converting currency from Uzbekistani Som (SUM) to US Dollars (USD) within the POS interface.",
+        "images": []
+      }
+    ]
+  }
+]

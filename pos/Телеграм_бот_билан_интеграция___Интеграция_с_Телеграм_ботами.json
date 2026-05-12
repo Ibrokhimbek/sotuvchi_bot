@@ -1,0 +1,149 @@
+[
+  {
+    "title": "Telegram Bot Integration for Linko-POS and Rhythm ERP",
+    "parent_section": "Телеграм бот билан интеграция / Интеграция с Телеграм ботами",
+    "overall_goal": "To provide a complete setup guide for creating a Telegram bot, integrating it with the Rhythm ERP system, configuring necessary SFA synchronization parameters, and managing the end-user ordering process.",
+    "rag_description": "This documentation section explains how to integrate a Telegram bot with Linko-POS and Rhythm ERP. It starts with creating a bot using BotFather and obtaining an API token. Users learn how to add the bot into the Rhythm ERP Super Admin Panel, configure mandatory fields such as Auth Tokens and API URLs, and set up webhooks for communication between Telegram and the server. The guide also details critical configuration alignments between the bot and the Sales Force Automation (SFA) system, including Market Agent IDs, currencies, price lists, and branch IDs. Finally, it outlines the consumer ordering flow, covering product selection, SMS verification, address entry, and order confirmation to ensure orders flow correctly into the ERP and POS systems.",
+    "content": [
+      {
+        "step": "Step 1: Bot Creation via BotFather",
+        "description": "Create a new bot using @BotFather on Telegram. Use the /newbot command and follow the prompts to name your bot. The bot's username must end in 'bot' (e.g., test1bot).",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/image.png"
+        ]
+      },
+      {
+        "step": "Step 2: Save the HTTP API Token",
+        "description": "Once the bot is created, BotFather will provide an HTTP API token. Save this token securely (e.g., in notes or a password manager) as it will be required for the Rhythm ERP setup.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/IMAGE%202025-09-22%20142814.jpg"
+        ]
+      },
+      {
+        "step": "Step 3: Accessing Rhythm ERP System",
+        "description": "Open your browser and navigate to your Rhythm ERP admin panel (e.g., https://yourserver.linko.uz/ru/api/v1/base_django/linko-super-admin-panel/). Log in with your admin credentials.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 4: Adding a New Bot to the System",
+        "description": "Navigate to the TelegramBot section and scroll down. Click the 'Add' (Добавить) button to open the 'Add bot' form.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "Step 5: Filling the Bot Configuration Form",
+        "description": "Enter the following fields: 'Token' (the API token from BotFather) and 'Name' (the display name for the bot).",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/Screenshot%202025-09-17%20at%207.30.07%E2%80%AFPM.png"
+        ]
+      },
+      {
+        "step": "Step 6: Configuring API and Auth Tokens",
+        "description": "Obtain the 'auth token' from the Main Menu in Rhythm ERP and paste it into the token field. Set the 'Rhythm api url' to your server address (e.g., https://yourserver.linko.uz/). Set 'Delivery price type' to 'fixed' and click Save.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/Screenshot%202025-09-19%20at%206.47.26%E2%80%AFPM.png"
+        ]
+      },
+      {
+        "step": "Step 7: Webhook Installation",
+        "description": "To activate the bot, set the webhook by entering the following URL in your browser: https://api.telegram.org/bot{BOT_TOKEN}/setwebhook?url={YOUR_SERVER_URL}. If successful, you should see '\"ok\": true'.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/2025-10-20_10-40-32.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/Screenshot%202025-09-18%20at%2011.04.33%E2%80%AFAM.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/Screenshot%202025-09-22%20at%202.50.22%E2%80%AFPM.png"
+        ]
+      },
+      {
+        "step": "Step 8: SFA and Configuration Alignment",
+        "description": "Ensure the bot configuration matches your SFA settings. Key parameters include MARKET_AGENT_FOR_TELEGRAM (matching employee ID), DEFAULT_CURRENCY_FOR_TELEGRAM_BOT (matching base cash currency), DEFAULT_PRICE_LIST_FOR_TELEGRAM_BOT (matching inventory price list ID), BRANCH_ID_FOR_TELEGRAM, and STOCK_ID_FOR_TELEGRAM_BOT. Also, ensure the SET_URL is set to https://webapp.linko.uz for the Mini App to function.",
+        "images": []
+      },
+      {
+        "step": "Step 9: Troubleshooting Product Visibility",
+        "description": "If products are not visible in the bot, verify that the 'Show in bot' (Показать в боте) checkbox is enabled in both the product card and the product type settings within the SFA system.",
+        "images": []
+      },
+      {
+        "step": "Step 10: Order Management and Checkout",
+        "description": "The user selects items from the catalog and adds them to the cart using the '+' button. At checkout, the user must confirm their phone number via SMS and provide a delivery address (either via map or manual entry). After clicking 'Place Order' (Оформить), the order is sent to the SFA/ERP system and appears in the POS cashier interface.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/IMAGE%202025-10-03%20111625.jpg",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/1-%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%20%288%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/10.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/87/1-%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%20%28%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Configuring Telegram Bot for POS Notifications",
+    "parent_section": "Тейеграм бот билан интеграция / Интеграция с Телеграм ботами",
+    "overall_goal": "To set up a Telegram bot integration that automatically sends POS receipt details and sale notifications to specific Telegram accounts via Rhythm ERP.",
+    "rag_description": "This section details the integration process between Linko-POS/Rhythm ERP and Telegram. It covers creating a bot using @BotFather to obtain an API token, adding the bot to the Rhythm ERP Super Admin Panel, and configuring necessary credentials such as the Rhythm auth token and API URL. Key features include setting up WebHooks and identifying user Chat IDs using @username_to_id_bot to ensure that sale notifications, including item lists and totals, are correctly routed to the designated Telegram users. This guide solves the problem of real-time remote monitoring of POS transactions through mobile messaging.",
+    "content": [
+      {
+        "step": "Step 1: Create a Bot via BotFather",
+        "description": "Start by creating a new bot in Telegram. Open @BotFather and send the /start command, then use /newbot to begin. Assign a display name to your bot and a unique username that must end in 'bot' (e.g., test1bot). After the bot is created, BotFather will provide an API token. Save this token securely as you will need it later for the Rhythm ERP configuration.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/88/image%20%283%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/88/IMAGE%202025-09-22%20142814.jpg"
+        ]
+      },
+      {
+        "step": "Step 2: Add the Bot to Rhythm ERP",
+        "description": "Navigate to the Rhythm ERP Super Admin Panel in your browser (e.g., https://your-server-domain/ru/api/v1/base_django/linko-super-admin-panel/). Log in with your credentials, scroll down to the 'Telegram bots' section, and click 'Add'. Fill in the form: paste your bot token into the 'Token' field, enter a 'Name' for the bot, provide the 'Rhythm auth token' received from your admin, set the 'Rhythm api url' to your server's address, and select 'fixed' for the 'Delivery price type'. Click 'Save' to confirm the entry.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/88/image%20%284%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/88/image%20%282%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/88/Screenshot%202025-09-17%20at%207.30.07%E2%80%AFPM.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/88/Screenshot%202025-09-19%20at%206.47.26%E2%80%AFPM.png"
+        ]
+      },
+      {
+        "step": "Step 3: Configure WebHooks, Chat IDs, and Testing",
+        "description": "On the bot editing page, scroll to the bottom and enable the 'WebHook' checkbox. To receive notifications, enter the recipient's Chat ID in the 'Send pos notification chat id' field. You can find a Chat ID by using @username_to_id_bot in Telegram and sharing the desired contact with it. Once configured and saved, test the setup by sending /start to your bot and performing a test sale in Linko-POS; the bot should immediately send the receipt details to the specified Telegram chat.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/88/image.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/88/Screenshot%202025-09-19%20at%2012.14.20%E2%80%AFPM.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/88/Screenshot%202025-09-19%20at%2012.16.20%E2%80%AFPM.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Telegram Bot Integration Configuration Requirements",
+    "parent_section": "Телеграм бот билан интеграция / Интеграция с Телеграм ботами",
+    "overall_goal": "Correctly configure the system keys and parameters required for the operation and customization of the Linko-POS Telegram bot.",
+    "rag_description": "This documentation section provides a comprehensive guide to the configuration keys (CONFIG KEY) required for integrating Linko-POS Desktop with a Telegram bot. It details essential settings such as branch and warehouse identification, currency and price list assignments, and agent responsibilities for incoming orders. The section also covers user interface customization, allowing administrators to enable or disable buttons for balances, cashback, loyalty points, feedback, and order history. Additionally, it specifies order management logic including minimum order limits, daily order caps, and automatic confirmation settings. Key technical requirements are also addressed, such as updating the Web App URL to linko.uz and setting up SMS service credentials for notifications.",
+    "content": [
+      {
+        "step": "1. Configure Core Identification and Branch Settings",
+        "description": "Identify the store and logistical parameters for the bot. Set MARKET_AGENT_FOR_TELEGRAM and OWN_AGENT_RESPONSIBLE_FOR_TELEGRAM_ORDER to assign a responsible agent for bot orders. Use BRANCH_ID_FOR_TELEGRAM, STOCK_ID_FOR_TELEGRAM_BOT, and MARKET_TYPE_FOR_TELEGRAM to link the bot to specific branches, warehouses, and store types within the system.",
+        "images": []
+      },
+      {
+        "step": "2. Set Pricing and Currency Parameters",
+        "description": "Establish financial settings for the product catalog. DEFAULT_CURRENCY_FOR_TELEGRAM_BOT is mandatory for the web bot to function. Define which price list to use with DEFAULT_PRICE_LIST_FOR_TELEGRAM_BOT. You can also hide the dollar exchange rate in payment messages using DONT_SHOW_RATE_IN_BOT_PAYMENT_MESSAGE and include currency data in Excel exports with SHOW_CURRENCY_IN_EXCEL_TELEGRAM_BOT.",
+        "images": []
+      },
+      {
+        "step": "3. Customize Bot User Interface and Feature Buttons",
+        "description": "Control which features are visible to the customer. Use keys like SHOW_SHARE_BUTTON_TELEGRAM, SHOW_BALANCE_BUTTON_TELEGRAM, SHOW_CASHBACK_BUTTON_TELEGRAM, and SHOW_BALL_BUTTON_TELEGRAM (or SHOW_BALL_FROM_PROMOTION) to toggle buttons for sharing, account balances, cashback, and loyalty points. Enable feedback collection via SHOW_FEEDBACK_BUTTON_TELEGRAM and manage visibility of order and return history with SHOW_ORDERS_BUTTON_TELEGRAM and SHOW_ORDER_RETURNS_BUTTON_TELEGRAM.",
+        "images": []
+      },
+      {
+        "step": "4. Define Ordering Rules and Notification Behavior",
+        "description": "Set operational limits and order workflows. Toggle product visibility and ordering capability with CAN_ORDER_TELEGRAM_BOT. Set a minimum order amount with MIN_ORDER_PRICE_FOR_TELEGRAM_BOT and limit daily orders per customer with ORDER_COUNT_LIMIT_FOR_TELEGRAM_BOT. Configure order automation via CONFIRMED_ORDER_FROM_TELEGRAM (immediate confirmation) and ORDER_STATUS_READY_FOR_TELEGRAM_BOT (sets status to Active). Enable automated bot notifications for order confirmation and returns using BOT_SEND_ORDER_CONFIRM and BOT_SEND_ORDER_RETURN_CREATE.",
+        "images": []
+      },
+      {
+        "step": "5. Technical Integration and URL Configuration",
+        "description": "Ensure the bot's technical components are properly linked. Input credentials for SMS notifications using LOGIN_FOR_SMS_SERVICE and PASSWORD_FOR_SMS_SERVICE. Critically, update the SET_URL setting from the default 'https://webapp.ritm.uz' to 'https://webapp.linko.uz' to ensure the Mini App functions correctly. Use SHOW_ZERO_BALANCES_FOR_BOT to decide if out-of-stock items are displayed.",
+        "images": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,288 @@
+[
+  {
+    "title": "Adding a product from the Sales window",
+    "parent_section": "Аахсубдвтдар / Твварт",
+    "overall_goal": "To provide a quick method for users to register new products into the system directly from the POS sales interface.",
+    "rag_description": "This documentation describes the process of adding new products to Linko-POS Desktop directly from the 'Sales' (Продажа) window. It details how to access the 'Add product' menu via the '+' button, explains how to fill out mandatory fields such as product name, unit of measurement, barcode, stock levels, and pricing (both purchase and sale), and provides instructions for enabling 'Marking' for regulated goods. This feature is essential for maintaining an up-to-date inventory without leaving the main transaction screen.",
+    "content": [
+      {
+        "step": "Step 1.1: Accessing the Add Product menu",
+        "description": "In the Sales (Продажа) window, click the '+' button located at the top of the interface. From the resulting menu, select 'Add product' (Добавить продукт).",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/73/image%20%283%29.png"
+        ]
+      },
+      {
+        "step": "Step 1.2: Entering product details",
+        "description": "The 'Add product' window will open. Fill in the following fields: 'Name' (product title); 'Unit of measurement' (e.g., kg, pcs, pack); 'Barcode' (if applicable); 'Image' (to upload a product photo); 'Stock balance' (initial quantity on hand); 'Purchase price' (cost price); and 'Sale price' (the price for customers). If you use wholesale pricing, you can also select price lists.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/73/image%20%284%29.png"
+        ]
+      },
+      {
+        "step": "Step 1.3: Configuring Marked Goods",
+        "description": "If the product requires digital marking, click the 'Show additional fields' (Показать дополнительные поля) button in the same window. In the expanded section, enable the 'Marking' parameter.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/73/image%20%285%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Adding a Product to the Inventory",
+    "parent_section": "Асасий / Барча бёдагида бёдаги бёдаги",
+    "overall_goal": "To guide users through the process of registering a new product in the Linko-POS system so it can be used for sales and inventory tracking.",
+    "rag_description": "This documentation section explains the step-by-step procedure for adding new items to the Linko-POS system. It details how to navigate to the 'Products' (Товары) section from the main menu and use the 'Add Product' (Добавить продукт) interface. The process involves entering essential metadata including the product name, unit of measurement, barcode, optional images, purchase price, and retail selling price. By following these steps, users can ensure their inventory is accurately reflected in the system and ready for transaction processing.",
+    "content": [
+      {
+        "step": "Step 1. Accessing the 'Products' section",
+        "description": "After logging into the system, open the side menu on the left and select the 'Products' (Товары) section. Here, you will see a list of all existing products. To begin adding a new item, click the '+ Add product' (+ Добавить продукт) button located at the top of the screen.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/62/image%20%282%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/62/image%20%283%29.png"
+        ]
+      },
+      {
+        "step": "Step 2. Entering product information",
+        "description": "Once the 'Add product' window opens, fill in the following fields: 'Name' (product title), 'Unit of measurement' (e.g., kg, piece, meter), 'Barcode' (if applicable), 'Image' (optional), 'Purchase price' (the cost to buy the item), and 'Sale price' (the retail price for the customer). After entering all the information correctly, click the 'Add' (Добавить) button. The product will then be added to the list and ready for sale.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/62/image%20%284%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Completion requirements for adding products",
+    "parent_section": "База завершебитства",
+    "overall_goal": "To successfully add a new product to the Linko-POS system by scanning its barcode and entering price details.",
+    "rag_description": "This documentation section provides instructions on how to add a new item to the Linko-POS Desktop system. It guides the user through navigating the 'Sale' menu to find the 'Add Product' function, using a barcode scanner to automatically pull product data from the Product Base (including IKPU and names), and manually entering the purchase and retail sale prices. The process ensures that inventory is correctly cataloged with all necessary fiscal and pricing metadata before saving.",
+    "content": [
+      {
+        "step": "Step 1: Open the 'Add Product' menu and scan the item",
+        "description": "Click the '+' icon at the top of the interface. From the menu that appears, select 'Sale' and then 'Add Product'. This will open the 'Add Product' window. Use your barcode scanner to scan the product's barcode. If the item is already in the Product Base, the system will automatically fill in all primary information including the IKPU, barcode, name, and image.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/73/image%20%283%29.png"
+        ]
+      },
+      {
+        "step": "Step 2: Enter pricing information and save",
+        "description": "Once the product information is loaded, you only need to enter the 'Purchase Price' (cost) and the 'Retail' price. After ensuring the data is entered correctly, click the 'Add' button to save the product to the database.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/73/image%20%284%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Configuring Products and Weighted Items",
+    "parent_section": "Махсулотлар / Товары",
+    "overall_goal": "To guide users through the process of setting up measurement units, adding products with PLU codes, organizing items by categories and brands, and exporting product data for electronic scales.",
+    "rag_description": "This documentation section explains how to manage inventory and scale integration in the Linko-POS system. It details the steps for creating units of measurement, specifically highlighting how to flag items as 'Weighted' for scale use. Users learn how to add products to the system by filling in details such as name, category, and price, with a focus on assigning PLU (Price Look-Up) codes for automatic recognition on electronic scales. The section also covers grouping items into categories and brands for better reporting and provides instructions on downloading specific data templates from the 'Weights' section to synchronize the POS system's product list with physical scales.",
+    "content": [
+      {
+        "step": "Step 1. Setting up units of measurement",
+        "description": "Navigate to the 'Products' section in the POS menu and select 'Units of Measurement' from the top panel. Click 'Add unit' to create the necessary units like kg (kilogram), pcs (piece), l (liter), m (meter), etc. If a unit is intended for products sold by weight (such as cheese or produce), ensure you enable the 'Weight Item' (Развесной товар) checkbox in the creation window. These units will then be available for selection when adding products.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/74/image%20%287%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/74/image%20%288%29.png"
+        ]
+      },
+      {
+        "step": "Step 2. Adding products and PLU codes",
+        "description": "Return to the 'Products' section and click 'Add product.' Fill in the product name, select the measurement unit, and enter the barcode, category, and brand. You can also upload an image. Enter the purchase price and the retail price. Crucially, assign a PLU (Price Look-Up) code, which is typically a 5–7 digit number used by scales to identify weight-based items. For these items, set the 'Retail' price based on 1 kg (e.g., if 1 kg costs 15,000, enter 15,000). The system will automatically calculate the final price based on the weight recorded by the scale.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/74/image%20%289%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Configuring categories and brands",
+        "description": "To facilitate easier reporting and filtering, organize your products into categories and brands. Use the 'Brands' section to enter the relevant brand names for your items (e.g., 'Nestle' or 'Vegetables LLC'). This organization is highly beneficial for subsequent data sorting and detailed analysis.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/74/image%20%2810%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/74/image%20%2811%29.png"
+        ]
+      },
+      {
+        "step": "Step 4. Downloading the scale template",
+        "description": "Once all products, PLU codes, and prices are set, go to the 'Weights' section in the top menu. Select 'Files / Download Template' from the right side, choose the specific scale model you are using, and download the template. Finally, upload this Excel/CSV template into your scale via its driver or official software to synchronize the POS data, including PLU codes and prices, with the physical scale.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/74/image%20%2812%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Managing Units of Measurement",
+    "parent_section": "Асасий бёб / База даввати",
+    "overall_goal": "To provide a comprehensive guide on creating, modifying, and deleting units of measurement within both the Linko-POS Desktop application and the SFA web-management system.",
+    "rag_description": "This documentation covers the full lifecycle of unit of measurement management in the Linko-POS ecosystem. It describes how to navigate to the 'Units of Measurement' section within the POS 'Products' module to add new units (such as kilograms or liters) and define whether they are for weighted goods. It also details how to edit existing units to change their status from weighted to standard. Finally, it explains the process for permanent deletion of units, which must be performed through the SFA (Sales Force Automation) web interface followed by a synchronization on the desktop POS to ensure the local database is updated. Key screens involved include the POS Products panel, the SFA Warehouse menu, and the unit creation/editing dialogs.",
+    "content": [
+      {
+        "step": "1.1. Opening the Units of Measurement List",
+        "description": "In the POS software, enter the 'Products' section. Select 'Units of Measurement' from the top panel. This will display a list of all previously entered units of measurement.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/60/image%20%288%29.png"
+        ]
+      },
+      {
+        "step": "1.2. Adding a New Unit of Measurement",
+        "description": "Click the 'Add unit' button. In the window that opens, enter the name of the unit (e.g., kilogram, meter, liter) in the 'Name' field. If the product is sold by weight or volume, enable the 'Weighted product' checkbox. Then, click the 'Add' button.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/60/image%20%289%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/60/image%20%2810%29.png"
+        ]
+      },
+      {
+        "step": "1.3. Synchronizing Data",
+        "description": "The new unit will appear in the list. Perform a synchronization once to ensure the unit is also saved on the server.",
+        "images": []
+      },
+      {
+        "step": "2.1. Locating a Unit for Editing",
+        "description": "If you need to change a unit (for example, to sell by item instead of weight), find the required unit in the 'Units of Measurement' list and click the pencil (edit) icon next to it.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/60/image%20%2811%29.png"
+        ]
+      },
+      {
+        "step": "2.2. Removing the Weighted Status",
+        "description": "In the editing window, uncheck the 'Weighted product' checkbox and click the 'Save' button. This unit will now function as a standard unit rather than a weight-based one for products.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/60/image%20%2812%29.png"
+        ]
+      },
+      {
+        "step": "3.1. Navigating to Units in SFA",
+        "description": "To completely delete a unit, log into the SFA web cabinet via a browser. Select the 'Warehouse' section from the top menu, then choose 'Units of Measurement' from the list.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/60/image%20%285%29.png"
+        ]
+      },
+      {
+        "step": "3.2. Selecting the Unit to Delete",
+        "description": "The page will display a list of units identical to the one in the POS. Select the unit you wish to delete.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/60/image%20%286%29.png"
+        ]
+      },
+      {
+        "step": "3.3. Confirming Deletion and Final Sync",
+        "description": "Click the 'Delete' icon on the right side. Confirm the action in the pop-up window by clicking 'Delete'. The unit will be removed from SFA. Finally, return to the POS software and sync once to remove the unit from the local desktop application.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/60/image%20%287%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Brand Management in Linko-POS and SFA",
+    "parent_section": "Беридигаб / Тарифаб",
+    "overall_goal": "To provide step-by-step instructions for creating, editing, and deleting product brands using the POS terminal and the SFA web cabinet.",
+    "rag_description": "This documentation section explains how to manage product brands within the Linko-POS system, covering both the desktop interface and the SFA (Sales Force Automation) web cabinet. It details the workflow for creating new brands to categorize products, modifying brand names or logos, and deleting outdated brand entries. Key features discussed include the 'Products' and 'Brand' menus in POS, and the 'Warehouse' -> 'Brands' section in SFA. The guide ensures users can maintain an organized product registry that synchronizes across the sales platform.",
+    "content": [
+      {
+        "step": "Step 1. Open the Brand List in POS",
+        "description": "Select the \"Products\" section from the left menu in the POS. Then, choose \"Brand\" from the top panel. You can create a new brand or edit existing ones by clicking the \"Add Brand\" button on the right.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/75/image%20%2813%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/75/image%20%2814%29.png"
+        ]
+      },
+      {
+        "step": "Step 2. Add a New Brand (POS)",
+        "description": "Click the \"Add Brand\" button. In the window that appears, enter the brand name and click \"Add\". The brand will be added to the list and can then be selected when adding new products.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/75/image%20%2815%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Change Brand Name (POS)",
+        "description": "Find the desired brand in the \"Brand\" list and click the pencil (edit) icon next to it. In the open window, change the brand name as needed and click \"Save\".",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/75/image%20%2816%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/75/image%20%2817%29.png"
+        ]
+      },
+      {
+        "step": "Step 4. Edit Brand via SFA",
+        "description": "Log into the SFA web cabinet and navigate to the \"Warehouse\" -> \"Brands\" section from the top menu. This displays all brands from the POS. To change details, click the three dots icon next to a brand and select \"Edit\". Here you can modify the brand name, organization, and upload a logo image. Click \"Save\" when finished.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/75/image%20%285%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/75/image%20%286%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/75/image%20%288%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/75/image%20%289%29.png"
+        ]
+      },
+      {
+        "step": "Step 5. Delete a Brand (SFA)",
+        "description": "Go to the SFA -> Warehouse -> Brands page. Click the three dots icon next to the brand you want to remove and select \"Delete\". Confirm the action when prompted. The brand will be removed from SFA and will disappear from the POS after the next synchronization.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/75/image%20%2811%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/75/image%20%2812%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Managing Product Categories",
+    "parent_section": "Аахсуавтаар / Твварр",
+    "overall_goal": "To guide users through the process of accessing the categories menu, creating new product categories, and managing existing ones within Linko-POS.",
+    "rag_description": "This documentation describes the workflow for managing product categories in Linko-POS Desktop. It explains how to navigate to the 'Products' section and the 'Categories' tab, create new categories by assigning names like 'Confectionery' or 'Dairy', and use search and edit functions. The section covers the specific interface buttons such as 'Add Category' and the search bar, ensuring users can organize their inventory effectively for selection during product setup.",
+    "content": [
+      {
+        "step": "Step 1: Open the category list",
+        "description": "Enter the 'Products' (Товары) section from the left-hand menu in the POS. From the top panel, select 'Categories' (Категории). This view shows the current category list and provides the 'Add category' button on the right to start creating new entries.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/75/image%20%2813%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/65/image%20%285%29.png"
+        ]
+      },
+      {
+        "step": "Step 2: Add a new category",
+        "description": "Click the 'Add category' (Добавить категорию) button. In the pop-up window, type the category name in the 'Name' (Наименование) field (e.g., Confectionery, Dairy, Coffee, etc.). Click 'Add' (Добавить) to save. The category will appear in the list and can then be selected when adding individual products.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/65/image%20%286%29.png"
+        ]
+      },
+      {
+        "step": "Step 3: Search and edit categories",
+        "description": "To find a specific category quickly, use the 'Search' (Поиск) field at the top of the list. To edit a category name, click the pencil icon next to it, update the name, and click 'Save' (Сохранить).",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/65/image%20%288%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Product Import and Template Completion",
+    "parent_section": "Махсулотлар / Товары",
+    "overall_goal": "To guide users through the process of downloading the standard Excel template, filling it with product information, and importing it into the Linko-POS system for bulk inventory creation.",
+    "rag_description": "This documentation provides a comprehensive walkthrough for bulk-importing items into the Linko-POS Desktop system. It details the entire workflow starting from the 'Products' section, where users download a standardized Excel template. The guide specifies mandatory fields such as Product Name, Unit of Measure, Organization, and Barcode, while also explaining optional attributes like Cost Price, IKPU tax codes, and warehouse stock levels. Key technical constraints are highlighted, including the requirement for unique barcodes and the pre-existence of Product Types and Brands on the server. The process concludes with selecting and saving the completed file within the 'Import' interface to successfully populate the product catalog.",
+    "content": [
+      {
+        "step": "Step 1: Download the Template",
+        "description": "Open the Linko-POS application and navigate to the 'Products' section. Click the 'Import' button located in the top right corner. In the resulting 'Import' window, select the 'Download template' button and save the file to a designated location on your computer.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/106/image.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/106/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 2: Fill Out the Template",
+        "description": "Open the template in Excel and input your product data. Mandatory fields (the first four columns) are Name, Unit of Measure, Organization (usually 'Demo' by default), and Barcode (must be unique). Optional fields include Product Type and Brand (must exist in SFA/POS beforehand), PLU codes for scales, Marking status (Yes/No), Cost Price (single numeric values only), IKPU tax codes, unit measurement codes, current stock levels, and Retail/Wholesale prices. Ensure you save the file after completion.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/106/image%20%283%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/106/image%20%284%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/106/image%20%285%29.png"
+        ]
+      },
+      {
+        "step": "Step 3: Import the Template into POS",
+        "description": "Return to the 'Products' section in POS and click 'Import' again. In the window, click 'Choose file' and select your saved Excel template. Click 'Save' to finalize the process. Upon successful import, all products listed in the template will be automatically added to your 'Products' inventory list.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/106/image%20%286%29.png"
+        ]
+      }
+    ]
+  }
+]

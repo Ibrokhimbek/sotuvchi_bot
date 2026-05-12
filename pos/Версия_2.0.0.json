@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Linko-POS Desktop Version 2.0.0 Release Notes",
+    "parent_section": null,
+    "overall_goal": "To inform users about system updates, stability improvements, and new features including payment integrations, data import tools, and performance optimizations.",
+    "rag_description": "This document outlines the updates for Linko-POS version 2.0.0, focusing on system stability and new functional capabilities. Key improvements include enhanced synchronization for inventory and sales, the introduction of a subscription management system with online payment support via Payme and Click, and batch client importing via Excel. The update also addresses receipt printing workflows—allowing intake without printing and providing more detailed return receipts—and adds performance-enhancing tools like a cache clearing button. These changes aim to stabilize hardware interactions, resolve shift-related errors, and streamline the cashback and client management processes.",
+    "content": [
+      {
+        "step": "1. Synchronization and Stability Improvements",
+        "description": "Synchronization stability has been significantly increased. Errors occurring during inventory, sales, and receiving processes have been fixed to ensure data is updated correctly without loss. Additionally, cash register stability on new servers has been established, hardware interaction errors have been resolved, and performance with USD servers and product modification workflows has been improved.",
+        "images": []
+      },
+      {
+        "step": "2. Subscriptions and Payments (Effective from February 19)",
+        "description": "A new subscription management system has been implemented. Users can now top up their balances online using Payme and Click payment systems.",
+        "images": []
+      },
+      {
+        "step": "3. Import and Data Management Tools",
+        "description": "Starting February 19, users can perform bulk client additions and updates via Excel files. When creating clients or suppliers, new options to select the specific country and define the phone number format have been added to the system.",
+        "images": []
+      },
+      {
+        "step": "4. Receipt and Intake Enhancements",
+        "description": "A new feature allows for inventory intake without the requirement to print a receipt. Receipt printing logic has been improved; return receipts now display all products—both sold and returned—for better clarity. Furthermore, errors related to shifts have been corrected to ensure accurate process tracking.",
+        "images": []
+      },
+      {
+        "step": "5. General Improvements and Optimization",
+        "description": "The 'Favorites' section has been refined with better functionality and bug fixes. The cashback system was updated to eliminate the need for manual synchronization during cashback-enabled sales. Finally, a 'Clear Cache' button was introduced to help users quickly restore system speed if the application slows down or freezes.",
+        "images": []
+      }
+    ]
+  }
+]

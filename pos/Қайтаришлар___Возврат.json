@@ -1,0 +1,148 @@
+[
+  {
+    "title": "Processing Returns via Sales History",
+    "parent_section": "Қайтаришлар / Возврат",
+    "overall_goal": "To find a past sale in the history to modify payment methods, reprint receipts, or process item returns.",
+    "rag_description": "This documentation section provides a comprehensive guide on managing past transactions in Linko-POS Desktop through the Sales History module. It details how users can locate specific receipts using date filters and search parameters like customer name or receipt number. The section covers critical administrative actions including reprinting receipts, correcting payment types (e.g., changing cash to terminal), and performing 'Type 2' returns. During a return, the user selects items from the original order, sets the refund amount, and chooses the refund method (cash, terminal, or debt reduction). This process ensures inventory is automatically restocked, cash register balances are updated, and transaction logs reflect the refund accurately.",
+    "content": [
+      {
+        "step": "Step 1. Accessing History",
+        "description": "Go to the 'History' -> 'Sales' section from the left-side menu. In the window that opens, you will see a list of all receipts. The interface includes 'Synchronized / Not Synchronized' filters at the top, the receipt list in the center, and a date range selector in the top right corner.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/241/image.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/241/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 2. Finding a Receipt (Dates and Search)",
+        "description": "Receipts are typically displayed by period. Click the date in the top right to set the required period (e.g., the day or month the receipt was issued). If the customer has the receipt, you can quickly find the order by typing the receipt number or customer name into the 'Search' field.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/241/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Opening the Receipt and Available Actions",
+        "description": "Click on the desired receipt row to open the 'Order No...' detail window. This view shows the customer name, creation date, warehouse, total amount, and the price/quantity of each item. Available actions include: 'Change Payment' (to switch payment type between cash, terminal, or debt without changing the total), 'Return' (to initiate an item refund), and 'Issue Receipt' or 'Print' (to re-send the receipt to the printer).",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/241/image%20%283%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/241/image%20%284%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/241/image%20%285%29.png"
+        ]
+      },
+      {
+        "step": "Step 4. Full or Partial Return by Receipt",
+        "description": "Click the 'Return' button to open the 'Return Order No...' window. Items from the original order appear on the right with an 'Available: X' count. Click items to move them to the return basket on the left and adjust the quantity (must not exceed 'Available'). Once items are selected, click 'Return' to open the payment window. Choose the payment method (Cash, Terminal, or Subtract from Customer Debt) and click 'Give money'. The system will return the items to stock, record an expense in the cash register, and update the returned amount in history.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/241/image%20%285%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/241/image%20%286%29.png"
+        ]
+      },
+      {
+        "step": "Step 5. Importance of Date Range",
+        "description": "If you cannot find a receipt, first check the date range. You must select the specific day or month when the receipt was originally issued. For example, if the receipt is from last month, you must select last month's period instead of the current one. The 'Sales History' serves as the primary hub for searching receipts, changing payment types, and processing returns using the second method.",
+        "images": []
+      }
+    ]
+  },
+  {
+    "title": "Returns via Client",
+    "parent_section": "Қайтаришлар / Возврат",
+    "overall_goal": "To process a product return from a specific customer and record the refund transaction in the system.",
+    "rag_description": "This section provides a step-by-step guide on how to perform a product return via a client in the Linko-POS Desktop system. It covers accessing the 'Return' section, selecting products from the catalog, adjusting quantities, and mandatory client identification. The guide also details the finalization process where the user selects a payment method (Cash, Terminal, or Debt Reduction) and completes the transaction. This action impacts the cash register by recording an expense and updates the customer's transaction history card.",
+    "content": [
+      {
+        "step": "Step 1. Accessing the 'Return' (via client) section",
+        "description": "Open the main menu on the left side and select the 'Return' section from the list.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/243/image.png"
+        ]
+      },
+      {
+        "step": "Step 2. Selecting items",
+        "description": "After the return window opens, select the product(s) from the catalog on the right. Clicking on a product adds it to the list in the left panel. If the quantity needs to be adjusted, use the '- / +' buttons on the left position to decrease or increase the number.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/243/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Selecting a client (Mandatory)",
+        "description": "Click on the 'Client Name' dropdown list on the left and select the client to whom you are issuing the return. This is a mandatory step to clearly identify who is receiving the refund. If necessary, you can also add a new client from this window.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/243/image%20%283%29.png"
+        ]
+      },
+      {
+        "step": "Step 4. Finalizing the return",
+        "description": "Once the products and client are selected, click the 'Create receipt' button. A payment window will open. In the 'Payment Method' section, select how the money will be returned: 'Cash', 'Terminal', or 'Subtract from client's debt'. Click the 'Give money' button to confirm the operation. This will record the operation as an expense in the cash register and create a return transaction in the customer's card.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/243/image%20%284%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Return History Management",
+    "parent_section": "Қайтаришлар / Возврат",
+    "overall_goal": "To view, search, and print receipts for processed product returns within the Linko-POS system.",
+    "rag_description": "This section explains how to manage and track product returns in the Linko-POS Desktop application using the Return History feature. It guides users through accessing the 'Returns' sub-section within the 'History' menu to view a detailed list of transactions including receipt numbers, client names, amounts, and timestamps. Users learn how to view specific return details such as items, quantities, and pricing, reprint return receipts for records, and use date filters or search functionality by client or receipt number to locate specific transactions.",
+    "content": [
+      {
+        "step": "Step 1: Accessing the Return History section",
+        "description": "Open the main menu on the left side and select the 'Returns' item under the 'History' section. Here, a list of all return receipts for the selected period will be displayed, including the receipt number, client name, return amount, and the date and time of the operation.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/242/image.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/242/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 2: Viewing return details and printing receipts",
+        "description": "Click on the desired row in the table to open the full details of that return, including the list of items, their quantity, price, and the total sum. Use the 'Print receipt' button at the bottom of the window to print the return receipt from the printer.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/242/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "Step 3: Filtering by period and using search",
+        "description": "To filter by date, click the date filter in the top right corner of the screen, select the start and end dates in the calendar, and click 'Apply'. The list will then show only returns from that period. You can also use the 'Search' bar to quickly find a specific return by customer name, phone number, or receipt number.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/242/image%20%283%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Returns to Suppliers",
+    "parent_section": "Җайтаришар / Возврат",
+    "overall_goal": "To provide step-by-step instructions for returning products to suppliers using the Linko-POS system, including stock selection, supplier identification, and balance management.",
+    "rag_description": "This documentation section provides a comprehensive guide on performing product returns to suppliers within the Linko-POS Desktop application. It details the workflow starting from accessing the 'Returns to Suppliers' module to final payment processing. Key features explained include stock level validation (where zero-stock items are highlighted in red), the use of the shopping cart for return items, selecting specific suppliers to update their corresponding balances, and choosing payment methods like cash or terminal. This section is essential for understanding how returns impact supplier accounts, either by reducing a user's debt (minus balance) or increasing credit (plus balance) for future purchases.",
+    "content": [
+      {
+        "step": "Step 1. Access the 'Returns to Suppliers' Section",
+        "description": "Select the 'Returns to Suppliers' (Возврат поставщикам) section from the main menu on the left. This is where all operations regarding goods returned to suppliers are handled.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/244/image.png"
+        ]
+      },
+      {
+        "step": "Step 2. Select Products and Set Quantity",
+        "description": "Click on the item you want to return from the product list on the right; it will move to the shopping cart on the left. If the product's warehouse balance is 0, the line in the cart will appear with a red background, and you cannot add more to the quantity—this indicates insufficient stock for a return. If there is stock available, the row will look normal, and you can increase or decrease the return quantity using the - / + buttons.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/244/telegram-cloud-photo-size-2-5314535379400592741-w.jpg",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/244/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Select Supplier and Refund Money",
+        "description": "Choose the appropriate supplier from the 'Supplier Name' (Название поставщика) list at the top left to specify who the goods are being returned to. Once you have confirmed the products and quantities are correct, click the 'Pay' (Оплатить) button at the bottom to open the payment window. Select the refund method (Cash or Terminal) and confirm the amount by clicking the 'Give Money' (Отдать деньги) button.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/244/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "Step 4. Relationship with Supplier Balance",
+        "description": "After completing the return, the returned amount is added (as a plus) to the selected supplier's balance, essentially counting as money paid to them which can be used for future credit. If the supplier's balance is negative (minus), it means you owe them money; the returns made through this section will serve to partially or fully cover that debt.",
+        "images": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,159 @@
+[
+  {
+    "title": "Arca Terminal Integration",
+    "parent_section": "Фисжал модуллар билан интеграция / Интеграция с Фискальными модулями",
+    "overall_goal": "To correctly configure the Arca terminal within the Linko-POS system to ensure fiscal receipts and terminal payments are processed accurately.",
+    "rag_description": "This documentation provides a step-by-step guide for integrating the Arca payment terminal with the Linko-POS Desktop system. It covers the initial setup within the POS terminal settings, including entering administrator credentials, configuring the terminal IP address via ERP Mode, and establishing a connection. Additionally, it highlights the necessity of mandatory fiscal data such as IKPU and Unit of Measurement codes in the product management section to ensure compliance. The section concludes with a verification process using a test transaction to confirm successful hardware integration and receipt printing.",
+    "content": [
+      {
+        "step": "1.1. Open Terminal Settings Window",
+        "description": "Open the POS system and navigate to Settings -> Terminal Settings from the main menu. In the window that opens, select the ARCA type. Prepare to fill in all the required fields such as login, password, and IP address.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/63/1-%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%20%28%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F%29%20%281%29.png"
+        ]
+      },
+      {
+        "step": "1.2. Enter Terminal Login",
+        "description": "Identify the login displayed on the 'Administrator' line of the physical terminal. Enter this exact login into the 'Login' field in the POS Terminal Settings window. Note: The login must be entered exactly as it appears on the terminal, including case sensitivity and spaces.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/163/mod_page/content/4/IMG_6434.jpg"
+        ]
+      },
+      {
+        "step": "1.3. Enter Password and IP Address",
+        "description": "In the 'Password' field, enter the standard terminal password (typically numbers 1 through 6), ensuring it matches the terminal's set password. In the 'IP Address of Terminal' field, enter the IP and port (e.g., 192.168.88.24:8888) found at the bottom of the screen after entering 'ERP Mode' on the terminal.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/163/mod_page/content/4/IMG_6435.jpg"
+        ]
+      },
+      {
+        "step": "2.1. Set Default Fiscal Option (Optional)",
+        "description": "If all receipts need to be sent as fiscal transactions, enable the fiscal checkbox in the Terminal Settings window. Then click the 'Connect' button. A message indicating a successful connection should appear on the terminal.",
+        "images": []
+      },
+      {
+        "step": "2.2. Fill in IKPU and Unit of Measurement Codes",
+        "description": "Navigate to the 'Products' section. For every product intended for sale, ensure the IKPU and 'Unit of Measurement Code' fields are completed, as these are mandatory for fiscal processing. To edit these, click the pencil icon next to a product, enter the codes in the edit window, and save.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/163/mod_page/content/4/image_2025-10-02_12-05-18.png"
+        ]
+      },
+      {
+        "step": "2.3. Print a Test Receipt",
+        "description": "Select a product in the POS and perform a test sale. Choose payment via terminal as the payment method. If a receipt prints successfully, the Arca terminal is correctly integrated with the POS system.",
+        "images": []
+      }
+    ]
+  },
+  {
+    "title": "Integration with E-pos",
+    "parent_section": "Фисагага бига ивегациу / Ивегациу с Фисагага бига",
+    "overall_goal": "To activate the E-pos software and establish a connection between the Linko POS system and the fiscal module for legal transaction reporting.",
+    "rag_description": "This section provides a step-by-step guide for integrating Linko-POS Desktop with the E-pos fiscal module. It covers the initial activation of the E-pos Communicator software using a license key (USB), testing reports (Z-report and X-report), and configuring the printer (e.g., XP-80) for fiscal receipts. It also explains how to link Linko POS to the E-pos service via the terminal settings, verify the connection status, and enter store details such as Name, TIN (INN), and address. A key feature described is the 'default item for fiscalization,' which ensures tax compliance by providing a fallback IKPU code for products that lack one, ensuring seamless reporting to tax authorities.",
+    "content": [
+      {
+        "step": "Step 1. Activating E-pos Software",
+        "description": "After the E-pos staff has installed the software and prepared the initial settings, open the E-pos Communicator application. Insert the provided license key (USB flash drive) into the laptop. Navigate to the 'Activation' section in the software and click the 'Activate' button to activate the license.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/67/IMAGE%202025-10-06%20135513.jpg"
+        ]
+      },
+      {
+        "step": "Step 2. Verifying Reports",
+        "description": "Check if reports are being received correctly. To do this, go to the 'Z-report' section and then click 'X-report'. A window displaying the list of reports should appear.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/67/1-%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%20%28%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F%29%20%282%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Printer Configuration",
+        "description": "Enter the 'Settings' section and select your printer (e.g., XP-80). After selecting the printer, click Z-report → X-report again. If everything is configured correctly, a test receipt will be printed.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/67/telegram-cloud-photo-size-2-5411252090078099899-y.jpg"
+        ]
+      },
+      {
+        "step": "Step 4. Accessing Linko POS Terminal Settings",
+        "description": "Open the Linko POS system. Click on the 'Settings' icon in the top right corner and then select the button with the terminal icon at the bottom.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/67/1-%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%20%28%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F%29%20%283%29.png"
+        ]
+      },
+      {
+        "step": "Step 5. Connecting Linko POS to E-pos",
+        "description": "A window will open regarding the terminal connection. Select 'E-pos' and click the 'Connect to E-Pos' button. Then, click 'Check shift' to verify the status. If there are no errors, the status will show as correct. If an error occurs during 'Check shift', you should contact E-pos support staff.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/67/image.png"
+        ]
+      },
+      {
+        "step": "Step 6. Finalizing Store and Fiscalization Settings",
+        "description": "Enter the store name. The TIN (INN) and address fields are optional, but if filled, this information will appear on the receipts. Finally, enable the 'Use default item for fiscalization' parameter and select a product from the list. This is necessary because if a product on a receipt does not have an IKPU code, the IKPU code of this selected default item will be used when sending fiscal data to the tax authorities.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/67/Screenshot%202025-10-06%20at%202.35.32%E2%80%AFPM.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Fiscal.me Integration and Configuration Guide",
+    "parent_section": "Фисдал модуллар билан интеграция / Интеграция с Фискальными модулями",
+    "overall_goal": "To successfully install drivers, configure the Fiscal.me software, and integrate it with the Linko-POS system for automated fiscal receipt generation.",
+    "rag_description": "This documentation section provides a step-by-step technical guide for integrating the Fiscal.me module with Linko-POS Desktop. It addresses the requirement for legal fiscal reporting by detailing the installation of .NET and fiscal drivers, the configuration of the Fiscal.me client application (including key synchronization, geolocation entry, and printer setup), and the final connection within the POS terminal settings. A critical feature described is the 'Default Product for Fiscalization' which ensures all receipts meet tax authority standards for IKPU and identification codes, even when individual items lack complete data. The guide also includes troubleshooting steps for common errors such as incorrect system time, internet connectivity issues, and terminal IP address mismatches.",
+    "content": [
+      {
+        "step": "1. Driver and .NET Installation",
+        "description": "Download and install the required .NET framework and the fiscal driver onto your computer. Once the installation is successful, restart your monoblock or PC.",
+        "images": []
+      },
+      {
+        "step": "2. Fiscal.me Software Configuration",
+        "description": "Download and open the Fiscal.me application. In the Fiscal Server Address and Key ID fields, click 'Get Key' to retrieve the key from the server, then click 'Sync' to synchronize. Enter a number in the Serial Number field (e.g., 1233454).",
+        "images": []
+      },
+      {
+        "step": "3. Geolocation Settings",
+        "description": "Specify your location using Latitude and Longitude. You can find these by searching for your location in a web browser (e.g., 'Tashkent latitude and longitude').",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/64/Screenshot%202025-09-13%20at%203.10.08%E2%80%AFPM.png"
+        ]
+      },
+      {
+        "step": "4. Printer and General Settings",
+        "description": "Go to the 'Printer Settings' section and select the printer that will output the receipts. After filling in all fields correctly, click 'Save General Settings'. Ensure all fields in the software appear as shown in the screenshot.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/64/IMAGE%202025-09-15%20114919.jpg"
+        ]
+      },
+      {
+        "step": "5. Testing the Connection",
+        "description": "Navigate to 'Test' -> 'Test Page' in the top navigation bar. In the 'Test Printing' section, select an option like 'Print Example Order' to verify that the printer is working correctly.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/64/IMAGE%202025-09-15%20115709.jpg"
+        ]
+      },
+      {
+        "step": "6. Linking to the POS System",
+        "description": "Synchronize the connection between the fiscal module and the POS again. In the Linko-POS system, go to 'Terminal Settings' and select 'Fiscal.me' as the terminal type. Click 'Check Shift' to verify communication with the fiscal module.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/64/IMAGE%202025-09-15%20115751.jpg",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/64/IMAGE%202025-09-15%20144010.jpg"
+        ]
+      },
+      {
+        "step": "7. Configuring Default Fiscal Product",
+        "description": "Enable the checkbox 'Use default product for fiscalization' and select a generic product. This ensures that even if a specific product lacks a barcode, IKPU, or identification code, the receipt will still contain valid tax data using the default product's credentials, while the POS continues to track actual inventory correctly.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/64/IMAGE%202025-09-15%20142924.jpg"
+        ]
+      },
+      {
+        "step": "8. Final Verification and Troubleshooting",
+        "description": "Perform a test sale in the POS. If a receipt does not print, check cable connections, internet stability, and driver versions. Crucially, verify the system date and time; if the computer time is incorrect, the server will return a 'BadRequest - receipt time is in the past' error. If an IP address error occurs, re-enter the terminal's IP address manually.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/64/IMAGE%202025-09-15%20144045.jpg"
+        ]
+      }
+    ]
+  }
+]

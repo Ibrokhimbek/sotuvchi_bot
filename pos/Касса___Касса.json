@@ -1,0 +1,139 @@
+[
+  {
+    "title": "Cashier Section Management",
+    "parent_section": "Абасса / Абасса",
+    "overall_goal": "To provide a comprehensive guide on navigating the Cashier module, performing manual transactions, filtering records, and managing client reconciliation reports in Linko-POS Desktop.",
+    "rag_description": "This section outlines the financial management features within the Linko-POS Desktop Cashier module. It details how to access the main transaction window, explains the function of the Income, Expense, and Transfer buttons, and defines balance indicators such as opening and closing amounts. Users will find instructions on applying advanced filters by date, employee, or category to locate specific transactions. Additionally, it covers how to open client cards directly from transaction rows to view debt/advance details and how to generate and download reconciliation acts (Aкт сверки) for auditing purposes. This module is the central hub for monitoring cash flow and verifying client balances across different branches and payment types.",
+    "content": [
+      {
+        "step": "Step 1: Opening the Cashier Window and Basic Operations",
+        "description": "Navigate to the 'Cashier' section from the top left menu. This area displays all cash movements and transactions. At the top of the screen, you will find three main buttons: 'Income' (for adding funds), 'Expense' (for recording payments out), and 'Transfer' (for moving funds between cash registers). Below these buttons, the system displays key indicators: 'At the beginning' (starting balance), 'Income' (total for the period), 'Expense' (total outflows), 'At the end' (closing balance), and 'Transaction Count'. These totals update automatically based on your applied filters.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/239/Screenshot%202025-12-04%20at%201.10.31%E2%80%AFPM.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/239/image.png"
+        ]
+      },
+      {
+        "step": "Step 2: Working with Filters and Searching",
+        "description": "To filter transactions by date, click the date range in the upper right corner to open the calendar filter. Select the desired period and click 'Apply'. You can further narrow results by using filters for specific cash registers, expense categories, employees, payment types, or branches. Additionally, a search field is available to quickly find transactions by comment, amount, or order number.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/239/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 3: Accessing Transaction Details and Client Cards",
+        "description": "Click on a specific transaction row in the table (e.g., a visitor entry) to open the 'Client Information' window. The 'Details' tab shows the customer's name, phone number, and their current debt or advance balance, which can be modified using the 'Edit' button.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/239/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "Step 4: Generating Reconciliation Acts",
+        "description": "Within the client window, navigate to the 'Reconciliation Act' (Aкт сверки) tab. Here you can filter by period, currency, and payment type to see all related Income/Expense records and linked documents like Order or Payment numbers. Use the 'Download Reconciliation Act' button to save this financial history as a file.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/239/image%20%283%29.png"
+        ]
+      },
+      {
+        "step": "Step 5: Summary of Capabilities",
+        "description": "The Cashier section allows you to monitor income and expenses for each register individually, track daily/monthly balances, locate any operation via filters, and access client cards to manage their transaction history and reconciliation reports.",
+        "images": []
+      }
+    ]
+  },
+  {
+    "title": "Registering Incoming Payments (Income)",
+    "parent_section": "Жасса / Жасса",
+    "overall_goal": "To correctly record funds received from clients or suppliers into the system, update cash balances, and reduce outstanding debts.",
+    "rag_description": "This documentation section explains the process of recording incoming cash or bank transactions (Income) within the Linko-POS Desktop 'Cashier' module. It outlines the steps to navigate to the Cashier section, select the appropriate income type (Client or Supplier), and fill out the necessary financial details including the destination account, amount, and counterparty selection. The process results in an updated cash balance and an automatic reduction of the payer's debt in the accounting system, ensuring accurate financial reporting for daily operations.",
+    "content": [
+      {
+        "step": "1. Accessing the Cashier Section",
+        "description": "Open the \"Cashier\" (Басса) section from the side menu on the left. Once opened, the screen will display all daily cash operations and the current total balances.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/204/image.png"
+        ]
+      },
+      {
+        "step": "2. Selecting the Income Type",
+        "description": "Click the green \"Income\" (Врихд) button located in the upper left corner. From the resulting list, choose \"Client\" (Жвиеат) if the payment is from a customer, or \"Supplier\" (Вбставщиб) if the payment is from a vendor. This action opens the Income entry window.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/204/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "3. Filling in Income Details",
+        "description": "In the \"Cashier\" field, select the specific cash register or account receiving the funds (e.g., \"Cash\"). Enter the amount being paid into the \"Sum\" (Гсвва) field. Use the \"Comments\" field for brief notes like \"Debt repayment\". Finally, click \"Select Client\" or \"Select Supplier\" to choose the corresponding person or entity from your database.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/204/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "4. Saving and Verifying Results",
+        "description": "After all fields are completed, click the green \"Save\" (Гбхрааитр) button. The cash balance in the system will increase accordingly, and if you track debts, the selected client's or supplier's debt will be automatically reduced.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/204/telegram-cloud-photo-size-2-5283149454913507301-w.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Recording Expenses and Cash Outflows",
+    "parent_section": "Аасса / Аасса",
+    "overall_goal": "To accurately document various types of cash outflows from the cash desk, such as salaries, supplier payments, and refunds, to maintain an up-to-date cash balance.",
+    "rag_description": "This documentation section explains how to record expense transactions in the Linko-POS Desktop system. It details the process of navigating to the Cash Desk (Kassa) module and initiating an expense (Расход) entry. The guide covers different expense categories including employee advances, daily fuel costs, supplier debt settlements, salaries, and client refunds. It describes the mandatory form fields such as cash source, amount, and date, as well as context-sensitive fields like employee or supplier selection. Finally, it explains how saving the transaction updates the system's ledger, increasing total expenses and decreasing the current cash balance.",
+    "content": [
+      {
+        "step": "1. Open the Expense Window",
+        "description": "Navigate to the 'Cash Desk' (Kassa) section using the menu in the top-left corner. Once the Cash Desk window is open, click the 'Expense' (Расход) button at the top. From the dropdown list, select the required expense type: 'Advance to employees', 'Daily fuel payment', 'Close debt to supplier', 'Employee salary', or 'Client' (for refunds). Selecting a type will open the specific expense form.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/205/image.png"
+        ]
+      },
+      {
+        "step": "2. Fill in the Expense Form",
+        "description": "Complete the required fields in the form: select the source 'Cash Desk' (e.g., 'Cash'), enter a 'Comment' if necessary, verify the 'Creation Date', and input the 'Amount'. The 'Expense Category' will be pre-filled based on your selection. Note that additional fields appear based on the category: select a 'Employee' for advances/salaries, a 'Supplier' for debt payments, or a 'Client' for refunds.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/205/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "3. Save and Verify the Transaction",
+        "description": "After filling in all mandatory fields, click the 'Save' (Сохранить) button at the bottom of the form. The new expense operation will be added to the transaction table. You will observe that the total 'Expense' sum increases and the 'Cash Balance' decreases appropriately, ensuring accurate financial tracking.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/205/image%20%282%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/205/image%20%283%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Transfer Between Cash Desks",
+    "parent_section": "Аасса / Аасса",
+    "overall_goal": "The goal of this section is to guide the user through the process of transferring funds between different cash accounts or terminals within the Linko-POS system.",
+    "rag_description": "This documentation section provides step-by-step instructions for performing internal fund transfers within the Linko-POS Desktop system. It covers accessing the 'Cashier' (Kassa) module, initiating a 'Transfer' (Перевод) operation, and completing the transaction form by specifying the source cash desk, recipient cash desk, date, and amount. The guide explains how to record movements such as transferring money from a terminal to a physical cash drawer or moving funds between different branches or office locations. Key actions include navigating the main menu, filling out mandatory transfer fields, and verifying the balance changes in the transaction history.",
+    "content": [
+      {
+        "step": "Step 1. Opening the Transfer Window",
+        "description": "Navigate to the top menu and enter the 'Cashier' section. Within the Cashier window, click the 'Transfer' button located next to the green and red action buttons. This will open the 'Transfer between cash desks' form as shown in the interface.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/206/image.png"
+        ]
+      },
+      {
+        "step": "Step 2. Filling out the Transfer Form",
+        "description": "Fill in the required fields in the transfer form: 1. Cashier (*): Select the source cash desk where funds will be withdrawn (e.g., Terminal). 2. Recipient Cashier (*): Select the destination cash desk where funds will be deposited (e.g., Cash). 3. Date (*): Specify the transfer date (defaults to current date). 4. Amount and Comment: Enter the 'Amount' to be transferred and provide an optional 'Comment' (e.g., 'Daily encashment' or 'Transfer from terminal to cash').",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/206/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Saving the Transfer and Verifying the Results",
+        "description": "After filling all mandatory fields, click the 'Save' button. Once saved, the balance in the source cash desk will decrease, and the balance in the recipient cash desk will increase accordingly. A new 'Transfer' operation will appear in the cash transaction list. This feature is typically used for terminal-to-cash transfers, branch-to-branch transfers, or moving funds between warehouse and office accounts.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/206/image%20%282%29.png"
+        ]
+      }
+    ]
+  }
+]

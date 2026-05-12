@@ -1,0 +1,107 @@
+[
+  {
+    "title": "Setting up Shtrikh-M Scales",
+    "parent_section": "Таразибаар / Весу",
+    "overall_goal": "To configure Shtrikh-M scales for use with Linko-POS, including port identification, network setup, and product synchronization.",
+    "rag_description": "This section provides a technical guide on integrating Shtrikh-M scales with the Linko-POS Desktop environment. It outlines the essential steps for hardware setup, including the determination of API and communication ports, the configuration of IP addresses for network connectivity, and the procedure for uploading product data directly to the scale's memory. The section concludes with a verification process that uses receipt printing to confirm the integration is successful, ensuring that the POS system can accurately communicate with the weighing hardware for retail operations.",
+    "content": [
+      {
+        "step": "Step 1",
+        "description": "Identify the API and Port settings required for the Shtrikh-M scales.",
+        "images": [
+          "https://files.glotr.uz/company/000/006/043/products/2016/09/28/14750655679425-007ce7d8453a4f5fc955711d102db45e.jpg?_=ozb9y"
+        ]
+      },
+      {
+        "step": "Step 2",
+        "description": "Configure the IP addresses on the Shtrikh-M scales and perform a data upload to synchronize products.",
+        "images": []
+      },
+      {
+        "step": "Step 3",
+        "description": "Print a test receipt from the scale to verify the configuration and ensure the device is working correctly.",
+        "images": []
+      }
+    ]
+  },
+  {
+    "title": "TM-A Scale Configuration and Data Loading",
+    "parent_section": "Таразибар / Вессу",
+    "overall_goal": "To successfully configure the TM-A electronic scale and synchronize product information from the POS system.",
+    "rag_description": "This guide provides instructions for managing TM-A series electronic scales within the Linko-POS ecosystem. It addresses the critical tasks of identifying the scale's network configuration and performing data synchronization. Users will learn how to view the device's IP address to establish a network connection and how to load product data into the scale's memory. This process ensures that weight-based items are accurately processed and labeled at the point of sale, solving potential communication issues between the desktop software and the hardware.",
+    "content": [
+      {
+        "step": "Step 1: View the IP address on the TM-A scale",
+        "description": "Identify and verify the IP address assigned to the TM-A scale. This network address is necessary for the Linko-POS Desktop software to communicate with the hardware.",
+        "images": [
+          "https://img.bisyor.uz/web/uploads/items/tarozi-elektronniy-200kg-supper-skidka-222431-1z-1618833006.jpg"
+        ]
+      },
+      {
+        "step": "Step 2: Load products onto the TM-A scale",
+        "description": "Transfer product information and pricing from the POS system to the TM-A scale, enabling the scale to recognize and weigh specific inventory items.",
+        "images": []
+      }
+    ]
+  },
+  {
+    "title": "Setting up YesPOS Barcode Scales",
+    "parent_section": "Таризабаб / Весу",
+    "overall_goal": "Configure the YesPOS barcode scale by installing drivers, importing product data from the POS system, setting up the IP connection, and customizing the label design.",
+    "rag_description": "This technical guide explains how to integrate YesPOS Barcode Scales with the Linko-POS system. It covers the end-to-end setup process including downloading drivers via the YesPOSuzBOT Telegram bot, exporting weighted product templates from the POS software, and importing them into the scale driver using semicolon delimiters. It also details the hardware connection process via IP address (Com Center) and the steps to modify and synchronize label designs (price tags) between the driver and the physical scale. Users will learn how to map PLU fields (PluNo, PluName, UniPrice, PluCode) and perform full data synchronization to ensure accurate weighing and barcode printing.",
+    "content": [
+      {
+        "step": "1. Obtaining the Driver and Instructions",
+        "description": "Start by opening the YesPOSuzBOT on Telegram and press start. In the menu, navigate to Scales → YesPOS Barcode Scale → TXT file import to view instructions and images on how to import files. After reviewing the instructions, go to the Drivers section in the menu and download the provided .zip file to your computer and install the driver.",
+        "images": []
+      },
+      {
+        "step": "2. Exporting Products from POS and Importing to Driver",
+        "description": "Open the Linko-POS system and navigate to Sales → Goods → Weight products. Click 'Download template' in the upper right corner and select your scale model to save the file. Next, open the YesPOS driver, go to PLU → IMPORT, and select 'Text File'. Open the file you exported from the POS. In the next window, enter a semicolon (;) in the 'Ordinary char' field as the separator. Click 'Next' and map the fields: PluNo, PluName, UniPrice, and PluCode. Ensure PluNo and PluCode match exactly; use the arrows to adjust if necessary.",
+        "images": []
+      },
+      {
+        "step": "3. Connecting the Scale and Uploading Data",
+        "description": "Check the scale's IP address in the 'Com Center' section of the driver. If the IP is incorrect, update it manually via 'Com Pars Set' and verify that the status displays 'Connection = True'. Once the connection is established, go to the Download/Upload section, select PLU, and click the 'Download all' button to transfer all products from the file to the scale hardware.",
+        "images": []
+      },
+      {
+        "step": "4. Customizing the Label Design",
+        "description": "Open the 'Label Design' section in the YesPOS driver. In the design window, use 'Com center' to test the connection, then go to 'Download/Upload' and select 'Label Design → Upload current' to see the current template. You can now rearrange elements, add new sections, or delete unnecessary ones. To save your changes and apply the new design to the scale, return to 'Com center → Download/Upload', select 'Label Design', and click 'Download all'.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/197/Screenshot%202025-09-27%20at%202.38.19%E2%80%AFPM.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Rongta Scales Integration",
+    "parent_section": "Таразибаар / Весу",
+    "overall_goal": "To successfully connect Rongta electronic scales to the Linko POS system and sync product data for weighing operations.",
+    "rag_description": "This documentation section explains the integration process for Rongta scales with the Linko POS Desktop application. It outlines the necessary preparation steps, including power requirements and network connectivity (Wi-Fi). The guide details how to connect the scales to a wireless network and provides options for uploading product lists and label templates either through a license-based system or via specialized drivers. This ensures that the POS and the weighing hardware are synchronized for accurate weight-based sales transactions.",
+    "content": [
+      {
+        "step": "Preparation and Integration Overview",
+        "description": "Before beginning the setup, ensure the scale is powered on and you have the Wi-Fi credentials (SSID and password) available. Crucially, both the laptop or PC running Linko POS and the Rongta scales must be connected to the same Wi-Fi network. This process involves connecting the hardware to the network and then loading product templates.",
+        "images": [
+          "https://frankfurt.apollo.olxcdn.com/v1/files/zo7zqk0fbdi52-UZ/image"
+        ]
+      },
+      {
+        "step": "14.1 Connecting Rongta Scales to Wi-Fi",
+        "description": "Follow the procedure to link your Rongta scales to your local wireless network so they can communicate with the POS workstation.",
+        "images": []
+      },
+      {
+        "step": "14.2 Loading Templates via License",
+        "description": "If utilizing the license-based method, proceed to upload your product lists and label configurations to the scales through the software interface.",
+        "images": []
+      },
+      {
+        "step": "14.3 Loading Templates via Driver",
+        "description": "Alternatively, use the driver-based method to transfer product data and formatting templates to the scale hardware.",
+        "images": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,227 @@
+[
+  {
+    "title": "General Statistics and Reporting Overview",
+    "parent_section": "Статистика / Статистика",
+    "overall_goal": "To guide users through accessing and interpreting business statistics in Linko-POS, including sales metrics, period filtering, graphical data analysis, and product performance analysis.",
+    "rag_description": "This section provides a comprehensive guide on using the Statistics module in the Linko-POS Desktop system. It covers how to navigate to the Main Statistics page via the sidebar menu and utilize reporting tools to analyze business performance. Key features include filtering data by specific periods such as day, week, month, or custom ranges, and interpreting key performance indicators like Revenue, Profit, Total Receipt Count, and Average Receipt Value. The guide also explains how to use interactive graphs to visualize trends by hour or day and analyze specific data blocks including Popular Products, Payment Methods (split by turnover or transaction frequency), and Sales by Category. This allows business owners to make data-driven decisions regarding inventory and pricing based on real-time sales performance.",
+    "content": [
+      {
+        "step": "Step 1. Accessing the Statistics Section",
+        "description": "Select the \"Statistics\" section from the left-hand menu. The screen will open to a page titled \"All reports -> Main\".",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/271/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 2. Selecting the Period (Day / Week / Month / Date Range)",
+        "description": "Click one of the period selection buttons in the top right corner of the screen: Day (single day statistics), Week (weekly statistics), Month (monthly statistics), or Date Selection (custom date range). When you change the period, the graph and all metrics below will update automatically.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/271/image.png"
+        ]
+      },
+      {
+        "step": "Step 3. Understanding the Main Indicators",
+        "description": "The top row displays four main indicator cards: 1) Revenue - the total sales amount for the selected period. 2) Profit - the profit calculated by subtracting costs/prime costs from revenue. 3) Checks - the total number of sales transactions performed. 4) Average Check - the average amount per transaction. Percentage indicators (e.g., -14%, +33%) show the growth or decline compared to the previous period.",
+        "images": []
+      },
+      {
+        "step": "Step 4. Working with the Graph (Hour / Day / Day of the Week)",
+        "description": "Below the cards is the graph section. Select a mode on the right side of the graph: Hour (hourly changes), Day (daily breakdown), or Day of the Week (breakdown by days of the week). Use the tabs above the graph to choose which metric to plot: Revenue, Profit, Check, or Average Check.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/271/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "Step 5. Detailed Analysis Blocks",
+        "description": "Three important blocks appear below the graph: 1) Popular Products - shows the Top-10 or a list of items sold by amount or share. 2) Payment Methods - breaks down payments into cash, terminal, or debt. You can toggle between \"Turnover\" (total amount per method) and \"Checks\" (number of transactions per method). 3) Sales by Category - shows sales performance based on product categories. If a category is not assigned, it may appear as \"not specified\".",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/271/image%20%283%29.png"
+        ]
+      },
+      {
+        "step": "Step 6. Quick Practical Scenario for Analysis",
+        "description": "To effectively use the statistics: 1) Enter Statistics and select \"Week\". 2) Open the Revenue graph and set the mode to \"Day\". 3) In the Payment Methods block, click \"Checks\" to see which payment type is used most frequently. 4) Review Popular Products to make decisions regarding stock levels and pricing.",
+        "images": []
+      }
+    ]
+  },
+  {
+    "title": "Inventory Balance with Profit Report",
+    "parent_section": "Статистиа / Статистиа",
+    "overall_goal": "Learn how to access, filter, and interpret the Inventory Balance with Profit report to analyze current stock value and projected earnings.",
+    "rag_description": "This section provides a detailed guide on using the 'Inventory Balance with Profit' report within the Linko-POS Desktop system. It covers the navigation path through the Reports menu, the use of the filter panel to isolate specific data (by warehouse, brand, or product type), and the export of data to Excel. Crucially, it explains every column in the generated table, including unit cost, selling price, and profit calculations. This report allows users to identify items sold at a loss (indicated by negative profit) and provides a total valuation of inventory based on both cost and retail prices.",
+    "content": [
+      {
+        "step": "Step 1. Accessing the 'Inventory Balance with Profit' Report",
+        "description": "1.1. Enter the 'Reports / All reports' section from the left-hand menu. 1.2. Select 'Inventory balance with profit' from the list. 1.3. After the window opens, you will see a complete table displaying product balances, their cost price, selling price, and profit.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/267/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 2. Main Action Buttons",
+        "description": "2.1. 'Open filter' — Opens the filter panel to refine the report and isolate specific products. 2.2. 'Download excel' — Downloads the current report on the screen into an Excel file (if a filter is applied, only the filtered results will be exported).",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/267/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Selecting Required Data via Filters",
+        "description": "3.1. Click 'Open filter' to display the filter panel at the top. 3.2. Select the required criteria from the following fields: Price list (which price to calculate by), Organization (view by organization), Warehouse (select specific warehouse), Product type (filter by category), Brand, Product (select a specific item), Column (filter by additional classifications if available), and 'Balance less than' (to find items with stock lower than a specified number). 3.3. After making selections, click 'Apply' to update the table. 3.4. Click 'Hide filter' to close the panel.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/267/image%20%283%29.png"
+        ]
+      },
+      {
+        "step": "Step 4. Understanding Table Columns",
+        "description": "It is essential to understand the following columns: 4.1. № (Sequence number). 4.2. Product (Name of the item). 4.3. Balance (Quantity in stock). 4.4. Cost per unit (Unit purchase price). 4.5. Product price per unit (Current selling price). 4.6. Profit per unit (Profit per item: positive if selling price is higher than cost; negative if selling price is lower than cost, indicating a loss or incorrect pricing). 4.7. Total cost amount (Stock * Cost). 4.8. Total price amount (Stock * Selling price). 4.9. Total profit amount (Total projected profit for the remaining stock).",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/267/image%20%284%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "ABC Analysis",
+    "parent_section": "Статистива / Статистива",
+    "overall_goal": "Perform ABC analysis to categorize products based on their sales importance and turnover contribution for better inventory management.",
+    "rag_description": "This documentation section explains how to use the ABC Analysis feature in the Linko-POS Desktop system, located within the Statistics module. ABC analysis categorizes products into three tiers: Class A (high performers), Class B (moderate performers), and Class C (low performers), based on their sales volume and revenue contribution. The guide details how to navigate to the section, apply advanced filters (such as date ranges, product types, brands, and branches), interpret table columns including sales percentages, and make data-driven decisions regarding stock control and promotions. It also covers exporting these analytics reports to Excel for external reporting.",
+    "content": [
+      {
+        "step": "1. Accessing the Section",
+        "description": "Navigate to the Statistics / ABC Analysis section from the left-hand menu. The interface will display the 'Open filter' and 'Download excel' buttons along with the product data table.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/268/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "2. Understanding the Purpose of ABC Analysis",
+        "description": "ABC analysis categorizes products into three classes (A, B, and C) based on their sales significance. The objective is to quickly identify which items generate the most revenue or turnover, which are average, and which are underperforming.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/268/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "3. Selecting the Required Period via Filter",
+        "description": "Click 'Open filter' to specify the data range using 'Date creation from' and 'Date creation to'. You can also refine results by Product Type, Brand, Branch, the employee who processed the order, and grouping preferences (e.g., by product or brand). Click 'Apply' to update the table, and use 'Hide filter' if necessary.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/268/image%20%283%29.png"
+        ]
+      },
+      {
+        "step": "4. Understanding Table Columns",
+        "description": "The table includes: ID (Product ID), Name, Quantity Sold (units), Quantity Sold (decimal values for weighted items like kg/liters), Sales Amount (total revenue per item), Sales Amount % (share of total sales), and Class (A, B, or C category).",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/268/image%20%284%29.png"
+        ]
+      },
+      {
+        "step": "5. Interpreting A / B / C Classes",
+        "description": "Class A includes top-selling products with the highest impact on turnover. Class B consists of moderately selling items of secondary importance. Class C represents low-turnover, slow-moving products.",
+        "images": []
+      },
+      {
+        "step": "6. Practical Application and Decision Making",
+        "description": "For Class A items, monitor stock levels closely to avoid deficits. For Class B, monitor their potential to move to Class A through promotions or advertising. For Class C, optimize the assortment to avoid overstocking and consider revising prices or placement.",
+        "images": []
+      },
+      {
+        "step": "7. Exporting to Excel",
+        "description": "Click the 'Download excel' button. The ABC report will be downloaded as an Excel file containing data based on your selected dates and filters.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/268/image%20%285%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Supplier Balance Report",
+    "parent_section": "Статистива / Статистива",
+    "overall_goal": "This guide provides instructions on how to view, analyze, and export supplier balance reports, tracking debts, payments, and returns for specific periods in Linko-POS.",
+    "rag_description": "This documentation section describes the Supplier Balance report within the Linko-POS Statistics module. It covers the workflow for accessing the report via the Statistics / All Reports menu, selecting specific date ranges using a calendar interface, and searching for individual suppliers. The report features top-level summary blocks showing total deliveries, returns, payments, and balance adjustments in multiple currencies (SUM and USD), alongside a detailed data table. It explains how to interpret visual cues such as red text for debts and green for advances, and how to export the filtered results into an Excel file for external record-keeping.",
+    "content": [
+      {
+        "step": "Step 1. Accessing the Section",
+        "description": "Navigate to the 'Statistics / All reports' section from the left side menu and select 'Supplier Balance' (Баланс поставщиков) from the list. When the window opens, general indicators will appear at the top, while the date selection, search field, and data table will be at the bottom.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/269/image.png"
+        ]
+      },
+      {
+        "step": "Step 2. Selecting the Period",
+        "description": "Click on the date range at the bottom (e.g., 01.12.2025 – 31.12.2025). Select the desired dates from the calendar (you can also change the month and year). Once selected, click 'Apply' (Применить) to confirm, or 'Cancel' (Отменить) to discard changes.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/269/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Searching by Supplier",
+        "description": "Type the supplier's name into the 'Search' (Поиск) field. The table will automatically filter to show results for the specified supplier(s).",
+        "images": []
+      },
+      {
+        "step": "Step 4. Understanding General Indicators",
+        "description": "The top section displays: 1. Balance at start (debt or advance at the beginning of the period); 2. Deliveries (total value of incoming stock); 3. Return (value of goods returned to the supplier); 4. Paid (total payments made); 5. Other incomes (additional adjustment entries); 6. Other expenses (additional adjustment exits); 7. Balance at end (final balance at the end of the period). Each block may display values in both SUM and USD.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/269/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "Step 5. Reading Table Columns",
+        "description": "The detailed table contains: Supplier name, Balance at start (SUM/USD), Sold (total value of supplier goods sold during this period, affecting the balance), Return (value of returned items), Paid (money paid), Other income/expenses, and Balance at end (final balance for each supplier).",
+        "images": []
+      },
+      {
+        "step": "Step 6. Understanding Colors",
+        "description": "Red (negative value) usually indicates that you owe the supplier money (debt has increased). Green (positive value) usually indicates you have an advance payment or the supplier owes you (due to returns or overpayments).",
+        "images": []
+      },
+      {
+        "step": "Step 7. Exporting to Excel",
+        "description": "Click the 'Download Excel' (Скачать excel) button in the upper right corner. The downloaded file will reflect the specific period and search filters applied in the current view.",
+        "images": []
+      }
+    ]
+  },
+  {
+    "title": "Customer Balance Report",
+    "parent_section": "Статистига / Статистига",
+    "overall_goal": "How to access, configure, and interpret the Customer Balance report in Linko-POS Desktop to track client transactions and balances.",
+    "rag_description": "This documentation provides a guide to the 'Customer Balance' report within the Statistics section of Linko-POS Desktop. It explains how to access the report, select specific date ranges using a calendar interface, and search for individual customers. The report includes a high-level summary dashboard and a detailed data table showing starting balances, sales, returns, payments, and ending balances in both SUM and USD currencies. It also highlights the use of color-coding (red and green) to distinguish between customer debts and advances, helping businesses manage their accounts receivable effectively.",
+    "content": [
+      {
+        "step": "Step 1: Accessing the report",
+        "description": "Go to the 'Statistics' section in the left-hand menu. From the 'All reports' list, select 'Customer Balance'. Once the window opens, the report will automatically display data based on the last selected period.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/270/image.png"
+        ]
+      },
+      {
+        "step": "Step 2: Understanding the general indicators",
+        "description": "The top section shows total balances for the period in both SUM and USD: Starting balance, Sales (total sales for the period), Returns (returned goods/amounts), Paid (amount paid by customers), Other income, Other expenses, and Ending balance. Colors (red/green) indicate the direction of the balance, allowing you to quickly identify who has a debt or an advance.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/270/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "Step 3: Selecting the period (date)",
+        "description": "Click on the date range displayed at the top. A calendar will appear where you can set the start and end dates. Click 'Apply' to update the report or 'Cancel' to discard changes.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/270/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 4: Searching for a client",
+        "description": "Enter the customer's name into the 'Search' (Поиск) field. The table will automatically filter to show only the customers matching your search query.",
+        "images": []
+      },
+      {
+        "step": "Step 5: Interpreting the data table",
+        "description": "The table provides a detailed breakdown for each client, including: Balance at start (SUM/USD), Sold (SUM/USD), Return (SUM/USD), Paid (SUM/USD), Other income/expenses, and Balance at the end. Use this table to quickly check the specific activities and current balance or debt of any customer.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/270/image%20%283%29.png"
+        ]
+      }
+    ]
+  }
+]

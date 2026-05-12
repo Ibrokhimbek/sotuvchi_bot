@@ -1,0 +1,101 @@
+[
+  {
+    "title": "Inventory Posting Process",
+    "parent_section": "Кирим қилиш / Оприходование",
+    "overall_goal": "To register incoming goods into the system, set their purchase and retail prices, assign a supplier, and record the payment transaction.",
+    "rag_description": "This section explains the inventory posting (Oprichodovanie) workflow in Linko-POS Desktop, which is used to add stock to the warehouse and record procurement expenses. The process involves navigating to the Posting module, selecting products, and configuring quantity, purchase prices, and retail prices. It covers mandatory supplier selection and the creation of new supplier profiles if they are missing from the system. Finally, it details the payment stage where users select a payment method and finalize the posting, resulting in updated inventory levels and transaction records in the Cashier Expense module.",
+    "content": [
+      {
+        "step": "Step 1. Accessing the Posting Section",
+        "description": "Open the sales window and click the menu button in the upper left corner. From the left side panel, select the \"Oprichodovanie\" (Posting) section.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/54/image.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/54/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 2. Entering Products and Prices",
+        "description": "In the posting window, select the required products. When you click on a selected product, the \"Edit Product\" window opens. Here you must fill in: \"Select Quantity\" (how many units/kg arrived), \"Purchase Price\" (the cost price), and \"Set Sale Price\" (the retail price). After entering these values, click \"Create\". The selected product will appear in the list on the left. You can also enable the \"Bonus System\" if there are supplier promotions like 1+1.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/54/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Selecting or Adding a Supplier",
+        "description": "On the left side of the posting window, look for \"Supplier Name\". Selecting a supplier is mandatory so the system knows where the goods originated. If the supplier is not in the list, open the \"Select Supplier\" window, click \"Add Supplier\", fill in the name, phone number, and other fields, then click \"Add\". The new supplier will be added to the list for selection.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/54/image%20%283%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/54/image%20%284%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/54/image%20%285%29.png"
+        ]
+      },
+      {
+        "step": "Step 4. Finalizing Posting and Processing Payment",
+        "description": "Once all products and the supplier are correctly selected, click the \"Oprichodovat\" (Post) button at the bottom. A payment window will open where you must choose the payment type (cash, terminal, etc.), enter the amount, and click \"Issue Receipt\". If successful, an \"Oprichodovano\" (Posted) message will appear, confirming the goods are in the warehouse and the payment is recorded in the Cashier -> Expense section.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/54/image%20%286%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/54/image%20%287%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/54/image%20%288%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Supplier Management in Inventory Inbound",
+    "parent_section": "Автаризациссиз ва Базага убагаб бериш / Автаризациссиз ва Базага убагаб бериш",
+    "overall_goal": "Learn how to select, create, and manage suppliers and their financial balances during the inventory inbound process.",
+    "rag_description": "This documentation provides a comprehensive guide on managing suppliers within the Linko-POS Desktop inventory inbound module. It explains how to open the supplier selection window, add new suppliers by entering their name, phone number, and contact person, and differentiates between various debt types. Key features covered include the 'Realization' mode (payment after sale) and 'Consignment' mode (items remain supplier property), as well as how to interpret supplier balances where negative values indicate debt and positive values indicate overpayments. This section is essential for users handling procurement and stock management.",
+    "content": [
+      {
+        "step": "Step 1. Opening the Supplier List",
+        "description": "In the 'Inventory Inbound' (Oprikhodovanie) window, click on the 'Select Supplier' text on the left side. This will open the 'Select Supplier' window where you can see a list of all previously added suppliers.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/52/image%20%287%29.png"
+        ]
+      },
+      {
+        "step": "Step 2. Adding a New Supplier",
+        "description": "If the required supplier is not in the list, click the 'Add Supplier' button. This will open a form where you must enter the Supplier Name (the brand or company name, e.g., Essi), Phone Number, and Contact Person. You can also add comments if necessary. Once filled, click 'Add' to save the supplier to the list.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/52/image%20%288%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/52/image%20%289%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/52/image%20%2810%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/52/image%20%2811%29.png"
+        ]
+      },
+      {
+        "step": "Step 3. Supplier Balance and Debt Types",
+        "description": "When receiving goods on credit, choose 'On Debt'. There are two modes: 'Realization', where you pay the supplier after selling the goods, and 'Consignment', where the goods belong to the supplier and you only pay for what is sold without the cost being written to your inventory valuation. You can monitor debts in the 'Balance' column: negative values represent your debt to the supplier, while positive values represent supplier debt or overpayments.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/52/image%20%2812%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/52/image%20%2813%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/52/image%20%286%29.png"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Product Card Display and Sorting Configuration",
+    "parent_section": "Абрабативаетсссс... Абрабативаетсссс... Абрабативаетсссс... Абрабативаетсссс...",
+    "overall_goal": "Configure how products are displayed and sorted within the Linko-POS system to improve efficiency during stock intake and sales.",
+    "rag_description": "This documentation section explains how to customize the visual representation and organization of items in the Linko-POS Desktop interface. It details the process of using the 'Product Card Settings' menu, accessible from the Incoming (Oprichodovanie) or Sales windows, to toggle specific data fields like product names, stock levels, and prices. It also describes how to switch between grid and list views. Furthermore, the guide covers the sorting feature, which allows users to rank products based on various parameters such as addition date, alphabetical order, remaining quantity, or price. By adjusting these settings, users can optimize their workspace to better suit their specific operational needs.",
+    "content": [
+      {
+        "step": "Step 1. Changing the product card view",
+        "description": "To customize the appearance of items, click the gear (settings) icon in the upper right corner of the Oprichodovanie (Incoming) or Sales window. In the 'Product Card Settings' window that appears, you can enable or disable various display options: 'Show only product name' for a minimal view, 'Show stock balance' to see inventory levels, 'Show price' to display the selling price, and 'Show products as a list' to change from the default tile layout. After toggling the desired switches, click 'Save' to apply the changes to the product screen.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/58/image%20%284%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/58/image%20%285%29.png",
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/58/image%20%286%29.png"
+        ]
+      },
+      {
+        "step": "Step 2. Sorting products",
+        "description": "If you need to arrange products based on specific criteria, click the filter (sorting) icon in the top right. The 'Sorting' window provides several options: sorting by recently added items, alphabetical order (A-Z or Z-A), stock levels (highest or lowest remaining quantity), or price (highest or lowest). Select the preferred sorting method and click 'Save' to reorder the items on your screen immediately.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/58/image%20%288%29.png"
+        ]
+      }
+    ]
+  }
+]

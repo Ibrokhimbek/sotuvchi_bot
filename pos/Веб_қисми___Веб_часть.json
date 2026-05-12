@@ -1,0 +1,97 @@
+[
+  {
+    "title": "Creating a Price List",
+    "parent_section": "Веб Ґисми / Веб часть",
+    "overall_goal": "To guide the user through the process of creating and managing price lists in the web-based SFA system for use across inventory and POS operations.",
+    "rag_description": "This section explains how to manage pricing tiers within the Linko-POS SFA (Web) interface. Users learn how to log in to the administrator portal, navigate to the Stock (Склад) module, and define new price lists by specifying names, currencies, and display orders. The documentation details how these price lists are integrated into core business processes including inventory revisions, stock receipts (Oprichodovanie), and POS sales transactions. It specifically addresses the management of multiple price types like retail and wholesale. A critical technical note is included regarding the necessity of logging out and re-logging into the POS desktop application to synchronize newly created price data.",
+    "content": [
+      {
+        "step": "Step 1: Logging into the SFA System",
+        "description": "Open the SFA address in your browser (e.g., https://devdistr.linko.uz/). In the login window, fill in the following fields: Server (the name provided to you), Login, and Password. Click the \"Login\" (Войти) button to enter the system as an administrator.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/172/mod_book/chapter/200/image.png"
+        ]
+      },
+      {
+        "step": "Step 2: Navigating to the Price Lists Section",
+        "description": "Select the \"Stock\" (Склад) module from the top menu. Locate and click on \"Price List\" in the bottom right corner. Here you will see a list of existing price lists and the \"Add price list\" (Добавить прайс-лист) button.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/172/mod_book/chapter/200/image%20%281%29.png",
+          "https://academy.linko.uz/pluginfile.php/172/mod_book/chapter/200/image%20%282%29.png"
+        ]
+      },
+      {
+        "step": "Step 3: Creating a New Price List",
+        "description": "Click the \"Add price list\" button to open the creation window. Fill in the following: \"Name\" (e.g., \"Wholesale Price\", \"Sales Price\"), \"Currency\" (usually SUM), and \"Order\" (a sequence number for sorting). You may also use \"Link price list\" to associate it with another list. Click \"Save\" and the new list will appear in the system.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/172/mod_book/chapter/200/image%20%283%29.png"
+        ]
+      },
+      {
+        "step": "Step 4: Application and Synchronization",
+        "description": "The created price list is utilized during inventory revisions, stock receipts (to select purchase and sale prices), and at the POS checkout when choosing between different price types (retail, wholesale, etc.). Important: After creating a price list or a new warehouse, it is recommended to log out and log back into the POS desktop application to ensure the data is synchronized correctly.",
+        "images": []
+      }
+    ]
+  },
+  {
+    "title": "Creating a Warehouse",
+    "parent_section": "Веб қисми / Веб часть",
+    "overall_goal": "To guide users through the process of adding and configuring a new warehouse in the SFA web portal for use in the Linko-POS system.",
+    "rag_description": "This section provides a comprehensive guide on how to create a new warehouse within the Linko-POS SFA web system. It explains the process of logging into the web interface, navigating to the Warehouse management section, and filling out the necessary details for a new storage location, such as name, address, branch affiliation, responsible manager, and stock tracking settings. The guide concludes with crucial synchronization instructions, advising users to re-login to the desktop POS application to ensure new warehouse data is correctly reflected during inventory audits, stock-ins, and sales operations.",
+    "content": [
+      {
+        "step": "Step 1 - Accessing the Warehouses Section",
+        "description": "Log in to the SFA web system using your server name, login, and password. From the top menu, navigate to the 'Warehouse' section and select 'Warehouses' from the list. Here, you will see a list of all existing warehouses.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/172/mod_book/chapter/201/telegram-cloud-photo-size-2-5271979335898304011-w.jpg"
+        ]
+      },
+      {
+        "step": "Step 2 - Creating a New Warehouse",
+        "description": "On the Warehouses page, click the 'Add Warehouse' button located at the top left. A window will open for adding a new warehouse. Fill in the following fields: Name (short name, e.g., 'Main Warehouse'), Full Name (optional but recommended), Address, Branch (select the corresponding branch), Warehouse Manager (select the responsible employee), Warehouse Type, and any additional comments. You can also enable 'Track minimum balance' to receive notifications (e.g., if only 5 units of Pepsi remain). Once all information is filled, click 'Save' to add the new warehouse to the list.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/172/mod_book/chapter/201/image.png",
+          "https://academy.linko.uz/pluginfile.php/172/mod_book/chapter/201/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 3 - Using the New Warehouse and Synchronization",
+        "description": "The newly created warehouse can now be used for operations such as inventory audits, stock-ins (receipts), and opening sales receipts. Important Note: After creating a new warehouse or price list, it is recommended to log out and log back into the POS desktop application server to ensure the data synchronizes and functions correctly.",
+        "images": []
+      }
+    ]
+  },
+  {
+    "title": "Adding a branch",
+    "parent_section": "Веб қисми / Веб часть",
+    "overall_goal": "To guide the user through the process of adding and configuring a new branch within the Linko-POS SFA web system.",
+    "rag_description": "This section provides a detailed walkthrough for adding a new branch in the Linko-POS SFA web interface. It covers logging into the system, navigating the personnel menu to reach the branches management screen, and the configuration of specific branch parameters. Key actions involve filling out essential fields such as Branch Name, Price List (which affects POS and other modules), Currency, Debt Accounting options, and setting the branch's geographic location on a map. This ensures proper organizational structure and financial linking within the POS ecosystem.",
+    "content": [
+      {
+        "step": "Step 1. System Login",
+        "description": "Log into the SFA web system by entering the Server, Login, and Password in the login window to access your account.",
+        "images": []
+      },
+      {
+        "step": "Step 2. Accessing the Branches List",
+        "description": "From the top menu, navigate to the 'Personnel' section and select 'Branches' from the dropdown menu. This page displays the list of existing branches.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/172/mod_book/chapter/202/image.png"
+        ]
+      },
+      {
+        "step": "Step 3. Opening the Add Branch Window",
+        "description": "To add a new branch, click the 'Add branch' button located in the top left corner. A configuration window will appear.",
+        "images": [
+          "https://academy.linko.uz/pluginfile.php/172/mod_book/chapter/202/image%20%281%29.png"
+        ]
+      },
+      {
+        "step": "Step 4. Filling in New Branch Details",
+        "description": "Fill out the 'Add branch' window with the following details: enter the 'Branch Name' (e.g., 'Tashkent', 'Samarkand'); select the 'Price list' that this branch will use in POS and other modules; choose the primary 'Currency' for the branch's calculations; check 'Debt accounting' if customer debts should be managed through this branch; and designate it as the 'Main branch' if applicable. Optionally, you can mark the branch's location on a map. After completing all fields, click 'SAVE' to add the branch and link the selected price list.",
+        "images": []
+      }
+    ]
+  }
+]

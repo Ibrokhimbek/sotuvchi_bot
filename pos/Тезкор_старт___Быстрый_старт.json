@@ -1,0 +1,25 @@
+[
+  {
+    "title": "Web Part of the Program",
+    "parent_section": "Тезвдр старт / Бтстртй старт",
+    "overall_goal": "To configure the core business entities in the web management interface of the Linko-POS system, including price lists, warehouses, and branches.",
+    "rag_description": "This section provides a guide for the initial configuration of the Linko-POS web management application. It covers three critical setup tasks: creating price lists for product valuation, setting up warehouses for inventory control, and establishing branch locations for organizational structure. Completing these steps is necessary to ensure that the POS system correctly identifies where products are stored, what they cost, and which physical location is conducting transactions.",
+    "content": [
+      {
+        "step": "Creating a price list",
+        "description": "Access the web interface to define and create the necessary price lists for products sold through the POS.",
+        "images": []
+      },
+      {
+        "step": "Creating a warehouse",
+        "description": "Set up the warehouse profiles in the system to manage and track stock levels across different storage locations.",
+        "images": []
+      },
+      {
+        "step": "Creating a branch",
+        "description": "Register the physical or logical branches of the business to organize sales data and operational workflows by location.",
+        "images": []
+      }
+    ]
+  }
+]
