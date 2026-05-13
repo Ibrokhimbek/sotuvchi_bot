@@ -89,15 +89,18 @@ def naturalize(text: str, probability: float = 0.55) -> str:
     return result
 
 
-def split_into_messages(text: str, max_parts: int = 2) -> list[str]:
-    """Ba'zan uzun xabarni 2 qismga ajratib yuborish — real odamlar shunday qiladi."""
-    if len(text) < 220 or "\n\n" not in text:
-        return [text]
-    parts = [p.strip() for p in text.split("\n\n") if p.strip()]
-    if len(parts) <= 1:
-        return [text]
-    if len(parts) > max_parts:
-        head = "\n\n".join(parts[: max_parts - 1])
-        tail = "\n\n".join(parts[max_parts - 1 :])
-        return [head, tail]
-    return parts
+def split_into_messages(text: str, max_parts: int = 5) -> list[str]:
+    """Modelning `~~~` separatori bo'yicha xabarni alohida bo'laklarga ajratadi.
+
+    Model PERSONA ichida har bir bo'lakni `~~~` bilan ajratishga o'rgatilgan.
+    Agar separator topilmasa, butun matn bitta xabar sifatida qaytadi.
+    """
+    raw_parts = [p.strip() for p in text.split("~~~")]
+    parts = [p for p in raw_parts if p]
+    if not parts:
+        return [text.strip()]
+    if len(parts) <= max_parts:
+        return parts
+    head = parts[: max_parts - 1]
+    tail = " ".join(parts[max_parts - 1 :])
+    return [*head, tail]

@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
     first_name    TEXT,
     last_name     TEXT,
     phone         TEXT,
+    handed_off    INTEGER DEFAULT 0,    -- 1 bo'lsa operatorga uzatilgan
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -22,6 +23,19 @@ CREATE TABLE IF NOT EXISTS messages (
     text          TEXT NOT NULL,
     media_kind    TEXT,                  -- 'voice' | 'video_note' | 'photo' | NULL
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (telegram_id) REFERENCES users(telegram_id)
+);
+
+CREATE TABLE IF NOT EXISTS leads (
+    telegram_id     INTEGER PRIMARY KEY,
+    contact_name    TEXT,
+    phone           TEXT,
+    business_type   TEXT,
+    store_size      TEXT,
+    notes           TEXT,
+    status          TEXT DEFAULT 'new',  -- new, qualified, contacted, converted
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (telegram_id) REFERENCES users(telegram_id)
 );
 
@@ -43,7 +57,15 @@ class Storage:
     async def init(self) -> None:
         async with aiosqlite.connect(self._path) as db:
             await db.executescript(SCHEMA)
+            await self._migrate(db)
             await db.commit()
+
+    async def _migrate(self, db: aiosqlite.Connection) -> None:
+        """Eski DB fayllar uchun yo'q ustun/jadvallarni qo'shadi."""
+        cursor = await db.execute("PRAGMA table_info(users)")
+        cols = {row[1] for row in await cursor.fetchall()}
+        if "handed_off" not in cols:
+            await db.execute("ALTER TABLE users ADD COLUMN handed_off INTEGER DEFAULT 0")
 
     async def upsert_user(
         self,
@@ -93,3 +115,57 @@ class Storage:
             )
             rows = await cursor.fetchall()
         return [HistoryRow(role=r[0], text=r[1]) for r in reversed(rows)]
+
+    async def upsert_lead(
+        self,
+        telegram_id: int,
+        *,
+        contact_name: str | None = None,
+        phone: str | None = None,
+        business_type: str | None = None,
+        store_size: str | None = None,
+        notes: str | None = None,
+    ) -> None:
+        """Bo'sh bo'lmagan maydonlarni yangilaydi, bo'shlarni tegmaydi."""
+        async with aiosqlite.connect(self._path) as db:
+            await db.execute(
+                """
+                INSERT INTO leads (telegram_id, contact_name, phone, business_type, store_size, notes)
+                VALUES (?, ?, ?, ?, ?, ?)
+                ON CONFLICT(telegram_id) DO UPDATE SET
+                    contact_name  = COALESCE(excluded.contact_name,  contact_name),
+                    phone         = COALESCE(excluded.phone,         phone),
+                    business_type = COALESCE(excluded.business_type, business_type),
+                    store_size    = COALESCE(excluded.store_size,    store_size),
+                    notes         = COALESCE(excluded.notes,         notes),
+                    updated_at    = CURRENT_TIMESTAMP
+                """,
+                (telegram_id, contact_name, phone, business_type, store_size, notes),
+            )
+            await db.commit()
+
+    async def get_lead(self, telegram_id: int) -> dict | None:
+        async with aiosqlite.connect(self._path) as db:
+            db.row_factory = aiosqlite.Row
+            cursor = await db.execute(
+                "SELECT * FROM leads WHERE telegram_id = ?", (telegram_id,)
+            )
+            row = await cursor.fetchone()
+        return dict(row) if row else None
+
+    async def mark_handoff(self, telegram_id: int) -> None:
+        async with aiosqlite.connect(self._path) as db:
+            await db.execute(
+                "UPDATE users SET handed_off = 1 WHERE telegram_id = ?",
+                (telegram_id,),
+            )
+            await db.commit()
+
+    async def is_handed_off(self, telegram_id: int) -> bool:
+        async with aiosqlite.connect(self._path) as db:
+            cursor = await db.execute(
+                "SELECT handed_off FROM users WHERE telegram_id = ?",
+                (telegram_id,),
+            )
+            row = await cursor.fetchone()
+        return bool(row and row[0])
