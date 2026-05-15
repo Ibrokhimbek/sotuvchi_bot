@@ -153,6 +153,29 @@ class Storage:
             row = await cursor.fetchone()
         return dict(row) if row else None
 
+    async def reset_user(self, telegram_id: int) -> None:
+        """/start qayta bosilganda eski suhbatni tozalash.
+
+        Tegishli messages va lead o'chiriladi, handed_off bekor qilinadi.
+        users qatori saqlanadi (telegram identifikatori o'zgarmaydi).
+        """
+        async with aiosqlite.connect(self._path) as db:
+            await db.execute("DELETE FROM messages WHERE telegram_id = ?", (telegram_id,))
+            await db.execute("DELETE FROM leads WHERE telegram_id = ?", (telegram_id,))
+            await db.execute(
+                "UPDATE users SET handed_off = 0, phone = NULL WHERE telegram_id = ?",
+                (telegram_id,),
+            )
+            await db.commit()
+
+    async def set_user_phone(self, telegram_id: int, phone: str) -> None:
+        async with aiosqlite.connect(self._path) as db:
+            await db.execute(
+                "UPDATE users SET phone = ? WHERE telegram_id = ?",
+                (phone, telegram_id),
+            )
+            await db.commit()
+
     async def mark_handoff(self, telegram_id: int) -> None:
         async with aiosqlite.connect(self._path) as db:
             await db.execute(

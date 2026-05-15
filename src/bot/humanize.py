@@ -34,7 +34,6 @@ _APOSTROPHE_WORDS = {
     "ko'p": "kop",
     "Ko'p": "Kop",
     "bo'ladi": "boladi",
-    "bo'lmaydi": "bolmaydi",
     "bo'lsa": "bolsa",
     "bo'lgan": "bolgan",
     "o'rganib": "organib",
@@ -45,6 +44,14 @@ _APOSTROPHE_WORDS = {
     "so'ng": "song",
     "so'rang": "sorang",
 }
+
+# Toshkent og'zaki uslubi: "maydi" → "midi"
+_MIDI_PATTERNS = [
+    (re.compile(r"\bbo'?lmaydi\b"), "bomidi"),
+    (re.compile(r"\bBo'?lmaydi\b"), "Bomidi"),
+    (re.compile(r"\b(\w+?)maydi\b"), r"\1midi"),
+    (re.compile(r"\b([A-ZЁЎҚҒҲ]\w*?)maydi\b"), r"\1midi"),
+]
 
 _PROTECT_PATTERNS = [
     re.compile(r"Linko-POS", re.IGNORECASE),
@@ -68,12 +75,19 @@ def naturalize(text: str, probability: float = 0.55) -> str:
 
     Asosiy ish Gemini system promptida bajariladi. Bu funksiya — qo'shimcha
     himoya qatlami: agar model haddan tashqari toza yozsa, bir nechta
-    apostrofni tashlab yuboradi va boshlanishni kichik harf qiladi.
+    apostrofni tashlab yuboradi, "maydi" ni "midi" ga aylantiradi va
+    boshlanishni kichik harf qiladi.
     """
-    if random.random() > probability:
-        return text
-
     result = text
+
+    # maydi → midi (Toshkent og'zaki) — har doim, lekin har biri o'z ehtimolligi bilan
+    for pattern, replacement in _MIDI_PATTERNS:
+        if random.random() < 0.7:
+            result = pattern.sub(replacement, result)
+
+    if random.random() > probability:
+        return result
+
     for original, replacement in _APOSTROPHE_WORDS.items():
         if original not in result:
             continue

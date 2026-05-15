@@ -17,8 +17,10 @@ sotadi.
 - **google-genai** (`gemini-2.5-flash` default) — multimodal, async, **function calling**,
   **context caching** (system prompt 217KB cache'da turadi, har so'rovda yuborilmaydi)
 - **SQLite + aiosqlite** — users, messages, leads jadvallari
-- **ElevenLabs TTS** (ixtiyoriy) — Nozimaxon ba'zan voice javob beradi
+- **Google Sheets webhook** (ixtiyoriy) — kontaktlar Apps Script orqali Sheets'ga
 - **ThrottleMiddleware** — bitta foydalanuvchidan minimal interval (default 1.2s)
+- Bot faqat matn javob beradi — voice/TTS yo'q. Mijoz audio yuborsa, Gemini uni
+  tinglaydi, lekin matn bilan javob qaytaradi.
 
 ## Function calling
 Gemini ikkita tool ishlatadi:
@@ -36,7 +38,7 @@ Gemini ikkita tool ishlatadi:
 - `src/bot/handlers.py` — text/voice/video_note/video/photo/start
 - `src/bot/throttle.py` — rate limit middleware
 - `src/bot/handoff.py` — operator chat'iga signal
-- `src/bot/tts.py` — ElevenLabs TTS (optional)
+- `src/integrations/sheets.py` — Google Sheets webhook (Apps Script Web App)
 - `src/storage/db.py` — users, messages, leads jadvallari
 - `src/main.py` — kompozitsion ildiz
 
@@ -47,8 +49,8 @@ Gemini ikkita tool ishlatadi:
 - `enable_gemini_cache` — true/false (default true)
 - `operator_chat_id` — handoff signal yuboriladigan guruh/user (bo'sh qoldirilsa, faqat DB belgilanadi)
 - `throttle_seconds` — anti-spam minimal interval, default 1.2
-- `elevenlabs_key` — TTS uchun (bo'sh qoldirilsa, voice javob o'chirilgan)
-- `voice_probability` — TTS bilan javob berish ehtimoli (default 0.18)
+- `gsheets_webhook_url` — Apps Script Web App URL (bo'sh qoldirilsa, sheets'ga yozilmaydi)
+- `delayed_greeting_seconds` — kontakt yuborilgandan keyin Nozimaxon kechikishi (default 60s)
 
 ## Ishga tushirish
 ```bash

@@ -9,17 +9,15 @@ from aiogram.types import Message, TelegramObject
 
 
 class ThrottleMiddleware(BaseMiddleware):
-    """Bitta foydalanuvchidan minimal interval bilan xabar qabul qiladi.
+    """Bitta foydalanuvchidan haddan tashqari tez kelgan xabarlarni silent tashlaydi.
 
-    Tezroq kelgan xabarlarni jim tashlab yuboradi (anti-spam). Birinchi marta
-    haddan oshganda qisqa eslatma yuboradi.
+    Pacing scheduler asosiy rate kontrolni ushlaydi — bu middleware faqat
+    button-mashing/script-spam'dan himoyalanish uchun (default 0.3s).
     """
 
-    def __init__(self, min_interval: float = 1.2, warning_text: str | None = None) -> None:
+    def __init__(self, min_interval: float = 0.3) -> None:
         self._min_interval = min_interval
-        self._warning = warning_text or "biroz sekinroq aka, men hammasiga javob beraman 🙂"
         self._last: dict[int, float] = defaultdict(float)
-        self._warned: dict[int, float] = defaultdict(float)
 
     async def __call__(
         self,
@@ -32,15 +30,7 @@ class ThrottleMiddleware(BaseMiddleware):
 
         user_id = event.from_user.id
         now = time.monotonic()
-        delta = now - self._last[user_id]
-        if delta < self._min_interval:
-            if now - self._warned[user_id] > 10:
-                self._warned[user_id] = now
-                try:
-                    await event.reply(self._warning)
-                except Exception:
-                    pass
+        if now - self._last[user_id] < self._min_interval:
             return None
-
         self._last[user_id] = now
         return await handler(event, data)

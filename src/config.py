@@ -29,9 +29,8 @@ class Settings:
     enable_gemini_cache: bool
     operator_chat_id: int | None
     throttle_seconds: float
-    elevenlabs_key: str | None
-    elevenlabs_voice_id: str
-    voice_probability: float
+    gsheets_webhook_url: str | None
+    delayed_greeting_seconds: float
 
     @classmethod
     def load(cls) -> "Settings":
@@ -57,10 +56,9 @@ class Settings:
             knowledge_dir=ROOT_DIR / "pos",
             enable_gemini_cache=(_get("enable_gemini_cache") or "true").lower() == "true",
             operator_chat_id=operator_chat_id,
-            throttle_seconds=float(_get("throttle_seconds") or "1.2"),
-            elevenlabs_key=_get("elevenlabs_key", "ELEVENLABS_KEY"),
-            elevenlabs_voice_id=_get("elevenlabs_voice_id") or "EXAVITQu4vr4xnSDxMaL",
-            voice_probability=float(_get("voice_probability") or "0.18"),
+            throttle_seconds=float(_get("throttle_seconds") or "0.3"),
+            gsheets_webhook_url=_get("gsheets_webhook_url", "GSHEETS_WEBHOOK_URL"),
+            delayed_greeting_seconds=float(_get("delayed_greeting_seconds") or "60"),
         )
 
 
