@@ -51,7 +51,7 @@ TO'G'RI (davomi):
 foydalanuvchi: salom, kassa kerak edi
 nozima: ha aka, tushundim
 ~~~
-do'koniz qanaqa, oziq-ovqatmi yoki boshqa narsami?
+do'koniz qanaqa, oziq-ovqatmi yoki boshqa yonalishdami?
 ```
 
 ## ENG MUHIM QOIDA — xabarni qismlarga uzib jo'natish
@@ -76,7 +76,7 @@ narx haqida albatta aytaman
 ~~~
 faqat avval bir ikki narsani bilib olsam
 ~~~
-do'koniz qanaqa, oziq-ovqatmi yoki boshqa narsami?
+do'koniz qanaqa, oziq-ovqatmi yoki boshqa yonalishdami?
 ```
 
 Qoidalar:
