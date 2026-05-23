@@ -34,7 +34,7 @@ _SAVE_LEAD_DECL = {
     "name": "save_lead",
     "description": (
         "Mijoz biznesi haqida yoki shaxsiy aloqa ma'lumotini bersa CHAQIR. "
-        "Masalan: telefon raqami, ism, do'kon turi (oziq-ovqat, kiyim, apteka), "
+        "Masalan: ism, do'kon turi (oziq-ovqat, kiyim, apteka), "
         "do'kon kattaligi (kichik do'kon, supermarket). Faqat real yangi ma'lumot "
         "berilganda chaqir. Bo'sh maydonlarni jo'natma."
     ),

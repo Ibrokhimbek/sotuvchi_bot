@@ -28,6 +28,10 @@ class PendingTurn:
     media_mime: str | None
     message: Message
     received_at: float
+    # AmoCRM Chat panelga forward qilish uchun (public URL bo'lsa)
+    media_url: str | None = None
+    media_size: int = 0
+    media_chat_type: str | None = None  # "voice", "video", "picture" — AmoCRM type
 
 
 @dataclass
@@ -54,10 +58,12 @@ class PacingScheduler:
         process: ProcessCallback,
         min_seconds: float = DEBOUNCE_MIN_SECONDS,
         max_seconds: float = DEBOUNCE_MAX_SECONDS,
+        immediate: bool = False,
     ) -> None:
         self._process = process
         self._min = min_seconds
         self._max = max_seconds
+        self._immediate = immediate
         self._states: dict[int, UserState] = {}
 
     def _state(self, user_id: int) -> UserState:
@@ -94,6 +100,8 @@ class PacingScheduler:
         state.pending = []
 
     def _compute_delay(self, state: UserState) -> float:
+        if self._immediate:
+            return 0.0
         # Mijozning bot-dan keyingi javob berish vaqtini ko'zgu sifatida olamiz
         if state.last_bot_msg_at > 0:
             user_gap = state.last_user_msg_at - state.last_bot_msg_at

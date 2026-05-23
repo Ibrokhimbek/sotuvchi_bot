@@ -24,7 +24,10 @@ from src.bot.humanize import (
     naturalize,
     split_into_messages,
 )
+from src.bot.media_store import MediaStore, TELEGRAM_TO_AMOCRM
 from src.bot.pacing import PacingScheduler, PendingTurn
+from src.integrations.amocrm import AmoCRMClient
+from src.integrations.amocrm_chats import AmoCRMChatsClient, ChatUser, MediaInfo
 from src.integrations.sheets import GoogleSheetsLogger
 from src.storage.db import Storage
 
@@ -38,19 +41,236 @@ class Deps:
     storage: Storage
     handoff: HandoffNotifier
     sheets: GoogleSheetsLogger
+    amocrm: AmoCRMClient
+    chats: AmoCRMChatsClient
+    chats_client_uuid: str | None
+    chats_manager_amojo_id: str | None  # outgoing bot xabarlari shu manager nomidan
+    media_store: MediaStore | None
+    # Yangi chat lead'larini avtomatik ko'chirish uchun (Instagram → Telegram)
+    amocrm_pipeline_id: int | None = None
+    amocrm_telegram_stage_id: int | None = None
+    amocrm_chat_default_stage_id: int | None = None
     pacing: PacingScheduler
     delayed_greeting_seconds: float = 40.0
+    dev_mode: bool = False
 
 
 deps = Deps()
 
 _pending_greetings: dict[int, asyncio.Task] = {}
 
+# AmoCRM Chat API: tartibni saqlash uchun per-user serialization
+_chat_user_locks: dict[int, asyncio.Lock] = {}
+_chat_user_last_ms: dict[int, int] = {}
+
+
+def _chat_lock(user_id: int) -> asyncio.Lock:
+    lock = _chat_user_locks.get(user_id)
+    if lock is None:
+        lock = asyncio.Lock()
+        _chat_user_locks[user_id] = lock
+    return lock
+
+
+def _next_chat_ms(user_id: int, candidate_ms: int | None = None) -> int:
+    """Mijoz uchun monoton ortib boruvchi ms-timestamp qaytaradi.
+
+    Lock ichida chaqirilishi kerak.
+    """
+    import time as _time
+    last = _chat_user_last_ms.get(user_id, 0)
+    now = candidate_ms if candidate_ms is not None else int(_time.time() * 1000)
+    next_ms = max(now, last + 1)
+    _chat_user_last_ms[user_id] = next_ms
+    return next_ms
+
 
 def _cancel_pending_greeting(user_id: int) -> None:
     task = _pending_greetings.pop(user_id, None)
     if task and not task.done():
         task.cancel()
+
+
+def cancel_pending_greeting(user_id: int) -> None:
+    """Public alias — boshqa modullardan chaqirish uchun (masalan AmoCRM callback)."""
+    _cancel_pending_greeting(user_id)
+
+
+def _conversation_id(user_id: int) -> str:
+    return f"tg_{user_id}"
+
+
+def _client_chat_user(user_id: int, username: str | None, first_name: str | None, phone: str | None) -> ChatUser:
+    return ChatUser(
+        id=f"tg_{user_id}",
+        name=first_name or (f"@{username}" if username else f"tg:{user_id}"),
+        phone=phone,
+    )
+
+
+def _bot_chat_user() -> ChatUser:
+    # Outgoing — manager pattern: ref_id = manager amojo_id, AmoCRM tomonida
+    # bot xabari mijozning chat threadiga to'g'ri tushadi.
+    return ChatUser(
+        id="linko-nozimaxon-bot",
+        name="Nozimaxon",
+        ref_id=deps.chats_manager_amojo_id,
+    )
+
+
+async def _log_chat_incoming(
+    *, user_id: int, username: str | None, first_name: str | None,
+    phone: str | None, text: str, msgid: str,
+    media: MediaInfo | None = None,
+    timestamp: int | None = None,
+    msec_timestamp: int | None = None,
+) -> None:
+    if not deps.chats.enabled:
+        return
+    try:
+        await deps.chats.send_incoming_message(
+            conversation_id=_conversation_id(user_id),
+            msgid=msgid,
+            sender=_client_chat_user(user_id, username, first_name, phone),
+            text=text,
+            media=media,
+            timestamp=timestamp,
+            msec_timestamp=msec_timestamp,
+        )
+    except Exception:
+        logger.exception("Chat API incoming xato tg=%s", user_id)
+        return
+    # Yangi lead'ni Telegram etapiga ko'chirish (faqat mahalliy DB'da hali lead_id yo'q bo'lsa)
+    asyncio.create_task(_maybe_route_lead_to_telegram_stage(user_id, phone))
+
+
+async def _maybe_route_lead_to_telegram_stage(user_id: int, phone: str | None) -> None:
+    """Mijoz uchun yangi yaratilgan lead'ni Instagram → Telegram etapiga ko'chiradi.
+
+    Faqat bir marta amalga oshadi (lead_id DB'da saqlanadi). Lead 5 soniya
+    kechikish bilan qidiriladi, AmoCRM yaratib ulgursin.
+    """
+    if not deps.amocrm.enabled or not deps.amocrm_pipeline_id:
+        return
+    if not deps.amocrm_telegram_stage_id or not deps.amocrm_chat_default_stage_id:
+        return
+    try:
+        existing = await deps.storage.get_amocrm_lead_id(user_id)
+        if existing:
+            return  # avval ko'chirilgan
+        await asyncio.sleep(5)
+        lead_id = await deps.amocrm.find_recent_lead_in_stage(
+            pipeline_id=deps.amocrm_pipeline_id,
+            status_id=deps.amocrm_chat_default_stage_id,
+            phone=phone,
+            max_age_seconds=120,
+        )
+        if not lead_id:
+            logger.info("Telegram etapiga ko'chirish uchun lead topilmadi tg=%s", user_id)
+            return
+        ok = await deps.amocrm.move_lead_to_stage(
+            lead_id,
+            pipeline_id=deps.amocrm_pipeline_id,
+            status_id=deps.amocrm_telegram_stage_id,
+        )
+        if ok:
+            await deps.storage.set_amocrm_lead_id(user_id, lead_id)
+            logger.info("Lead %s Telegram etapiga ko'chirildi (tg=%s)", lead_id, user_id)
+    except Exception:
+        logger.exception("Lead routing xato tg=%s", user_id)
+
+
+async def _log_chat_outgoing(
+    *, user_id: int, username: str | None, first_name: str | None,
+    phone: str | None, text: str, msgid: str,
+    timestamp: int | None = None,
+    msec_timestamp: int | None = None,
+) -> None:
+    if not deps.chats.enabled:
+        return
+    if not deps.chats_manager_amojo_id:
+        # Bot xabarini sender.ref_id sifatida manager amojo_id kerak.
+        # Yo'q bo'lsa, AmoCRM tomonida "sender: user not found" xatosi bo'ladi.
+        return
+    try:
+        await deps.chats.send_outgoing_message(
+            conversation_id=_conversation_id(user_id),
+            msgid=msgid,
+            sender=_bot_chat_user(),
+            receiver=_client_chat_user(user_id, username, first_name, phone),
+            text=text,
+            timestamp=timestamp,
+            msec_timestamp=msec_timestamp,
+        )
+    except Exception:
+        logger.exception("Chat API outgoing xato tg=%s", user_id)
+
+
+async def _log_chat_outgoing_parts(
+    *, user_id: int, username: str | None, first_name: str | None,
+    phone: str | None, text: str, base_msgid: str,
+) -> None:
+    """`~~~` bo'yicha har bo'lakni AmoCRM'ga ALOHIDA xabar sifatida yuboradi.
+
+    Per-user lock ostida ishlaydi — global monoton ms-timestamp ta'minlanadi.
+    """
+    if not deps.chats.enabled or not deps.chats_manager_amojo_id:
+        return
+    parts = [p.strip() for p in text.split("~~~") if p.strip()]
+    if not parts:
+        return
+    async with _chat_lock(user_id):
+        for i, part in enumerate(parts):
+            msec_ts = _next_chat_ms(user_id)
+            await _log_chat_outgoing(
+                user_id=user_id, username=username, first_name=first_name, phone=phone,
+                text=part, msgid=f"{base_msgid}_p{i}",
+                timestamp=msec_ts // 1000, msec_timestamp=msec_ts,
+            )
+
+
+async def _log_turn_to_chat_api(
+    *, user_id: int, username: str | None, first_name: str | None,
+    phone: str | None, pending: list[PendingTurn], reply_text: str, base_msgid: str,
+) -> None:
+    """Bitta turn ichidagi BARCHA xabarlarni AmoCRM'ga yuboradi.
+
+    Per-user LOCK ishlatiladi — agar bir vaqtda bir nechta batch tasklari ishlasa,
+    ular ketma-ket ishlaydi. Har xabarga GLOBAL monoton ms-timestamp beriladi.
+    """
+    if not deps.chats.enabled:
+        return
+
+    async with _chat_lock(user_id):
+        # 1. Incoming — Telegram vaqti yoki monoton ortish
+        for turn in pending:
+            media_info = _media_info_from_turn(turn)
+            tg_msg_id = getattr(turn.message, "message_id", None) if turn.message else None
+            msgid = f"in_{user_id}_{tg_msg_id or int(turn.received_at * 1000)}"
+            base_ms = None
+            if turn.message and getattr(turn.message, "date", None):
+                try:
+                    base_ms = int(turn.message.date.timestamp() * 1000)
+                except Exception:
+                    base_ms = None
+            msec_ts = _next_chat_ms(user_id, candidate_ms=base_ms)
+            await _log_chat_incoming(
+                user_id=user_id, username=username, first_name=first_name, phone=phone,
+                text="" if media_info else (turn.save_text or "(media)"),
+                msgid=msgid, media=media_info,
+                timestamp=msec_ts // 1000, msec_timestamp=msec_ts,
+            )
+
+        # 2. Outgoing — `~~~` separator bo'yicha har bo'lak
+        parts = [p.strip() for p in reply_text.split("~~~") if p.strip()]
+        if parts and deps.chats_manager_amojo_id:
+            for i, part in enumerate(parts):
+                msec_ts = _next_chat_ms(user_id)
+                await _log_chat_outgoing(
+                    user_id=user_id, username=username, first_name=first_name, phone=phone,
+                    text=part, msgid=f"{base_msgid}_p{i}",
+                    timestamp=msec_ts // 1000, msec_timestamp=msec_ts,
+                )
 
 
 def _contact_keyboard() -> ReplyKeyboardMarkup:
@@ -66,6 +286,10 @@ async def on_start(message: Message) -> None:
     user = message.from_user
     if user is None:
         return
+    logger.info(
+        "on_start: user_id=%s username=%s name=%s chat_id=%s",
+        user.id, user.username, user.first_name, message.chat.id,
+    )
     _cancel_pending_greeting(user.id)
     deps.pacing.cancel(user.id)
     await deps.storage.upsert_user(user.id, user.username, user.first_name, user.last_name)
@@ -118,12 +342,32 @@ async def on_contact(message: Message, bot: Bot) -> None:
         )
     )
 
-    await message.answer(
+    thank_you = (
         "Raqamingizni qoldirganingiz uchun rahmat! 🙏\n"
-        "Iltimos, kutib turing — hodimimiz tez orada chat orqali aloqaga chiqadi!",
-        reply_markup=ReplyKeyboardRemove(),
+        "Iltimos, kutib turing — hodimimiz tez orada chat orqali aloqaga chiqadi!"
     )
+    await message.answer(thank_you, reply_markup=ReplyKeyboardRemove())
     deps.pacing.mark_bot_done(user.id)
+
+    # Chat API: incoming (kontakt eventi) → outgoing (rahmat) — per-user lock ostida
+    async def _contact_to_chat() -> None:
+        async with _chat_lock(user.id):
+            ms_in = _next_chat_ms(user.id)
+            await _log_chat_incoming(
+                user_id=user.id, username=user.username, first_name=user.first_name,
+                phone=phone, text=f"[Mijoz kontaktini ulashdi: {contact_name}, {phone}]",
+                msgid=f"contact_{message.message_id}",
+                timestamp=ms_in // 1000, msec_timestamp=ms_in,
+            )
+            ms_out = _next_chat_ms(user.id)
+            await _log_chat_outgoing(
+                user_id=user.id, username=user.username, first_name=user.first_name,
+                phone=phone, text=thank_you,
+                msgid=f"thanks_{message.message_id}",
+                timestamp=ms_out // 1000, msec_timestamp=ms_out,
+            )
+    asyncio.create_task(_contact_to_chat())
+
     _schedule_delayed_greeting(user.id, bot, message.chat.id)
 
 
@@ -147,22 +391,45 @@ def _schedule_delayed_greeting(user_id: int, bot: Bot, chat_id: int) -> None:
 
 
 async def _send_delayed_greeting(user_id: int, bot: Bot, chat_id: int) -> None:
-    history_rows = await deps.storage.recent_history(user_id, limit=24)
-    history = [
-        Turn(role=("user" if r.role == "user" else "model"), text=r.text)
-        for r in history_rows
-    ]
+    logger.info("_send_delayed_greeting: user_id=%s chat_id=%s", user_id, chat_id)
 
+    # MUHIM: bu mijoz bilan BIRINCHI tanishuv. History bo'sh berilgan —
+    # kontakt eventi qo'shimcha kontekstga aralashtirmasligi uchun.
     reply_text = await deps.agent.reply(
-        history=history,
+        history=[],
         user_text=(
-            "(mijoz hozirgina raqamini qoldirdi. Sen unga endi BIRINCHI marta yozayotgan "
-            "Nozimaxonsan — iliq salomlash, o'zingni tanishtir va do'koni haqida so'ra)"
+            "Bu sening mijoz bilan eng BIRINCHI tanishuv xabaring. Mijoz hozirgina "
+            "Telegramda bog'lanish raqamini qoldirdi va sen unga endi yozyapsan.\n\n"
+            "FAQAT QUYIDAGILARNI QIL:\n"
+            "1. 'Assalomu alaykum aka!' deb iliq salomlash\n"
+            "2. 'yaxshimisiz?' kabi qisqa savol\n"
+            "3. O'zingni tanishtir: 'Mani ismim Nozimaxon, Linko-POS kompaniyasidanman'\n"
+            "4. Do'koni haqida BITTA umumiy savol — 'qanaqa do'kon, oziq-ovqatmi yoki boshqa yo'nalishdami?'\n\n"
+            "QAT'IY TAQIQ:\n"
+            "- mahsulot funksiyalari haqida (tarozi, kassa, ombor, hisobot, fiskal modul) "
+            "HEC GAPIRMA\n"
+            "- narx haqida hech narsa aytma\n"
+            "- 'sizga juda mos keladi' kabi sotuv frazasi yozma\n"
+            "- maxsulot tavsiflarini taqdim etma\n\n"
+            "Bu shunchaki iliq tanishish. Mijoz o'z biznesini gapirib bersa, undan keyin "
+            "boshqa suhbatlarda mahsulot haqida gaplashasan."
         ),
     )
     await deps.storage.save_message(user_id, "model", reply_text)
     await _send_parts(bot, chat_id, reply_text)
     deps.pacing.mark_bot_done(user_id)
+
+    # Chat API outgoing — har `~~~` qism alohida xabar sifatida
+    if deps.chats.enabled:
+        user_row = await deps.storage.get_user_info(user_id)
+        asyncio.create_task(_log_chat_outgoing_parts(
+            user_id=user_id,
+            username=(user_row or {}).get("username"),
+            first_name=(user_row or {}).get("first_name"),
+            phone=(user_row or {}).get("phone"),
+            text=reply_text,
+            base_msgid=f"delayed_{user_id}_{int(__import__('time').time())}",
+        ))
 
 
 @router.message(F.text)
@@ -194,6 +461,7 @@ async def on_voice(message: Message, bot: Bot) -> None:
     _cancel_pending_greeting(user.id)
     data = await _download(bot, message.voice.file_id)
     await deps.storage.upsert_user(user.id, user.username, user.first_name, user.last_name)
+    media_url, media_size, amocrm_type = _save_media_for_amocrm(data, "voice")
     deps.pacing.enqueue(
         user.id,
         PendingTurn(
@@ -204,6 +472,9 @@ async def on_voice(message: Message, bot: Bot) -> None:
             media_mime="audio/ogg",
             message=message,
             received_at=time.monotonic(),
+            media_url=media_url,
+            media_size=media_size,
+            media_chat_type=amocrm_type,
         ),
     )
 
@@ -216,6 +487,7 @@ async def on_video_note(message: Message, bot: Bot) -> None:
     _cancel_pending_greeting(user.id)
     data = await _download(bot, message.video_note.file_id)
     await deps.storage.upsert_user(user.id, user.username, user.first_name, user.last_name)
+    media_url, media_size, amocrm_type = _save_media_for_amocrm(data, "video_note")
     deps.pacing.enqueue(
         user.id,
         PendingTurn(
@@ -226,6 +498,9 @@ async def on_video_note(message: Message, bot: Bot) -> None:
             media_mime="video/mp4",
             message=message,
             received_at=time.monotonic(),
+            media_url=media_url,
+            media_size=media_size,
+            media_chat_type=amocrm_type,
         ),
     )
 
@@ -239,6 +514,7 @@ async def on_video(message: Message, bot: Bot) -> None:
     data = await _download(bot, message.video.file_id)
     await deps.storage.upsert_user(user.id, user.username, user.first_name, user.last_name)
     caption = message.caption or "(mijoz video yubordi — ko'rib javob ber)"
+    media_url, media_size, amocrm_type = _save_media_for_amocrm(data, "video")
     deps.pacing.enqueue(
         user.id,
         PendingTurn(
@@ -249,6 +525,9 @@ async def on_video(message: Message, bot: Bot) -> None:
             media_mime="video/mp4",
             message=message,
             received_at=time.monotonic(),
+            media_url=media_url,
+            media_size=media_size,
+            media_chat_type=amocrm_type,
         ),
     )
 
@@ -263,6 +542,7 @@ async def on_photo(message: Message, bot: Bot) -> None:
     data = await _download(bot, photo.file_id)
     await deps.storage.upsert_user(user.id, user.username, user.first_name, user.last_name)
     caption = message.caption or "(mijoz rasm yubordi — undagi narsani tushunib javob ber)"
+    media_url, media_size, amocrm_type = _save_media_for_amocrm(data, "photo")
     deps.pacing.enqueue(
         user.id,
         PendingTurn(
@@ -273,6 +553,9 @@ async def on_photo(message: Message, bot: Bot) -> None:
             media_mime="image/jpeg",
             message=message,
             received_at=time.monotonic(),
+            media_url=media_url,
+            media_size=media_size,
+            media_chat_type=amocrm_type,
         ),
     )
 
@@ -291,6 +574,37 @@ async def _download(bot: Bot, file_id: str) -> bytes:
     return buf.getvalue()
 
 
+def _media_info_from_turn(turn: PendingTurn) -> MediaInfo | None:
+    """PendingTurn'dan AmoCRM MediaInfo'sini yasaydi (URL bo'lsa)."""
+    if not turn.media_url or not turn.media_chat_type:
+        return None
+    # URL'dan fayl nomini olamiz (.../media/<hash>.<ext>)
+    file_name = turn.media_url.rsplit("/", 1)[-1]
+    return MediaInfo(
+        type=turn.media_chat_type,
+        url=turn.media_url,
+        file_name=file_name,
+        file_size=turn.media_size,
+    )
+
+
+def _save_media_for_amocrm(
+    data: bytes, telegram_kind: str,
+) -> tuple[str | None, int, str | None]:
+    """MediaStore'ga saqlaydi va (url, size, amocrm_type) qaytaradi.
+
+    MediaStore yo'q yoki disabled bo'lsa, (None, 0, None) qaytaradi.
+    """
+    if not deps.media_store or not deps.media_store.enabled:
+        return None, 0, None
+    mapping = TELEGRAM_TO_AMOCRM.get(telegram_kind)
+    if not mapping:
+        return None, 0, None
+    amocrm_type, ext = mapping
+    url, size = deps.media_store.save(data, ext)
+    return url, size, amocrm_type
+
+
 async def process_batch(user_id: int, pending: list[PendingTurn]) -> None:
     """Pacing scheduler chaqiradi — bir nechta xabarni birga ishlaymiz."""
     if not pending:
@@ -304,12 +618,42 @@ async def process_batch(user_id: int, pending: list[PendingTurn]) -> None:
         logger.error("Message bot referenceisiz — javob bermaymiz")
         return
 
+    msg_user_id = last_msg.from_user.id if last_msg.from_user else None
+    if msg_user_id != user_id:
+        logger.error(
+            "user_id mos kelmadi! pacing user_id=%s, message.from_user.id=%s, chat_id=%s",
+            user_id, msg_user_id, chat_id,
+        )
+    logger.info(
+        "process_batch: user_id=%s chat_id=%s pending=%d",
+        user_id, chat_id, len(pending),
+    )
+
     # Hammasini DB'ga yozamiz
     for turn in pending:
         await deps.storage.save_message(user_id, "user", turn.save_text, turn.media_kind)
 
     if await deps.storage.is_handed_off(user_id):
-        await last_msg.reply("menejerimiz tez orada o'zi bog'lanadi, biroz kuting iltimos 🙏")
+        # Operator boshqaryapti — Gemini chaqirilmaydi, mijozga avto-javob yo'q.
+        # LEKIN mijozning xabarlarini AmoCRM Chat panel'iga yetkazamiz —
+        # operator real vaqtda ko'rishi kerak.
+        if deps.chats.enabled:
+            user_obj = last_msg.from_user
+            user_row = await deps.storage.get_user_info(user_id)
+            phone_val = (user_row or {}).get("phone")
+            for turn in pending:
+                tg_msg_id = getattr(turn.message, "message_id", None) if turn.message else None
+                msgid = f"in_{user_id}_{tg_msg_id or int(turn.received_at * 1000)}"
+                media_info = _media_info_from_turn(turn)
+                asyncio.create_task(_log_chat_incoming(
+                    user_id=user_id,
+                    username=user_obj.username if user_obj else None,
+                    first_name=user_obj.first_name if user_obj else None,
+                    phone=phone_val,
+                    text="" if media_info else (turn.save_text or "(media)"),
+                    msgid=msgid,
+                    media=media_info,
+                ))
         deps.pacing.mark_bot_done(user_id)
         return
 
@@ -319,14 +663,21 @@ async def process_batch(user_id: int, pending: list[PendingTurn]) -> None:
         Turn(role=("user" if r.role == "user" else "model"), text=r.text)
         for r in history_rows
     ]
+    logger.info(
+        "process_batch: user_id=%s history_size=%d first=%r",
+        user_id, len(history), history[0].text[:60] if history else None,
+    )
 
     media_parts: list[MediaPart] = []
     text_chunks: list[str] = []
+    save_chunks: list[str] = []
     for turn in pending:
         if turn.media_data and turn.media_mime:
             media_parts.append(MediaPart(data=turn.media_data, mime_type=turn.media_mime))
         text_chunks.append(turn.user_text)
+        save_chunks.append(turn.save_text)
     combined_text = "\n".join(c for c in text_chunks if c)
+    user_facing_text = "\n".join(c for c in save_chunks if c)
 
     await bot.send_chat_action(chat_id, ChatAction.TYPING)
 
@@ -379,6 +730,21 @@ async def process_batch(user_id: int, pending: list[PendingTurn]) -> None:
     await _send_parts(bot, chat_id, reply_text, reply_to=last_msg)
     deps.pacing.mark_bot_done(user_id)
 
+    user_obj = last_msg.from_user
+    username_val = user_obj.username if user_obj else None
+    first_name_val = user_obj.first_name if user_obj else None
+
+    # Chat API: incoming + outgoing — KETMA-KET, bitta task ichida (tartibni saqlash uchun)
+    if deps.chats.enabled:
+        user_row = await deps.storage.get_user_info(user_id)
+        phone_val = (user_row or {}).get("phone")
+        last_msg_id = getattr(last_msg, "message_id", 0)
+        asyncio.create_task(_log_turn_to_chat_api(
+            user_id=user_id, username=username_val, first_name=first_name_val,
+            phone=phone_val, pending=pending, reply_text=reply_text,
+            base_msgid=f"out_{user_id}_{last_msg_id}",
+        ))
+
 
 async def _send_parts(
     bot: Bot,
@@ -388,10 +754,11 @@ async def _send_parts(
 ) -> None:
     text_parts = [naturalize(p) for p in split_into_messages(reply_text)]
     for i, part in enumerate(text_parts):
-        await hold_typing(bot, chat_id, seconds=estimate_typing_seconds(part))
+        if not deps.dev_mode:
+            await hold_typing(bot, chat_id, seconds=estimate_typing_seconds(part))
         if i == 0 and reply_to is not None:
             await reply_to.reply(part)
         else:
             await bot.send_message(chat_id, part)
-        if i < len(text_parts) - 1:
+        if i < len(text_parts) - 1 and not deps.dev_mode:
             await asyncio.sleep(random.uniform(0.4, 1.1))

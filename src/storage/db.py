@@ -7,13 +7,14 @@ import aiosqlite
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS users (
-    telegram_id   INTEGER PRIMARY KEY,
-    username      TEXT,
-    first_name    TEXT,
-    last_name     TEXT,
-    phone         TEXT,
-    handed_off    INTEGER DEFAULT 0,    -- 1 bo'lsa operatorga uzatilgan
-    created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    telegram_id     INTEGER PRIMARY KEY,
+    username        TEXT,
+    first_name      TEXT,
+    last_name       TEXT,
+    phone           TEXT,
+    handed_off      INTEGER DEFAULT 0,    -- 1 bo'lsa operatorga uzatilgan
+    amocrm_lead_id  INTEGER,              -- AmoCRM lead ID
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS messages (
@@ -66,6 +67,8 @@ class Storage:
         cols = {row[1] for row in await cursor.fetchall()}
         if "handed_off" not in cols:
             await db.execute("ALTER TABLE users ADD COLUMN handed_off INTEGER DEFAULT 0")
+        if "amocrm_lead_id" not in cols:
+            await db.execute("ALTER TABLE users ADD COLUMN amocrm_lead_id INTEGER")
 
     async def upsert_user(
         self,
@@ -181,6 +184,33 @@ class Storage:
             await db.execute(
                 "UPDATE users SET handed_off = 1 WHERE telegram_id = ?",
                 (telegram_id,),
+            )
+            await db.commit()
+
+    async def get_user_info(self, telegram_id: int) -> dict | None:
+        async with aiosqlite.connect(self._path) as db:
+            db.row_factory = aiosqlite.Row
+            cursor = await db.execute(
+                "SELECT telegram_id, username, first_name, last_name, phone FROM users WHERE telegram_id = ?",
+                (telegram_id,),
+            )
+            row = await cursor.fetchone()
+        return dict(row) if row else None
+
+    async def get_amocrm_lead_id(self, telegram_id: int) -> int | None:
+        async with aiosqlite.connect(self._path) as db:
+            cursor = await db.execute(
+                "SELECT amocrm_lead_id FROM users WHERE telegram_id = ?",
+                (telegram_id,),
+            )
+            row = await cursor.fetchone()
+        return int(row[0]) if row and row[0] else None
+
+    async def set_amocrm_lead_id(self, telegram_id: int, lead_id: int) -> None:
+        async with aiosqlite.connect(self._path) as db:
+            await db.execute(
+                "UPDATE users SET amocrm_lead_id = ? WHERE telegram_id = ?",
+                (lead_id, telegram_id),
             )
             await db.commit()
 

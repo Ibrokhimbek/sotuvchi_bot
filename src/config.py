@@ -31,6 +31,24 @@ class Settings:
     throttle_seconds: float
     gsheets_webhook_url: str | None
     delayed_greeting_seconds: float
+    amocrm_subdomain: str | None
+    amocrm_token: str | None
+    amocrm_pipeline_name: str
+    amocrm_account_id: str | None
+    amocrm_chat_channel_id: str | None
+    amocrm_chat_channel_secret: str | None
+    amocrm_chat_scope_id: str | None
+    amocrm_chat_client_uuid: str | None
+    amocrm_manager_amojo_id: str | None
+    amocrm_pipeline_id: int | None
+    amocrm_telegram_stage_id: int | None
+    amocrm_chat_default_stage_id: int | None  # AmoCRM yangi chat lead'larini qaerga qo'yadi (default Instagram)
+    webhook_url: str | None
+    webhook_path: str
+    webhook_host: str
+    webhook_port: int
+    webhook_secret: str | None
+    amocrm_telegram_webhook_url: str | None
 
     @classmethod
     def load(cls) -> "Settings":
@@ -59,6 +77,26 @@ class Settings:
             throttle_seconds=float(_get("throttle_seconds") or "0.3"),
             gsheets_webhook_url=_get("gsheets_webhook_url", "GSHEETS_WEBHOOK_URL"),
             delayed_greeting_seconds=float(_get("delayed_greeting_seconds") or "60"),
+            amocrm_subdomain=_get("amocrm_subdomain", "AMOCRM_SUBDOMAIN"),
+            amocrm_token=_get("amocrm_token", "AMOCRM_TOKEN"),
+            amocrm_pipeline_name=_get("amocrm_pipeline_name") or "POS New",
+            amocrm_account_id=_get("amocrm_account_id"),
+            amocrm_chat_channel_id=_get("amocrm_chat_channel_id"),
+            amocrm_chat_channel_secret=_get("amocrm_chat_channel_secret"),
+            amocrm_chat_scope_id=_get("amocrm_chat_scope_id"),
+            amocrm_chat_client_uuid=_get("amocrm_chat_client_uuid"),
+            amocrm_manager_amojo_id=_get("amocrm_manager_amojo_id"),
+            amocrm_pipeline_id=int(_get("amocrm_pipeline_id")) if _get("amocrm_pipeline_id") else None,
+            amocrm_telegram_stage_id=int(_get("amocrm_telegram_stage_id")) if _get("amocrm_telegram_stage_id") else None,
+            amocrm_chat_default_stage_id=int(_get("amocrm_chat_default_stage_id")) if _get("amocrm_chat_default_stage_id") else None,
+            webhook_url=_get("webhook_url", "WEBHOOK_URL"),
+            webhook_path=_get("webhook_path") or "/telegram/webhook",
+            webhook_host=_get("webhook_host") or "0.0.0.0",
+            webhook_port=int(_get("webhook_port") or "8080"),
+            webhook_secret=_get("webhook_secret", "WEBHOOK_SECRET"),
+            amocrm_telegram_webhook_url=_get(
+                "amocrm_telegram_webhook_url", "AMOCRM_TELEGRAM_WEBHOOK_URL"
+            ),
         )
 
 
