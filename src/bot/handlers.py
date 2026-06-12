@@ -53,11 +53,16 @@ class Deps:
     pacing: PacingScheduler
     delayed_greeting_seconds: float = 40.0
     dev_mode: bool = False
+    # Follow-up: mijoz javob bermasa, Nozimaxon o'zi tabiiy eslatma yozadi
+    followup_enabled: bool = True
+    followup_seconds: float = 7200.0
+    followup_max_attempts: int = 2
 
 
 deps = Deps()
 
 _pending_greetings: dict[int, asyncio.Task] = {}
+_pending_followups: dict[int, asyncio.Task] = {}
 
 # AmoCRM Chat API: tartibni saqlash uchun per-user serialization
 _chat_user_locks: dict[int, asyncio.Lock] = {}
@@ -85,6 +90,26 @@ def _next_chat_ms(user_id: int, candidate_ms: int | None = None) -> int:
     return next_ms
 
 
+_UZ_WEEKDAYS = (
+    "dushanba", "seshanba", "chorshanba", "payshanba", "juma", "shanba", "yakshanba"
+)
+
+
+def _turn_context(first_name: str | None) -> str:
+    """Har turn uchun kichik kontekst — sana va mijoz ismi.
+
+    System promptga emas, per-turn user content'ga qo'shiladi (caching buzilmaydi).
+    Model bu ma'lumotni ko'rsatma sifatida ishlatadi, javobda takrorlamaydi.
+    """
+    from datetime import datetime
+
+    now = datetime.now()
+    parts = [f"bugun {now:%Y-%m-%d}, {_UZ_WEEKDAYS[now.weekday()]}"]
+    if first_name:
+        parts.append(f"mijoz ismi: {first_name} (iloji bo'lsa shu ism bilan murojaat qil)")
+    return "[ichki kontekst — javobda takrorlama: " + "; ".join(parts) + "]"
+
+
 def _cancel_pending_greeting(user_id: int) -> None:
     task = _pending_greetings.pop(user_id, None)
     if task and not task.done():
@@ -94,6 +119,23 @@ def _cancel_pending_greeting(user_id: int) -> None:
 def cancel_pending_greeting(user_id: int) -> None:
     """Public alias — boshqa modullardan chaqirish uchun (masalan AmoCRM callback)."""
     _cancel_pending_greeting(user_id)
+
+
+def _cancel_pending_followup(user_id: int) -> None:
+    task = _pending_followups.pop(user_id, None)
+    if task and not task.done():
+        task.cancel()
+
+
+def cancel_pending_followup(user_id: int) -> None:
+    """Public alias — operator qo'lga olganda follow-up'ni to'xtatish uchun."""
+    _cancel_pending_followup(user_id)
+
+
+def _on_incoming(user_id: int) -> None:
+    """Mijozdan yangi xabar kelganda kutilayotgan greeting/follow-up'larni bekor qiladi."""
+    _cancel_pending_greeting(user_id)
+    _cancel_pending_followup(user_id)
 
 
 def _conversation_id(user_id: int) -> str:
@@ -290,7 +332,7 @@ async def on_start(message: Message) -> None:
         "on_start: user_id=%s username=%s name=%s chat_id=%s",
         user.id, user.username, user.first_name, message.chat.id,
     )
-    _cancel_pending_greeting(user.id)
+    _on_incoming(user.id)
     deps.pacing.cancel(user.id)
     await deps.storage.upsert_user(user.id, user.username, user.first_name, user.last_name)
     await deps.storage.reset_user(user.id)
@@ -393,11 +435,15 @@ def _schedule_delayed_greeting(user_id: int, bot: Bot, chat_id: int) -> None:
 async def _send_delayed_greeting(user_id: int, bot: Bot, chat_id: int) -> None:
     logger.info("_send_delayed_greeting: user_id=%s chat_id=%s", user_id, chat_id)
 
+    greet_row = await deps.storage.get_user_info(user_id)
+    greet_name = (greet_row or {}).get("first_name")
+
     # MUHIM: bu mijoz bilan BIRINCHI tanishuv. History bo'sh berilgan —
     # kontakt eventi qo'shimcha kontekstga aralashtirmasligi uchun.
     reply_text = await deps.agent.reply(
         history=[],
         user_text=(
+            f"{_turn_context(greet_name)}\n\n"
             "Bu sening mijoz bilan eng BIRINCHI tanishuv xabaring. Mijoz hozirgina "
             "Telegramda bog'lanish raqamini qoldirdi va sen unga endi yozyapsan.\n\n"
             "FAQAT QUYIDAGILARNI QIL:\n"
@@ -431,13 +477,123 @@ async def _send_delayed_greeting(user_id: int, bot: Bot, chat_id: int) -> None:
             base_msgid=f"delayed_{user_id}_{int(__import__('time').time())}",
         ))
 
+    # Mijoz salomlashishga javob bermasa, keyinroq tabiiy eslatma yuboramiz
+    _schedule_followup(user_id, bot, chat_id)
+
+
+def _schedule_followup(user_id: int, bot: Bot, chat_id: int) -> None:
+    """Bot mijozga yozgandan keyin chaqiriladi — javob kelmasa eslatma yuboradi.
+
+    Bitta task butun ketma-ketlikni boshqaradi: 1-urinish `followup_seconds`dan
+    keyin, har keyingisi uzayadi. Mijoz javob bersa (yoki operator qo'lga olsa)
+    task bekor qilinadi.
+    """
+    if not deps.followup_enabled or deps.followup_max_attempts <= 0:
+        return
+    _cancel_pending_followup(user_id)
+
+    async def _job() -> None:
+        try:
+            for attempt in range(deps.followup_max_attempts):
+                delay = deps.followup_seconds * (attempt + 1)
+                await asyncio.sleep(delay)
+                sent = await _send_followup(user_id, bot, chat_id, attempt)
+                if not sent:
+                    break  # SKIP, mijoz javob berdi yoki handoff — to'xtaymiz
+        except asyncio.CancelledError:
+            return
+        except Exception:
+            logger.exception("Follow-up xato tg=%s", user_id)
+        finally:
+            _pending_followups.pop(user_id, None)
+
+    _pending_followups[user_id] = asyncio.create_task(
+        _job(), name=f"followup-{user_id}"
+    )
+
+
+async def _send_followup(user_id: int, bot: Bot, chat_id: int, attempt: int) -> bool:
+    """Bitta follow-up xabarini yuboradi. Yuborilsa True, to'xtatish kerak bo'lsa False."""
+    if await deps.storage.is_handed_off(user_id):
+        return False
+
+    history_rows = await deps.storage.recent_history(user_id, limit=30)
+    if not history_rows:
+        return False
+    # Oxirgi yozuv mijozniki bo'lsa — u allaqachon javob bergan, eslatma shart emas.
+    if history_rows[-1].role == "user":
+        return False
+
+    history = [
+        Turn(role=("user" if r.role == "user" else "model"), text=r.text)
+        for r in history_rows
+    ]
+    user_row = await deps.storage.get_user_info(user_id)
+    name = (user_row or {}).get("first_name")
+
+    if attempt == 0:
+        angle = (
+            "Bu BIRINCHI eslatmang. Juda yengil, qisqa qiziqish bildir — masalan "
+            "'aka, oylab kordingizmi?' yoki oxirgi savolingni boshqa so'z bilan eslat."
+        )
+    else:
+        angle = (
+            "Bu OXIRGI eslatmang va sen avval allaqachon bir marta eslatib bo'lgansan "
+            "(tarixdagi o'z xabaringga qara). Endi BUTUNLAY BOSHQACHA yondash — "
+            "aynan o'sha gapni qaytarma. Yumshoq orqaga chekin yoki aniq qiymat taklif "
+            "qil: masalan bepul demo/sinov taklif qil, yoki 'shoshilmang, tayyor "
+            "bolsangiz yozing, men shu yerdaman' de. Bosim umuman yo'q."
+        )
+
+    instruction = (
+        f"{_turn_context(name)}\n\n"
+        "Sen mijozga oxirgi xabar yozding, lekin u hali javob bermadi (bir muncha "
+        "vaqt o'tdi). Sen tabiiy sotuv menejeri sifatida YENGIL eslatma yozasan — "
+        "umuman bosim qilmaysan.\n\n"
+        f"{angle}\n\n"
+        "QOIDALAR:\n"
+        "- Salomlashma — avval salomlashgansan. Darrov qisqa, do'stona eslatma.\n"
+        "- MUHIM: tarixdagi o'z oldingi eslatmangni AYNAN takrorlama — boshqa so'z, "
+        "boshqa ohang bilan yoz. Bir xil jumlani ikki marta yozma.\n"
+        "- 1-2 ta juda qisqa xabar. Har alohida xabarni ~~~ bilan ajrat.\n"
+        "- AGAR suhbat tabiiy yakuniga yetgan bo'lsa (mijoz rahmat aytib xayrlashgan, "
+        "'qiziqmayman' yoki 'keyin' degan) — hech narsa yozma, FAQAT bitta so'z "
+        "qaytar: SKIP"
+    )
+
+    try:
+        reply_text = await deps.agent.reply(history=history, user_text=instruction)
+    except Exception:
+        logger.exception("Follow-up Gemini xato tg=%s", user_id)
+        return False
+
+    if not reply_text or reply_text.strip().upper().startswith("SKIP"):
+        logger.info("Follow-up SKIP tg=%s attempt=%s", user_id, attempt)
+        return False
+
+    await deps.storage.save_message(user_id, "model", reply_text)
+    await _send_parts(bot, chat_id, reply_text)
+    deps.pacing.mark_bot_done(user_id)
+    logger.info("Follow-up yuborildi tg=%s attempt=%s", user_id, attempt)
+
+    if deps.chats.enabled:
+        asyncio.create_task(_log_chat_outgoing_parts(
+            user_id=user_id,
+            username=(user_row or {}).get("username"),
+            first_name=name,
+            phone=(user_row or {}).get("phone"),
+            text=reply_text,
+            base_msgid=f"followup_{user_id}_{attempt}_{int(time.time())}",
+        ))
+    return True
+
 
 @router.message(F.text)
 async def on_text(message: Message) -> None:
     user = message.from_user
     if user is None or message.text is None:
         return
-    _cancel_pending_greeting(user.id)
+    _on_incoming(user.id)
     await deps.storage.upsert_user(user.id, user.username, user.first_name, user.last_name)
     deps.pacing.enqueue(
         user.id,
@@ -458,7 +614,7 @@ async def on_voice(message: Message, bot: Bot) -> None:
     user = message.from_user
     if user is None or message.voice is None:
         return
-    _cancel_pending_greeting(user.id)
+    _on_incoming(user.id)
     data = await _download(bot, message.voice.file_id)
     await deps.storage.upsert_user(user.id, user.username, user.first_name, user.last_name)
     media_url, media_size, amocrm_type = _save_media_for_amocrm(data, "voice")
@@ -484,7 +640,7 @@ async def on_video_note(message: Message, bot: Bot) -> None:
     user = message.from_user
     if user is None or message.video_note is None:
         return
-    _cancel_pending_greeting(user.id)
+    _on_incoming(user.id)
     data = await _download(bot, message.video_note.file_id)
     await deps.storage.upsert_user(user.id, user.username, user.first_name, user.last_name)
     media_url, media_size, amocrm_type = _save_media_for_amocrm(data, "video_note")
@@ -510,7 +666,7 @@ async def on_video(message: Message, bot: Bot) -> None:
     user = message.from_user
     if user is None or message.video is None:
         return
-    _cancel_pending_greeting(user.id)
+    _on_incoming(user.id)
     data = await _download(bot, message.video.file_id)
     await deps.storage.upsert_user(user.id, user.username, user.first_name, user.last_name)
     caption = message.caption or "(mijoz video yubordi — ko'rib javob ber)"
@@ -537,7 +693,7 @@ async def on_photo(message: Message, bot: Bot) -> None:
     user = message.from_user
     if user is None or not message.photo:
         return
-    _cancel_pending_greeting(user.id)
+    _on_incoming(user.id)
     photo = message.photo[-1]
     data = await _download(bot, photo.file_id)
     await deps.storage.upsert_user(user.id, user.username, user.first_name, user.last_name)
@@ -563,7 +719,7 @@ async def on_photo(message: Message, bot: Bot) -> None:
 @router.message()
 async def on_fallback(message: Message) -> None:
     if message.from_user:
-        _cancel_pending_greeting(message.from_user.id)
+        _on_incoming(message.from_user.id)
     await message.reply("kechirasiz, bu turdagi xabarni tushunmadim 🙂 matn yoki ovozli yozsangiz boladi")
 
 
@@ -629,6 +785,9 @@ async def process_batch(user_id: int, pending: list[PendingTurn]) -> None:
         user_id, chat_id, len(pending),
     )
 
+    # Joriy turn xabarlari tarixga aralashmasligi uchun chegarani SAQLASHDAN OLDIN olamiz.
+    history_boundary_id = await deps.storage.get_last_message_id(user_id)
+
     # Hammasini DB'ga yozamiz
     for turn in pending:
         await deps.storage.save_message(user_id, "user", turn.save_text, turn.media_kind)
@@ -657,8 +816,9 @@ async def process_batch(user_id: int, pending: list[PendingTurn]) -> None:
         deps.pacing.mark_bot_done(user_id)
         return
 
-    history_rows = await deps.storage.recent_history(user_id, limit=30)
-    history_rows = history_rows[: -len(pending)] if len(pending) <= len(history_rows) else []
+    history_rows = await deps.storage.recent_history(
+        user_id, limit=30, max_id=history_boundary_id
+    )
     history = [
         Turn(role=("user" if r.role == "user" else "model"), text=r.text)
         for r in history_rows
@@ -670,14 +830,16 @@ async def process_batch(user_id: int, pending: list[PendingTurn]) -> None:
 
     media_parts: list[MediaPart] = []
     text_chunks: list[str] = []
-    save_chunks: list[str] = []
     for turn in pending:
         if turn.media_data and turn.media_mime:
             media_parts.append(MediaPart(data=turn.media_data, mime_type=turn.media_mime))
         text_chunks.append(turn.user_text)
-        save_chunks.append(turn.save_text)
     combined_text = "\n".join(c for c in text_chunks if c)
-    user_facing_text = "\n".join(c for c in save_chunks if c)
+
+    # Per-turn kontekst (sana + ism) — faqat modelga ko'rsatiladi, DB'ga yozilmaydi.
+    ctx_user = last_msg.from_user
+    ctx_prelude = _turn_context(ctx_user.first_name if ctx_user else None)
+    model_text = f"{ctx_prelude}\n{combined_text}" if combined_text else ctx_prelude
 
     await bot.send_chat_action(chat_id, ChatAction.TYPING)
 
@@ -685,9 +847,17 @@ async def process_batch(user_id: int, pending: list[PendingTurn]) -> None:
         cleaned = {k: v for k, v in args.items() if v}
         if not cleaned:
             return
+        # Sheets'ga ikki marta yozmaslik uchun: kontakt tugmasi orqali telefon
+        # allaqachon saqlangan bo'lsa (on_contact yozgan), qayta yozmaymiz.
+        existing = await deps.storage.get_user_info(user_id)
+        already_logged = bool(existing and existing.get("phone"))
+
         await deps.storage.upsert_lead(user_id, **cleaned)
         if "phone" in cleaned:
             await deps.storage.set_user_phone(user_id, cleaned["phone"])
+
+        if already_logged:
+            return  # kontakt allaqachon Sheets'ga tushgan — dublikat qatordan saqlanamiz
         user = last_msg.from_user
         asyncio.create_task(
             deps.sheets.log_contact(
@@ -715,7 +885,7 @@ async def process_batch(user_id: int, pending: list[PendingTurn]) -> None:
     try:
         reply_text = await deps.agent.reply(
             history=history,
-            user_text=combined_text or None,
+            user_text=model_text,
             media=media_parts or None,
             on_save_lead=on_save_lead,
             on_request_operator=on_request_operator,
@@ -744,6 +914,9 @@ async def process_batch(user_id: int, pending: list[PendingTurn]) -> None:
             phone=phone_val, pending=pending, reply_text=reply_text,
             base_msgid=f"out_{user_id}_{last_msg_id}",
         ))
+
+    # Mijoz bu javobga ham javob bermasa, keyinroq tabiiy eslatma yuboramiz
+    _schedule_followup(user_id, bot, chat_id)
 
 
 async def _send_parts(

@@ -110,6 +110,12 @@ async def _setup(dev_mode: bool):
         0.5 if dev_mode else settings.delayed_greeting_seconds
     )
     handlers.deps.dev_mode = dev_mode
+    handlers.deps.followup_enabled = settings.followup_enabled
+    # Dev rejimida follow-up'ni qisqa interval bilan sinash mumkin
+    handlers.deps.followup_seconds = (
+        15.0 if dev_mode else settings.followup_seconds
+    )
+    handlers.deps.followup_max_attempts = settings.followup_max_attempts
 
     dp = Dispatcher()
     dp.message.middleware(ThrottleMiddleware(min_interval=settings.throttle_seconds))
@@ -199,12 +205,14 @@ async def run_webhook(dev_mode: bool) -> None:
     # AmoCRM Chats callback (operator AmoCRM panel'ida javob yozsa)
     if chats.enabled and settings.amocrm_chat_channel_secret:
         from src.bot.handlers import cancel_pending_greeting as _cpg
+        from src.bot.handlers import cancel_pending_followup as _cpf
         callback = build_amocrm_callback_handler(
             bot=bot,
             storage=handlers.deps.storage,
             secret=settings.amocrm_chat_channel_secret,
             cancel_pending_greeting=_cpg,
             cancel_pacing=handlers.deps.pacing.cancel,
+            cancel_followup=_cpf,
         )
         app.router.add_post("/amocrm/chats/{scope_id}", callback)
         logger.info("AmoCRM Chats callback ulandi: /amocrm/chats/{scope_id}")

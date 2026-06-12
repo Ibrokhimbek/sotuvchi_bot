@@ -25,14 +25,18 @@ class HandoffNotifier:
             return
 
         lead = await self._storage.get_lead(user.id)
-        text = self._format_message(user, reason, lead)
+        try:
+            history = await self._storage.recent_messages(user.id, limit=10)
+        except Exception:
+            history = []
+        text = self._format_message(user, reason, lead, history)
         try:
             await self._bot.send_message(self._operator_chat_id, text)
         except Exception:
             logger.exception("Operator chatiga yuborib bo'lmadi")
 
     @staticmethod
-    def _format_message(user: User, reason: str, lead: dict | None) -> str:
+    def _format_message(user: User, reason: str, lead: dict | None, history=None) -> str:
         name = " ".join(filter(None, [user.first_name, user.last_name])) or user.full_name
         username = f"@{user.username}" if user.username else "(username yo'q)"
         lines = [
@@ -51,4 +55,13 @@ class HandoffNotifier:
             ]:
                 if lead.get(field):
                     lines.append(f"{label}: {lead[field]}")
+        if history:
+            lines.append("")
+            lines.append("💬 Oxirgi suhbat:")
+            for row in history:
+                who = "Mijoz" if row.role == "user" else "Nozimaxon"
+                snippet = (row.text or "").replace("\n", " ").strip()
+                if len(snippet) > 200:
+                    snippet = snippet[:200] + "…"
+                lines.append(f"{who}: {snippet}")
         return "\n".join(lines)

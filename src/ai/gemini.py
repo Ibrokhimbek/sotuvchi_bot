@@ -47,6 +47,8 @@ _SAVE_LEAD_DECL = {
             "store_size":    {"type": "string", "description": "Do'kon kattaligi yoki kassa soni"},
             "notes":         {"type": "string", "description": "Qo'shimcha eslatma"},
         },
+        # Kamida biznes turi bo'lishi shart — bo'sh {} bilan chaqirishning oldini oladi.
+        "required": ["business_type"],
     },
 }
 
@@ -86,6 +88,20 @@ class GeminiAgent:
         self._tools = [
             types.Tool(function_declarations=[_SAVE_LEAD_DECL, _REQUEST_OPERATOR_DECL])
         ]
+        # Telefon/lead matnida default safety filtrlari ba'zan finish_reason=SAFETY
+        # berib bo'sh javob qaytaradi — faqat YUQORI xavfni bloklaymiz.
+        self._safety_settings = [
+            types.SafetySetting(category=c, threshold=types.HarmBlockThreshold.BLOCK_ONLY_HIGH)
+            for c in (
+                types.HarmCategory.HARM_CATEGORY_HARASSMENT,
+                types.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+                types.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+                types.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            )
+        ]
+        # 2.5-flash thinking modeli — persona-driven sotuv oqimida fikrlash tokeni
+        # latency va narx qo'shadi, sifatga deyarli ta'sir qilmaydi. O'chiramiz.
+        self._thinking_config = types.ThinkingConfig(thinking_budget=0)
         self._cache_name: str | None = None
         self._enable_cache = enable_cache
         self._refresh_interval = cache_refresh_interval
@@ -190,20 +206,42 @@ class GeminiAgent:
             current_parts.append(types.Part.from_text(text="(bo'sh xabar)"))
         contents.append(types.Content(role="user", parts=current_parts))
 
+        # Model bitta javobda matn + function_call'ni BIRGA qaytarishi mumkin.
+        # Matnni yo'qotmaslik uchun har iteratsiyada yig'ib boramiz.
+        collected_text: list[str] = []
+
         for _ in range(3):
             response = await self._generate(contents)
+            self._log_usage(response)
 
             candidate = response.candidates[0] if response.candidates else None
+            finish_reason = getattr(candidate, "finish_reason", None) if candidate else None
             if not candidate or not candidate.content or not candidate.content.parts:
-                return "kechirasiz, bir lahza yana yozib yuborasizmi"
+                logger.warning(
+                    "Gemini bo'sh javob qaytardi: finish_reason=%s, collected=%r",
+                    finish_reason, collected_text,
+                )
+                break
 
-            function_calls = [
-                p.function_call for p in candidate.content.parts if p.function_call
-            ]
+            # SAFETY / RECITATION → model bloklangan, bo'sh kelishi mumkin.
+            # MAX_TOKENS → matn bor lekin uzilgan, uni baribir olamiz.
+            fr_name = getattr(finish_reason, "name", str(finish_reason))
+            if fr_name in ("SAFETY", "RECITATION"):
+                logger.warning("Gemini javobi bloklandi: finish_reason=%s", fr_name)
+
+            parts = candidate.content.parts
+
+            # Matn qismlarini yig'amiz — function_call bilan birga kelsa ham yo'qotmaymiz.
+            for p in parts:
+                ptext = getattr(p, "text", None)
+                if ptext and ptext.strip():
+                    collected_text.append(ptext.strip())
+
+            function_calls = [p.function_call for p in parts if p.function_call]
 
             if not function_calls:
-                text = (response.text or "").strip()
-                return text or "kechirasiz, bir lahza yana yozib yuborasizmi"
+                # Model gapini tugatdi — yig'ilgan matnni qaytaramiz.
+                break
 
             contents.append(candidate.content)
             response_parts: list[types.Part] = []
@@ -226,15 +264,36 @@ class GeminiAgent:
                 )
             contents.append(types.Content(role="user", parts=response_parts))
 
-        return "kechirasiz, biroz aralashib ketdim, savolni qaytarsangiz iltimos"
+        final_text = "\n".join(collected_text).strip()
+        if final_text:
+            return final_text
+
+        logger.warning("Gemini hech qanday matn bermadi — fallback ishlatilmoqda")
+        return "ha aytavering, eshityapman 🙂"
+
+    @staticmethod
+    def _log_usage(response) -> None:
+        """Token sarfini va cache hit'ni log'ga yozadi (xarajatni kuzatish uchun)."""
+        usage = getattr(response, "usage_metadata", None)
+        if not usage:
+            return
+        logger.debug(
+            "Gemini tokenlar: prompt=%s, javob=%s, cache'dan=%s, jami=%s",
+            getattr(usage, "prompt_token_count", None),
+            getattr(usage, "candidates_token_count", None),
+            getattr(usage, "cached_content_token_count", None),
+            getattr(usage, "total_token_count", None),
+        )
 
     async def _generate(self, contents):
         """Generate_content chaqiruvi; cache xato bo'lsa fallbackga o'tib qayta yaratadi."""
         for attempt in range(2):
             config_kwargs: dict = {
-                "temperature": 0.95,
-                "top_p": 0.95,
+                "temperature": 0.7,
+                "top_p": 0.9,
                 "max_output_tokens": 700,
+                "thinking_config": self._thinking_config,
+                "safety_settings": self._safety_settings,
             }
             if self._cache_name:
                 config_kwargs["cached_content"] = self._cache_name
@@ -252,7 +311,9 @@ class GeminiAgent:
                 if attempt == 0 and self._cache_name and _looks_like_cache_error(e):
                     logger.warning("Cache muddati tugagan ko'rinadi — qayta yaratamiz: %s", e)
                     self._cache_name = None
-                    asyncio.create_task(self.warm_cache())  # background recreate
+                    # Bloklab qayta yaratamiz — aks holda keyingi so'rovlar ham
+                    # cache'siz to'liq system prompt tokenini to'laydi.
+                    await self.warm_cache()
                     continue
                 raise
         raise RuntimeError("generate retry exhausted")

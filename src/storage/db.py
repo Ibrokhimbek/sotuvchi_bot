@@ -105,19 +105,40 @@ class Storage:
             )
             await db.commit()
 
-    async def recent_history(self, telegram_id: int, limit: int = 20) -> list[HistoryRow]:
+    async def get_last_message_id(self, telegram_id: int) -> int | None:
+        """Mijozning hozirgi eng katta message id'sini qaytaradi (chegara sifatida)."""
         async with aiosqlite.connect(self._path) as db:
             cursor = await db.execute(
-                """
-                SELECT role, text FROM messages
-                WHERE telegram_id = ?
-                ORDER BY id DESC
-                LIMIT ?
-                """,
-                (telegram_id, limit),
+                "SELECT MAX(id) FROM messages WHERE telegram_id = ?",
+                (telegram_id,),
             )
+            row = await cursor.fetchone()
+        return int(row[0]) if row and row[0] is not None else None
+
+    async def recent_history(
+        self, telegram_id: int, limit: int = 20, max_id: int | None = None
+    ) -> list[HistoryRow]:
+        """Oxirgi xabarlar (eskidan yangiga). `max_id` berilsa, id <= max_id bo'lganlar.
+
+        `max_id` — batch saqlashdan OLDIN olingan chegara. Bu joriy turn xabarlari
+        tarixga aralashib, modelning o'z prompti user input sifatida ko'rinishini
+        oldini oladi.
+        """
+        query = "SELECT role, text FROM messages WHERE telegram_id = ?"
+        params: list = [telegram_id]
+        if max_id is not None:
+            query += " AND id <= ?"
+            params.append(max_id)
+        query += " ORDER BY id DESC LIMIT ?"
+        params.append(limit)
+        async with aiosqlite.connect(self._path) as db:
+            cursor = await db.execute(query, params)
             rows = await cursor.fetchall()
         return [HistoryRow(role=r[0], text=r[1]) for r in reversed(rows)]
+
+    async def recent_messages(self, telegram_id: int, limit: int = 10) -> list[HistoryRow]:
+        """Operator handoff uchun — oxirgi N ta xabar (eskidan yangiga)."""
+        return await self.recent_history(telegram_id, limit=limit)
 
     async def upsert_lead(
         self,

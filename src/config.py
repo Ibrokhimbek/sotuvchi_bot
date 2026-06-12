@@ -31,6 +31,9 @@ class Settings:
     throttle_seconds: float
     gsheets_webhook_url: str | None
     delayed_greeting_seconds: float
+    followup_enabled: bool
+    followup_seconds: float
+    followup_max_attempts: int
     amocrm_subdomain: str | None
     amocrm_token: str | None
     amocrm_pipeline_name: str
@@ -77,6 +80,10 @@ class Settings:
             throttle_seconds=float(_get("throttle_seconds") or "0.3"),
             gsheets_webhook_url=_get("gsheets_webhook_url", "GSHEETS_WEBHOOK_URL"),
             delayed_greeting_seconds=float(_get("delayed_greeting_seconds") or "60"),
+            followup_enabled=(_get("followup_enabled") or "true").lower() == "true",
+            # Mijoz javob bermasa, qancha vaqtdan keyin eslatma yuboriladi (default 2 soat)
+            followup_seconds=float(_get("followup_seconds") or "7200"),
+            followup_max_attempts=int(_get("followup_max_attempts") or "2"),
             amocrm_subdomain=_get("amocrm_subdomain", "AMOCRM_SUBDOMAIN"),
             amocrm_token=_get("amocrm_token", "AMOCRM_TOKEN"),
             amocrm_pipeline_name=_get("amocrm_pipeline_name") or "POS New",

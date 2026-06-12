@@ -89,6 +89,7 @@ def build_amocrm_callback_handler(
     secret: str,
     cancel_pending_greeting: Callable[[int], None] | None = None,
     cancel_pacing: Callable[[int], Awaitable[None] | None] | None = None,
+    cancel_followup: Callable[[int], None] | None = None,
 ):
     """aiohttp POST handler — AmoCRM operator javoblarini qabul qiladi."""
 
@@ -152,12 +153,17 @@ def build_amocrm_callback_handler(
         except Exception:
             logger.exception("mark_handoff xato")
 
-        # Pending salomlashish va pacing'ni bekor qilamiz (mavjud bo'lsa)
+        # Pending salomlashish, follow-up va pacing'ni bekor qilamiz (mavjud bo'lsa)
         if cancel_pending_greeting:
             try:
                 cancel_pending_greeting(telegram_id)
             except Exception:
                 logger.exception("cancel_pending_greeting xato")
+        if cancel_followup:
+            try:
+                cancel_followup(telegram_id)
+            except Exception:
+                logger.exception("cancel_followup xato")
         if cancel_pacing:
             try:
                 res = cancel_pacing(telegram_id)
