@@ -1,0 +1,33 @@
+# Secret va ma'lumotlar — hech qachon image ichiga tushmaydi
+.env
+.env.local
+data/
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Virtual env va cache
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# Git va IDE
+.git/
+.gitignore
+.idea/
+.vscode/
+
+# OS / boshqa
+.DS_Store
+logs/
+*.log
+
+# Hujjatlar build uchun kerak emas
+DEPLOY_TZ.md
+README.md
+CLAUDE.md
+AGENT_REVIEW.md

@@ -1,0 +1,46 @@
+# Nozimaxon bot — Docker Compose (production)
+#
+# Tashqi port: 7040  ->  konteyner ichidagi 8080 (webhook_port)
+# Reverse proxy (nozimaxonbot.linko.uz, TLS) host'ning 7040 portiga yo'naltiradi.
+#
+# Ishga tushirish:
+#   docker compose up -d --build
+# Loglar:
+#   docker compose logs -f
+# To'xtatish:
+#   docker compose down
+#
+# MUHIM: faqat BITTA instans ishlashi kerak (replicas: 1) —
+# pacing/greeting/follow-up va AmoCRM xabar tartibi process xotirasida saqlanadi.
+
+services:
+  bot:
+    build: .
+    image: nozimaxon-bot:latest
+    container_name: nozimaxon-bot
+    restart: unless-stopped
+
+    # .env host'da turadi, git'ga tushmaydi (secret'lar shu yerda)
+    env_file: .env
+
+    ports:
+      - "7040:8080"   # HOST:KONTEYNER — tashqariga 7040
+
+    volumes:
+      - bot-data:/app/data   # SQLite (bot.db) + media — redeploy'da saqlanadi
+
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0) if urllib.request.urlopen('http://127.0.0.1:8080/healthz').read()==b'ok' else sys.exit(1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+volumes:
+  bot-data:
