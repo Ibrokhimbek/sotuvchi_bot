@@ -169,13 +169,31 @@ async def run_webhook(dev_mode: bool) -> None:
         own_webhook_url=full_url,
     )
 
-    # Telegram'ga webhook URL'ni o'rnatamiz (eskisi avtomatik almashtiriladi)
-    await bot.set_webhook(
-        url=full_url,
-        secret_token=settings.webhook_secret or None,
-        drop_pending_updates=True,
-    )
-    logger.info("Telegram webhook o'rnatildi: %s", full_url)
+    async def _ensure_webhook() -> None:
+        """Telegram webhook'ni fon rejimida o'rnatadi, muvaffaqiyatgacha qayta urinadi.
+
+        Domen DNS/HTTPS hali tayyor bo'lmasa, Telegram hostni resolve qila olmaydi.
+        Shu sababli butun jarayonni crash qildirmaymiz — server ishlab turaveradi
+        (/healthz javob beradi), webhook esa domen tayyor bo'lishi bilan o'rnatiladi.
+        """
+        delay = 5
+        while True:
+            try:
+                await bot.set_webhook(
+                    url=full_url,
+                    secret_token=settings.webhook_secret or None,
+                    drop_pending_updates=True,
+                )
+                logger.info("Telegram webhook o'rnatildi: %s", full_url)
+                return
+            except Exception as e:
+                logger.error(
+                    "Webhook o'rnatib bo'lmadi: %s | URL=%s | Domen DNS/HTTPS tashqaridan "
+                    "ochiqmi tekshiring. %ss dan keyin qayta urinaman.",
+                    e, full_url, delay,
+                )
+                await asyncio.sleep(delay)
+                delay = min(delay * 2, 300)
 
     app = web.Application()
     app.router.add_post(
@@ -233,11 +251,16 @@ async def run_webhook(dev_mode: bool) -> None:
     runner = web.AppRunner(app)
     await runner.setup()
     site = web.TCPSite(runner, settings.webhook_host, settings.webhook_port)
+    webhook_task: asyncio.Task | None = None
     try:
         await site.start()
+        # Server tayyor — endi webhook'ni fonda o'rnatamiz (domen tayyor bo'lguncha qayta urinadi)
+        webhook_task = asyncio.create_task(_ensure_webhook(), name="ensure-webhook")
         while True:
             await asyncio.sleep(3600)
     finally:
+        if webhook_task and not webhook_task.done():
+            webhook_task.cancel()
         await runner.cleanup()
         await forwarder.close()
         await agent.stop_auto_refresh()
