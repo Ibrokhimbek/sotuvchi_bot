@@ -10,6 +10,9 @@ from aiogram import Bot, F, Router
 from aiogram.enums import ChatAction
 from aiogram.filters import CommandStart
 from aiogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
     KeyboardButton,
     Message,
     ReplyKeyboardMarkup,
@@ -94,9 +97,75 @@ _UZ_WEEKDAYS = (
     "dushanba", "seshanba", "chorshanba", "payshanba", "juma", "shanba", "yakshanba"
 )
 
+# Qo'llab-quvvatlanadigan tillar
+SUPPORTED_LANGS = ("uz", "ru")
+DEFAULT_LANG = "uz"
 
-def _turn_context(first_name: str | None) -> str:
-    """Har turn uchun kichik kontekst — sana va mijoz ismi.
+# Gemini'ga beriladigan til ko'rsatmasi
+_LANG_DIRECTIVE = {
+    "uz": "o'zbek tilida",
+    "ru": "rus tilida (на русском языке)",
+}
+
+# Statik (AI emas) xabarlarning tarjimalari
+_CONTACT_REQUEST = {
+    "uz": (
+        "Linko-POS kompaniyasiga xush kelibsiz. Sotuv menejerimiz siz bilan "
+        "bog'lanishini xohlaysizmi?\n\n"
+        "Pastdagi tugmani bosib raqamingizni qoldiring — Hodimimiz tez orada o'zi yozadi 🙏"
+    ),
+    "ru": (
+        "Добро пожаловать в компанию Linko-POS. Хотите, чтобы наш менеджер по продажам "
+        "связался с вами?\n\n"
+        "Нажмите кнопку ниже и оставьте свой номер — наш сотрудник скоро напишет вам 🙏"
+    ),
+}
+_CONTACT_BUTTON = {
+    "uz": "📱 Raqamimni jo'natish",
+    "ru": "📱 Отправить мой номер",
+}
+_THANK_YOU = {
+    "uz": (
+        "Raqamingizni qoldirganingiz uchun rahmat! 🙏\n"
+        "Iltimos, kutib turing — hodimimiz tez orada chat orqali aloqaga chiqadi!"
+    ),
+    "ru": (
+        "Спасибо, что оставили свой номер! 🙏\n"
+        "Пожалуйста, подождите — наш сотрудник скоро свяжется с вами в чате!"
+    ),
+}
+_CHOOSE_LANG_TEXT = "Iltimos, suhbat tilini tanlang:\nПожалуйста, выберите язык общения:"
+_ERROR_TECH = {
+    "uz": "biroz texnik nuqson chiqdi, bir lahzadan keyin yana yozasizmi 🙏",
+    "ru": "произошёл небольшой сбой, напишите ещё раз через мгновение 🙏",
+}
+_UNSUPPORTED_MSG = {
+    "uz": "kechirasiz, bu turdagi xabarni tushunmadim 🙂 matn yoki ovozli yozsangiz boladi",
+    "ru": "извините, я не поняла этот тип сообщения 🙂 напишите текстом или голосовым",
+}
+
+
+def _norm_lang(lang: str | None) -> str:
+    return lang if lang in SUPPORTED_LANGS else DEFAULT_LANG
+
+
+def _language_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(inline_keyboard=[[
+        InlineKeyboardButton(text="🇺🇿 O'zbekcha", callback_data="lang:uz"),
+        InlineKeyboardButton(text="🇷🇺 Русский", callback_data="lang:ru"),
+    ]])
+
+
+def _contact_keyboard(lang: str = DEFAULT_LANG) -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[[KeyboardButton(text=_CONTACT_BUTTON[_norm_lang(lang)], request_contact=True)]],
+        resize_keyboard=True,
+        one_time_keyboard=True,
+    )
+
+
+def _turn_context(first_name: str | None, lang: str = DEFAULT_LANG) -> str:
+    """Har turn uchun kichik kontekst — sana, javob tili va mijoz ismi.
 
     System promptga emas, per-turn user content'ga qo'shiladi (caching buzilmaydi).
     Model bu ma'lumotni ko'rsatma sifatida ishlatadi, javobda takrorlamaydi.
@@ -105,6 +174,9 @@ def _turn_context(first_name: str | None) -> str:
 
     now = datetime.now()
     parts = [f"bugun {now:%Y-%m-%d}, {_UZ_WEEKDAYS[now.weekday()]}"]
+    parts.append(
+        f"javob tili: {_LANG_DIRECTIVE[_norm_lang(lang)]} — javobni FAQAT shu tilda yoz"
+    )
     if first_name:
         parts.append(f"mijoz ismi: {first_name} (iloji bo'lsa shu ism bilan murojaat qil)")
     return "[ichki kontekst — javobda takrorlama: " + "; ".join(parts) + "]"
@@ -315,14 +387,6 @@ async def _log_turn_to_chat_api(
                 )
 
 
-def _contact_keyboard() -> ReplyKeyboardMarkup:
-    return ReplyKeyboardMarkup(
-        keyboard=[[KeyboardButton(text="📱 Raqamimni jo'natish", request_contact=True)]],
-        resize_keyboard=True,
-        one_time_keyboard=True,
-    )
-
-
 @router.message(CommandStart())
 async def on_start(message: Message) -> None:
     user = message.from_user
@@ -336,13 +400,31 @@ async def on_start(message: Message) -> None:
     deps.pacing.cancel(user.id)
     await deps.storage.upsert_user(user.id, user.username, user.first_name, user.last_name)
     await deps.storage.reset_user(user.id)
-    await message.answer(
-        "Assalomu alaykum! 👋\n\n"
-        "Linko kompaniyasiga xush kelibsiz. Sotuv menejerimiz siz bilan "
-        "bog'lanishini xohlaysizmi?\n\n"
-        "Pastdagi tugmani bosib raqamingizni qoldiring — Hodimimiz o'zlari sizga javob beradi.",
-        reply_markup=_contact_keyboard(),
-    )
+    # Avval til tanlanadi — keyin (callback'da) kontakt so'raladi
+    await message.answer(_CHOOSE_LANG_TEXT, reply_markup=_language_keyboard())
+    deps.pacing.mark_bot_done(user.id)
+
+
+@router.callback_query(F.data.startswith("lang:"))
+async def on_language_choice(callback: CallbackQuery) -> None:
+    user = callback.from_user
+    if user is None or not callback.data:
+        return
+    lang = _norm_lang(callback.data.split(":", 1)[1])
+    await deps.storage.set_user_language(user.id, lang)
+    logger.info("Til tanlandi: tg=%s lang=%s", user.id, lang)
+    await callback.answer()
+    # Til tugmalarini olib tashlaymiz (qayta bosilmasin)
+    try:
+        if callback.message:
+            await callback.message.edit_reply_markup(reply_markup=None)
+    except Exception:
+        pass
+    # Tanlangan tilda kontakt so'raymiz
+    if callback.message:
+        await callback.message.answer(
+            _CONTACT_REQUEST[lang], reply_markup=_contact_keyboard(lang)
+        )
     deps.pacing.mark_bot_done(user.id)
 
 
@@ -384,10 +466,8 @@ async def on_contact(message: Message, bot: Bot) -> None:
         )
     )
 
-    thank_you = (
-        "Raqamingizni qoldirganingiz uchun rahmat! 🙏\n"
-        "Iltimos, kutib turing — hodimimiz tez orada chat orqali aloqaga chiqadi!"
-    )
+    lang = await deps.storage.get_user_language(user.id)
+    thank_you = _THANK_YOU[lang]
     await message.answer(thank_you, reply_markup=ReplyKeyboardRemove())
     deps.pacing.mark_bot_done(user.id)
 
@@ -437,13 +517,14 @@ async def _send_delayed_greeting(user_id: int, bot: Bot, chat_id: int) -> None:
 
     greet_row = await deps.storage.get_user_info(user_id)
     greet_name = (greet_row or {}).get("first_name")
+    greet_lang = _norm_lang((greet_row or {}).get("language"))
 
     # MUHIM: bu mijoz bilan BIRINCHI tanishuv. History bo'sh berilgan —
     # kontakt eventi qo'shimcha kontekstga aralashtirmasligi uchun.
     reply_text = await deps.agent.reply(
         history=[],
         user_text=(
-            f"{_turn_context(greet_name)}\n\n"
+            f"{_turn_context(greet_name, greet_lang)}\n\n"
             "Bu sening mijoz bilan eng BIRINCHI tanishuv xabaring. Mijoz hozirgina "
             "Telegramda bog'lanish raqamini qoldirdi va sen unga endi yozyapsan.\n\n"
             "FAQAT QUYIDAGILARNI QIL:\n"
@@ -530,6 +611,7 @@ async def _send_followup(user_id: int, bot: Bot, chat_id: int, attempt: int) -> 
     ]
     user_row = await deps.storage.get_user_info(user_id)
     name = (user_row or {}).get("first_name")
+    lang = _norm_lang((user_row or {}).get("language"))
 
     if attempt == 0:
         angle = (
@@ -546,7 +628,7 @@ async def _send_followup(user_id: int, bot: Bot, chat_id: int, attempt: int) -> 
         )
 
     instruction = (
-        f"{_turn_context(name)}\n\n"
+        f"{_turn_context(name, lang)}\n\n"
         "Sen mijozga oxirgi xabar yozding, lekin u hali javob bermadi (bir muncha "
         "vaqt o'tdi). Sen tabiiy sotuv menejeri sifatida YENGIL eslatma yozasan — "
         "umuman bosim qilmaysan.\n\n"
@@ -718,9 +800,11 @@ async def on_photo(message: Message, bot: Bot) -> None:
 
 @router.message()
 async def on_fallback(message: Message) -> None:
+    lang = DEFAULT_LANG
     if message.from_user:
         _on_incoming(message.from_user.id)
-    await message.reply("kechirasiz, bu turdagi xabarni tushunmadim 🙂 matn yoki ovozli yozsangiz boladi")
+        lang = await deps.storage.get_user_language(message.from_user.id)
+    await message.reply(_UNSUPPORTED_MSG[lang])
 
 
 async def _download(bot: Bot, file_id: str) -> bytes:
@@ -836,9 +920,10 @@ async def process_batch(user_id: int, pending: list[PendingTurn]) -> None:
         text_chunks.append(turn.user_text)
     combined_text = "\n".join(c for c in text_chunks if c)
 
-    # Per-turn kontekst (sana + ism) — faqat modelga ko'rsatiladi, DB'ga yozilmaydi.
+    # Per-turn kontekst (sana + til + ism) — faqat modelga ko'rsatiladi, DB'ga yozilmaydi.
     ctx_user = last_msg.from_user
-    ctx_prelude = _turn_context(ctx_user.first_name if ctx_user else None)
+    ctx_lang = await deps.storage.get_user_language(user_id)
+    ctx_prelude = _turn_context(ctx_user.first_name if ctx_user else None, ctx_lang)
     model_text = f"{ctx_prelude}\n{combined_text}" if combined_text else ctx_prelude
 
     await bot.send_chat_action(chat_id, ChatAction.TYPING)
@@ -892,7 +977,7 @@ async def process_batch(user_id: int, pending: list[PendingTurn]) -> None:
         )
     except Exception:
         logger.exception("Gemini xatosi")
-        await last_msg.reply("biroz texnik nuqson chiqdi, bir lahzadan keyin yana yozasizmi 🙏")
+        await last_msg.reply(_ERROR_TECH[ctx_lang])
         deps.pacing.mark_bot_done(user_id)
         return
 

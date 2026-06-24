@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS users (
     phone           TEXT,
     handed_off      INTEGER DEFAULT 0,    -- 1 bo'lsa operatorga uzatilgan
     amocrm_lead_id  INTEGER,              -- AmoCRM lead ID
+    language        TEXT DEFAULT 'uz',    -- mijoz tanlagan til: 'uz' | 'ru'
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -69,6 +70,8 @@ class Storage:
             await db.execute("ALTER TABLE users ADD COLUMN handed_off INTEGER DEFAULT 0")
         if "amocrm_lead_id" not in cols:
             await db.execute("ALTER TABLE users ADD COLUMN amocrm_lead_id INTEGER")
+        if "language" not in cols:
+            await db.execute("ALTER TABLE users ADD COLUMN language TEXT DEFAULT 'uz'")
 
     async def upsert_user(
         self,
@@ -212,11 +215,28 @@ class Storage:
         async with aiosqlite.connect(self._path) as db:
             db.row_factory = aiosqlite.Row
             cursor = await db.execute(
-                "SELECT telegram_id, username, first_name, last_name, phone FROM users WHERE telegram_id = ?",
+                "SELECT telegram_id, username, first_name, last_name, phone, language FROM users WHERE telegram_id = ?",
                 (telegram_id,),
             )
             row = await cursor.fetchone()
         return dict(row) if row else None
+
+    async def set_user_language(self, telegram_id: int, language: str) -> None:
+        async with aiosqlite.connect(self._path) as db:
+            await db.execute(
+                "UPDATE users SET language = ? WHERE telegram_id = ?",
+                (language, telegram_id),
+            )
+            await db.commit()
+
+    async def get_user_language(self, telegram_id: int) -> str:
+        async with aiosqlite.connect(self._path) as db:
+            cursor = await db.execute(
+                "SELECT language FROM users WHERE telegram_id = ?", (telegram_id,)
+            )
+            row = await cursor.fetchone()
+        lang = (row[0] if row else None) or "uz"
+        return lang if lang in ("uz", "ru") else "uz"
 
     async def get_amocrm_lead_id(self, telegram_id: int) -> int | None:
         async with aiosqlite.connect(self._path) as db:
