@@ -338,9 +338,9 @@ async def on_start(message: Message) -> None:
     await deps.storage.reset_user(user.id)
     await message.answer(
         "Assalomu alaykum! 👋\n\n"
-        "Linko-POS kompaniyasiga xush kelibsiz. Sotuv menejerimiz siz bilan "
+        "Linko kompaniyasiga xush kelibsiz. Sotuv menejerimiz siz bilan "
         "bog'lanishini xohlaysizmi?\n\n"
-        "Pastdagi tugmani bosib raqamingizni qoldiring — Hodimimiz tez orada o'zi yozadi 🙏",
+        "Pastdagi tugmani bosib raqamingizni qoldiring — Hodimimiz o'zlari sizga javob beradi.",
         reply_markup=_contact_keyboard(),
     )
     deps.pacing.mark_bot_done(user.id)
@@ -449,11 +449,11 @@ async def _send_delayed_greeting(user_id: int, bot: Bot, chat_id: int) -> None:
             "FAQAT QUYIDAGILARNI QIL:\n"
             "1. 'Assalomu alaykum aka!' deb iliq salomlash\n"
             "2. 'yaxshimisiz?' kabi qisqa savol\n"
-            "3. O'zingni tanishtir: 'Mani ismim Nozimaxon, Linko-POS kompaniyasidanman'\n"
+            "3. O'zingni tanishtir: 'Mani ismim Nozimaxon, Linko kompaniyasidanman'\n"
             "4. Do'koni haqida BITTA umumiy savol — 'qanaqa do'kon, oziq-ovqatmi yoki boshqa yo'nalishdami?'\n\n"
             "QAT'IY TAQIQ:\n"
             "- mahsulot funksiyalari haqida (tarozi, kassa, ombor, hisobot, fiskal modul) "
-            "HEC GAPIRMA\n"
+            "HECH GAPIRMA\n"
             "- narx haqida hech narsa aytma\n"
             "- 'sizga juda mos keladi' kabi sotuv frazasi yozma\n"
             "- maxsulot tavsiflarini taqdim etma\n\n"

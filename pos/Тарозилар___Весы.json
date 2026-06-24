@@ -2,8 +2,8 @@
   {
     "title": "Setting up Shtrikh-M Scales",
     "parent_section": "Таразибаар / Весу",
-    "overall_goal": "To configure Shtrikh-M scales for use with Linko-POS, including port identification, network setup, and product synchronization.",
-    "rag_description": "This section provides a technical guide on integrating Shtrikh-M scales with the Linko-POS Desktop environment. It outlines the essential steps for hardware setup, including the determination of API and communication ports, the configuration of IP addresses for network connectivity, and the procedure for uploading product data directly to the scale's memory. The section concludes with a verification process that uses receipt printing to confirm the integration is successful, ensuring that the POS system can accurately communicate with the weighing hardware for retail operations.",
+    "overall_goal": "To configure Shtrikh-M scales for use with Linko POS, including port identification, network setup, and product synchronization.",
+    "rag_description": "This section provides a technical guide on integrating Shtrikh-M scales with the Linko POS Desktop environment. It outlines the essential steps for hardware setup, including the determination of API and communication ports, the configuration of IP addresses for network connectivity, and the procedure for uploading product data directly to the scale's memory. The section concludes with a verification process that uses receipt printing to confirm the integration is successful, ensuring that the POS system can accurately communicate with the weighing hardware for retail operations.",
     "content": [
       {
         "step": "Step 1",
@@ -28,11 +28,11 @@
     "title": "TM-A Scale Configuration and Data Loading",
     "parent_section": "Таразибар / Вессу",
     "overall_goal": "To successfully configure the TM-A electronic scale and synchronize product information from the POS system.",
-    "rag_description": "This guide provides instructions for managing TM-A series electronic scales within the Linko-POS ecosystem. It addresses the critical tasks of identifying the scale's network configuration and performing data synchronization. Users will learn how to view the device's IP address to establish a network connection and how to load product data into the scale's memory. This process ensures that weight-based items are accurately processed and labeled at the point of sale, solving potential communication issues between the desktop software and the hardware.",
+    "rag_description": "This guide provides instructions for managing TM-A series electronic scales within the Linko POS ecosystem. It addresses the critical tasks of identifying the scale's network configuration and performing data synchronization. Users will learn how to view the device's IP address to establish a network connection and how to load product data into the scale's memory. This process ensures that weight-based items are accurately processed and labeled at the point of sale, solving potential communication issues between the desktop software and the hardware.",
     "content": [
       {
         "step": "Step 1: View the IP address on the TM-A scale",
-        "description": "Identify and verify the IP address assigned to the TM-A scale. This network address is necessary for the Linko-POS Desktop software to communicate with the hardware.",
+        "description": "Identify and verify the IP address assigned to the TM-A scale. This network address is necessary for the Linko POS Desktop software to communicate with the hardware.",
         "images": [
           "https://img.bisyor.uz/web/uploads/items/tarozi-elektronniy-200kg-supper-skidka-222431-1z-1618833006.jpg"
         ]
@@ -48,7 +48,7 @@
     "title": "Setting up YesPOS Barcode Scales",
     "parent_section": "Таризабаб / Весу",
     "overall_goal": "Configure the YesPOS barcode scale by installing drivers, importing product data from the POS system, setting up the IP connection, and customizing the label design.",
-    "rag_description": "This technical guide explains how to integrate YesPOS Barcode Scales with the Linko-POS system. It covers the end-to-end setup process including downloading drivers via the YesPOSuzBOT Telegram bot, exporting weighted product templates from the POS software, and importing them into the scale driver using semicolon delimiters. It also details the hardware connection process via IP address (Com Center) and the steps to modify and synchronize label designs (price tags) between the driver and the physical scale. Users will learn how to map PLU fields (PluNo, PluName, UniPrice, PluCode) and perform full data synchronization to ensure accurate weighing and barcode printing.",
+    "rag_description": "This technical guide explains how to integrate YesPOS Barcode Scales with the Linko POS system. It covers the end-to-end setup process including downloading drivers via the YesPOSuzBOT Telegram bot, exporting weighted product templates from the POS software, and importing them into the scale driver using semicolon delimiters. It also details the hardware connection process via IP address (Com Center) and the steps to modify and synchronize label designs (price tags) between the driver and the physical scale. Users will learn how to map PLU fields (PluNo, PluName, UniPrice, PluCode) and perform full data synchronization to ensure accurate weighing and barcode printing.",
     "content": [
       {
         "step": "1. Obtaining the Driver and Instructions",
@@ -57,7 +57,7 @@
       },
       {
         "step": "2. Exporting Products from POS and Importing to Driver",
-        "description": "Open the Linko-POS system and navigate to Sales → Goods → Weight products. Click 'Download template' in the upper right corner and select your scale model to save the file. Next, open the YesPOS driver, go to PLU → IMPORT, and select 'Text File'. Open the file you exported from the POS. In the next window, enter a semicolon (;) in the 'Ordinary char' field as the separator. Click 'Next' and map the fields: PluNo, PluName, UniPrice, and PluCode. Ensure PluNo and PluCode match exactly; use the arrows to adjust if necessary.",
+        "description": "Open the Linko POS system and navigate to Sales → Goods → Weight products. Click 'Download template' in the upper right corner and select your scale model to save the file. Next, open the YesPOS driver, go to PLU → IMPORT, and select 'Text File'. Open the file you exported from the POS. In the next window, enter a semicolon (;) in the 'Ordinary char' field as the separator. Click 'Next' and map the fields: PluNo, PluName, UniPrice, and PluCode. Ensure PluNo and PluCode match exactly; use the arrows to adjust if necessary.",
         "images": []
       },
       {

@@ -2,8 +2,8 @@
   {
     "title": "General Statistics and Reporting Overview",
     "parent_section": "Статистика / Статистика",
-    "overall_goal": "To guide users through accessing and interpreting business statistics in Linko-POS, including sales metrics, period filtering, graphical data analysis, and product performance analysis.",
-    "rag_description": "This section provides a comprehensive guide on using the Statistics module in the Linko-POS Desktop system. It covers how to navigate to the Main Statistics page via the sidebar menu and utilize reporting tools to analyze business performance. Key features include filtering data by specific periods such as day, week, month, or custom ranges, and interpreting key performance indicators like Revenue, Profit, Total Receipt Count, and Average Receipt Value. The guide also explains how to use interactive graphs to visualize trends by hour or day and analyze specific data blocks including Popular Products, Payment Methods (split by turnover or transaction frequency), and Sales by Category. This allows business owners to make data-driven decisions regarding inventory and pricing based on real-time sales performance.",
+    "overall_goal": "To guide users through accessing and interpreting business statistics in Linko POS, including sales metrics, period filtering, graphical data analysis, and product performance analysis.",
+    "rag_description": "This section provides a comprehensive guide on using the Statistics module in the Linko POS Desktop system. It covers how to navigate to the Main Statistics page via the sidebar menu and utilize reporting tools to analyze business performance. Key features include filtering data by specific periods such as day, week, month, or custom ranges, and interpreting key performance indicators like Revenue, Profit, Total Receipt Count, and Average Receipt Value. The guide also explains how to use interactive graphs to visualize trends by hour or day and analyze specific data blocks including Popular Products, Payment Methods (split by turnover or transaction frequency), and Sales by Category. This allows business owners to make data-driven decisions regarding inventory and pricing based on real-time sales performance.",
     "content": [
       {
         "step": "Step 1. Accessing the Statistics Section",
@@ -49,7 +49,7 @@
     "title": "Inventory Balance with Profit Report",
     "parent_section": "Статистиа / Статистиа",
     "overall_goal": "Learn how to access, filter, and interpret the Inventory Balance with Profit report to analyze current stock value and projected earnings.",
-    "rag_description": "This section provides a detailed guide on using the 'Inventory Balance with Profit' report within the Linko-POS Desktop system. It covers the navigation path through the Reports menu, the use of the filter panel to isolate specific data (by warehouse, brand, or product type), and the export of data to Excel. Crucially, it explains every column in the generated table, including unit cost, selling price, and profit calculations. This report allows users to identify items sold at a loss (indicated by negative profit) and provides a total valuation of inventory based on both cost and retail prices.",
+    "rag_description": "This section provides a detailed guide on using the 'Inventory Balance with Profit' report within the Linko POS Desktop system. It covers the navigation path through the Reports menu, the use of the filter panel to isolate specific data (by warehouse, brand, or product type), and the export of data to Excel. Crucially, it explains every column in the generated table, including unit cost, selling price, and profit calculations. This report allows users to identify items sold at a loss (indicated by negative profit) and provides a total valuation of inventory based on both cost and retail prices.",
     "content": [
       {
         "step": "Step 1. Accessing the 'Inventory Balance with Profit' Report",
@@ -85,7 +85,7 @@
     "title": "ABC Analysis",
     "parent_section": "Статистива / Статистива",
     "overall_goal": "Perform ABC analysis to categorize products based on their sales importance and turnover contribution for better inventory management.",
-    "rag_description": "This documentation section explains how to use the ABC Analysis feature in the Linko-POS Desktop system, located within the Statistics module. ABC analysis categorizes products into three tiers: Class A (high performers), Class B (moderate performers), and Class C (low performers), based on their sales volume and revenue contribution. The guide details how to navigate to the section, apply advanced filters (such as date ranges, product types, brands, and branches), interpret table columns including sales percentages, and make data-driven decisions regarding stock control and promotions. It also covers exporting these analytics reports to Excel for external reporting.",
+    "rag_description": "This documentation section explains how to use the ABC Analysis feature in the Linko POS Desktop system, located within the Statistics module. ABC analysis categorizes products into three tiers: Class A (high performers), Class B (moderate performers), and Class C (low performers), based on their sales volume and revenue contribution. The guide details how to navigate to the section, apply advanced filters (such as date ranges, product types, brands, and branches), interpret table columns including sales percentages, and make data-driven decisions regarding stock control and promotions. It also covers exporting these analytics reports to Excel for external reporting.",
     "content": [
       {
         "step": "1. Accessing the Section",
@@ -137,8 +137,8 @@
   {
     "title": "Supplier Balance Report",
     "parent_section": "Статистива / Статистива",
-    "overall_goal": "This guide provides instructions on how to view, analyze, and export supplier balance reports, tracking debts, payments, and returns for specific periods in Linko-POS.",
-    "rag_description": "This documentation section describes the Supplier Balance report within the Linko-POS Statistics module. It covers the workflow for accessing the report via the Statistics / All Reports menu, selecting specific date ranges using a calendar interface, and searching for individual suppliers. The report features top-level summary blocks showing total deliveries, returns, payments, and balance adjustments in multiple currencies (SUM and USD), alongside a detailed data table. It explains how to interpret visual cues such as red text for debts and green for advances, and how to export the filtered results into an Excel file for external record-keeping.",
+    "overall_goal": "This guide provides instructions on how to view, analyze, and export supplier balance reports, tracking debts, payments, and returns for specific periods in Linko POS.",
+    "rag_description": "This documentation section describes the Supplier Balance report within the Linko POS Statistics module. It covers the workflow for accessing the report via the Statistics / All Reports menu, selecting specific date ranges using a calendar interface, and searching for individual suppliers. The report features top-level summary blocks showing total deliveries, returns, payments, and balance adjustments in multiple currencies (SUM and USD), alongside a detailed data table. It explains how to interpret visual cues such as red text for debts and green for advances, and how to export the filtered results into an Excel file for external record-keeping.",
     "content": [
       {
         "step": "Step 1. Accessing the Section",
@@ -186,8 +186,8 @@
   {
     "title": "Customer Balance Report",
     "parent_section": "Статистига / Статистига",
-    "overall_goal": "How to access, configure, and interpret the Customer Balance report in Linko-POS Desktop to track client transactions and balances.",
-    "rag_description": "This documentation provides a guide to the 'Customer Balance' report within the Statistics section of Linko-POS Desktop. It explains how to access the report, select specific date ranges using a calendar interface, and search for individual customers. The report includes a high-level summary dashboard and a detailed data table showing starting balances, sales, returns, payments, and ending balances in both SUM and USD currencies. It also highlights the use of color-coding (red and green) to distinguish between customer debts and advances, helping businesses manage their accounts receivable effectively.",
+    "overall_goal": "How to access, configure, and interpret the Customer Balance report in Linko POS Desktop to track client transactions and balances.",
+    "rag_description": "This documentation provides a guide to the 'Customer Balance' report within the Statistics section of Linko POS Desktop. It explains how to access the report, select specific date ranges using a calendar interface, and search for individual customers. The report includes a high-level summary dashboard and a detailed data table showing starting balances, sales, returns, payments, and ending balances in both SUM and USD currencies. It also highlights the use of color-coding (red and green) to distinguish between customer debts and advances, helping businesses manage their accounts receivable effectively.",
     "content": [
       {
         "step": "Step 1: Accessing the report",

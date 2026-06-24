@@ -273,7 +273,7 @@ def sheets_enabled() -> bool:
 
 
 def _parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Nozimaxon — Linko-POS sotuvchi bot")
+    parser = argparse.ArgumentParser(description="Nozimaxon — Linko POS sotuvchi bot")
     parser.add_argument(
         "--dev",
         action="store_true",

@@ -1,9 +1,9 @@
 [
   {
-    "title": "Linko-POS Version 1.3.19 Update Notes",
+    "title": "Linko POS Version 1.3.19 Update Notes",
     "parent_section": null,
-    "overall_goal": "To provide an overview of the new features, functional improvements, and bug fixes introduced in Linko-POS Desktop version 1.3.19.",
-    "rag_description": "This technical update for Linko-POS Desktop version 1.3.19 introduces key enhancements to the sales workflow and label printing. Major features include the 'Favorite Products' section on the main sales screen for quick access and a receipt rounding function. The update also improves price tag management by allowing large-format pricing and custom text, while fixing layout issues where text overlapped barcodes. Performance-wise, the system now features optimized synchronization for inventory and sales data, alongside fixes for weighted product barcode generation and supplier return processes. This document serves as a guide for users to understand these new capabilities and the resolved technical issues.",
+    "overall_goal": "To provide an overview of the new features, functional improvements, and bug fixes introduced in Linko POS Desktop version 1.3.19.",
+    "rag_description": "This technical update for Linko POS Desktop version 1.3.19 introduces key enhancements to the sales workflow and label printing. Major features include the 'Favorite Products' section on the main sales screen for quick access and a receipt rounding function. The update also improves price tag management by allowing large-format pricing and custom text, while fixing layout issues where text overlapped barcodes. Performance-wise, the system now features optimized synchronization for inventory and sales data, alongside fixes for weighted product barcode generation and supplier return processes. This document serves as a guide for users to understand these new capabilities and the resolved technical issues.",
     "content": [
       {
         "step": "1. New 'Favorite Products' Feature",

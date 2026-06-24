@@ -2,8 +2,8 @@
   {
     "title": "Arca Terminal Integration",
     "parent_section": "Фисжал модуллар билан интеграция / Интеграция с Фискальными модулями",
-    "overall_goal": "To correctly configure the Arca terminal within the Linko-POS system to ensure fiscal receipts and terminal payments are processed accurately.",
-    "rag_description": "This documentation provides a step-by-step guide for integrating the Arca payment terminal with the Linko-POS Desktop system. It covers the initial setup within the POS terminal settings, including entering administrator credentials, configuring the terminal IP address via ERP Mode, and establishing a connection. Additionally, it highlights the necessity of mandatory fiscal data such as IKPU and Unit of Measurement codes in the product management section to ensure compliance. The section concludes with a verification process using a test transaction to confirm successful hardware integration and receipt printing.",
+    "overall_goal": "To correctly configure the Arca terminal within the Linko POS system to ensure fiscal receipts and terminal payments are processed accurately.",
+    "rag_description": "This documentation provides a step-by-step guide for integrating the Arca payment terminal with the Linko POS Desktop system. It covers the initial setup within the POS terminal settings, including entering administrator credentials, configuring the terminal IP address via ERP Mode, and establishing a connection. Additionally, it highlights the necessity of mandatory fiscal data such as IKPU and Unit of Measurement codes in the product management section to ensure compliance. The section concludes with a verification process using a test transaction to confirm successful hardware integration and receipt printing.",
     "content": [
       {
         "step": "1.1. Open Terminal Settings Window",
@@ -49,7 +49,7 @@
     "title": "Integration with E-pos",
     "parent_section": "Фисагага бига ивегациу / Ивегациу с Фисагага бига",
     "overall_goal": "To activate the E-pos software and establish a connection between the Linko POS system and the fiscal module for legal transaction reporting.",
-    "rag_description": "This section provides a step-by-step guide for integrating Linko-POS Desktop with the E-pos fiscal module. It covers the initial activation of the E-pos Communicator software using a license key (USB), testing reports (Z-report and X-report), and configuring the printer (e.g., XP-80) for fiscal receipts. It also explains how to link Linko POS to the E-pos service via the terminal settings, verify the connection status, and enter store details such as Name, TIN (INN), and address. A key feature described is the 'default item for fiscalization,' which ensures tax compliance by providing a fallback IKPU code for products that lack one, ensuring seamless reporting to tax authorities.",
+    "rag_description": "This section provides a step-by-step guide for integrating Linko POS Desktop with the E-pos fiscal module. It covers the initial activation of the E-pos Communicator software using a license key (USB), testing reports (Z-report and X-report), and configuring the printer (e.g., XP-80) for fiscal receipts. It also explains how to link Linko POS to the E-pos service via the terminal settings, verify the connection status, and enter store details such as Name, TIN (INN), and address. A key feature described is the 'default item for fiscalization,' which ensures tax compliance by providing a fallback IKPU code for products that lack one, ensuring seamless reporting to tax authorities.",
     "content": [
       {
         "step": "Step 1. Activating E-pos Software",
@@ -98,8 +98,8 @@
   {
     "title": "Fiscal.me Integration and Configuration Guide",
     "parent_section": "Фисдал модуллар билан интеграция / Интеграция с Фискальными модулями",
-    "overall_goal": "To successfully install drivers, configure the Fiscal.me software, and integrate it with the Linko-POS system for automated fiscal receipt generation.",
-    "rag_description": "This documentation section provides a step-by-step technical guide for integrating the Fiscal.me module with Linko-POS Desktop. It addresses the requirement for legal fiscal reporting by detailing the installation of .NET and fiscal drivers, the configuration of the Fiscal.me client application (including key synchronization, geolocation entry, and printer setup), and the final connection within the POS terminal settings. A critical feature described is the 'Default Product for Fiscalization' which ensures all receipts meet tax authority standards for IKPU and identification codes, even when individual items lack complete data. The guide also includes troubleshooting steps for common errors such as incorrect system time, internet connectivity issues, and terminal IP address mismatches.",
+    "overall_goal": "To successfully install drivers, configure the Fiscal.me software, and integrate it with the Linko POS system for automated fiscal receipt generation.",
+    "rag_description": "This documentation section provides a step-by-step technical guide for integrating the Fiscal.me module with Linko POS Desktop. It addresses the requirement for legal fiscal reporting by detailing the installation of .NET and fiscal drivers, the configuration of the Fiscal.me client application (including key synchronization, geolocation entry, and printer setup), and the final connection within the POS terminal settings. A critical feature described is the 'Default Product for Fiscalization' which ensures all receipts meet tax authority standards for IKPU and identification codes, even when individual items lack complete data. The guide also includes troubleshooting steps for common errors such as incorrect system time, internet connectivity issues, and terminal IP address mismatches.",
     "content": [
       {
         "step": "1. Driver and .NET Installation",
@@ -134,7 +134,7 @@
       },
       {
         "step": "6. Linking to the POS System",
-        "description": "Synchronize the connection between the fiscal module and the POS again. In the Linko-POS system, go to 'Terminal Settings' and select 'Fiscal.me' as the terminal type. Click 'Check Shift' to verify communication with the fiscal module.",
+        "description": "Synchronize the connection between the fiscal module and the POS again. In the Linko POS system, go to 'Terminal Settings' and select 'Fiscal.me' as the terminal type. Click 'Check Shift' to verify communication with the fiscal module.",
         "images": [
           "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/64/IMAGE%202025-09-15%20115751.jpg",
           "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/64/IMAGE%202025-09-15%20144010.jpg"

@@ -2,8 +2,8 @@
   {
     "title": "Working with the Price Tag Module",
     "parent_section": null,
-    "overall_goal": "To provide a step-by-step guide on how to search for products, configure print parameters, and manage templates for printing price tags in the Linko-POS Desktop system.",
-    "rag_description": "This documentation section provides instructions for the 'Price Tag' (Cennik) module in Linko-POS Desktop. It guides users through opening the module from the main menu, navigating the split-screen interface (product list vs. settings panel), and selecting products using search or brand filters. It covers essential configuration steps such as selecting the warehouse, price list, currency, and sticker quantity. Furthermore, it explains how to manage price tag templates, including choosing sizes (like 60x30 or 40x30), editing designs via the template editor, and saving customized layouts for printing. This section is crucial for users needing to generate physical labels for inventory management and retail display.",
+    "overall_goal": "To provide a step-by-step guide on how to search for products, configure print parameters, and manage templates for printing price tags in the Linko POS Desktop system.",
+    "rag_description": "This documentation section provides instructions for the 'Price Tag' (Cennik) module in Linko POS Desktop. It guides users through opening the module from the main menu, navigating the split-screen interface (product list vs. settings panel), and selecting products using search or brand filters. It covers essential configuration steps such as selecting the warehouse, price list, currency, and sticker quantity. Furthermore, it explains how to manage price tag templates, including choosing sizes (like 60x30 or 40x30), editing designs via the template editor, and saving customized layouts for printing. This section is crucial for users needing to generate physical labels for inventory management and retail display.",
     "content": [
       {
         "step": "1. Opening the Price Tag Module",

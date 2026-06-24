@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 def load_knowledge_base(directory: Path) -> str:
-    """Linko-POS JSON fayllarini bitta katta matnga aylantirib qaytaradi.
+    """Linko POS JSON fayllarini bitta katta matnga aylantirib qaytaradi.
 
     Gemini system_instruction ichiga to'g'ridan-to'g'ri joylashtiriladi.
     """

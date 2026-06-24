@@ -2,8 +2,8 @@
   {
     "title": "Cashier Section Management",
     "parent_section": "Абасса / Абасса",
-    "overall_goal": "To provide a comprehensive guide on navigating the Cashier module, performing manual transactions, filtering records, and managing client reconciliation reports in Linko-POS Desktop.",
-    "rag_description": "This section outlines the financial management features within the Linko-POS Desktop Cashier module. It details how to access the main transaction window, explains the function of the Income, Expense, and Transfer buttons, and defines balance indicators such as opening and closing amounts. Users will find instructions on applying advanced filters by date, employee, or category to locate specific transactions. Additionally, it covers how to open client cards directly from transaction rows to view debt/advance details and how to generate and download reconciliation acts (Aкт сверки) for auditing purposes. This module is the central hub for monitoring cash flow and verifying client balances across different branches and payment types.",
+    "overall_goal": "To provide a comprehensive guide on navigating the Cashier module, performing manual transactions, filtering records, and managing client reconciliation reports in Linko POS Desktop.",
+    "rag_description": "This section outlines the financial management features within the Linko POS Desktop Cashier module. It details how to access the main transaction window, explains the function of the Income, Expense, and Transfer buttons, and defines balance indicators such as opening and closing amounts. Users will find instructions on applying advanced filters by date, employee, or category to locate specific transactions. Additionally, it covers how to open client cards directly from transaction rows to view debt/advance details and how to generate and download reconciliation acts (Aкт сверки) for auditing purposes. This module is the central hub for monitoring cash flow and verifying client balances across different branches and payment types.",
     "content": [
       {
         "step": "Step 1: Opening the Cashier Window and Basic Operations",
@@ -45,7 +45,7 @@
     "title": "Registering Incoming Payments (Income)",
     "parent_section": "Жасса / Жасса",
     "overall_goal": "To correctly record funds received from clients or suppliers into the system, update cash balances, and reduce outstanding debts.",
-    "rag_description": "This documentation section explains the process of recording incoming cash or bank transactions (Income) within the Linko-POS Desktop 'Cashier' module. It outlines the steps to navigate to the Cashier section, select the appropriate income type (Client or Supplier), and fill out the necessary financial details including the destination account, amount, and counterparty selection. The process results in an updated cash balance and an automatic reduction of the payer's debt in the accounting system, ensuring accurate financial reporting for daily operations.",
+    "rag_description": "This documentation section explains the process of recording incoming cash or bank transactions (Income) within the Linko POS Desktop 'Cashier' module. It outlines the steps to navigate to the Cashier section, select the appropriate income type (Client or Supplier), and fill out the necessary financial details including the destination account, amount, and counterparty selection. The process results in an updated cash balance and an automatic reduction of the payer's debt in the accounting system, ensuring accurate financial reporting for daily operations.",
     "content": [
       {
         "step": "1. Accessing the Cashier Section",
@@ -81,7 +81,7 @@
     "title": "Recording Expenses and Cash Outflows",
     "parent_section": "Аасса / Аасса",
     "overall_goal": "To accurately document various types of cash outflows from the cash desk, such as salaries, supplier payments, and refunds, to maintain an up-to-date cash balance.",
-    "rag_description": "This documentation section explains how to record expense transactions in the Linko-POS Desktop system. It details the process of navigating to the Cash Desk (Kassa) module and initiating an expense (Расход) entry. The guide covers different expense categories including employee advances, daily fuel costs, supplier debt settlements, salaries, and client refunds. It describes the mandatory form fields such as cash source, amount, and date, as well as context-sensitive fields like employee or supplier selection. Finally, it explains how saving the transaction updates the system's ledger, increasing total expenses and decreasing the current cash balance.",
+    "rag_description": "This documentation section explains how to record expense transactions in the Linko POS Desktop system. It details the process of navigating to the Cash Desk (Kassa) module and initiating an expense (Расход) entry. The guide covers different expense categories including employee advances, daily fuel costs, supplier debt settlements, salaries, and client refunds. It describes the mandatory form fields such as cash source, amount, and date, as well as context-sensitive fields like employee or supplier selection. Finally, it explains how saving the transaction updates the system's ledger, increasing total expenses and decreasing the current cash balance.",
     "content": [
       {
         "step": "1. Open the Expense Window",
@@ -110,8 +110,8 @@
   {
     "title": "Transfer Between Cash Desks",
     "parent_section": "Аасса / Аасса",
-    "overall_goal": "The goal of this section is to guide the user through the process of transferring funds between different cash accounts or terminals within the Linko-POS system.",
-    "rag_description": "This documentation section provides step-by-step instructions for performing internal fund transfers within the Linko-POS Desktop system. It covers accessing the 'Cashier' (Kassa) module, initiating a 'Transfer' (Перевод) operation, and completing the transaction form by specifying the source cash desk, recipient cash desk, date, and amount. The guide explains how to record movements such as transferring money from a terminal to a physical cash drawer or moving funds between different branches or office locations. Key actions include navigating the main menu, filling out mandatory transfer fields, and verifying the balance changes in the transaction history.",
+    "overall_goal": "The goal of this section is to guide the user through the process of transferring funds between different cash accounts or terminals within the Linko POS system.",
+    "rag_description": "This documentation section provides step-by-step instructions for performing internal fund transfers within the Linko POS Desktop system. It covers accessing the 'Cashier' (Kassa) module, initiating a 'Transfer' (Перевод) operation, and completing the transaction form by specifying the source cash desk, recipient cash desk, date, and amount. The guide explains how to record movements such as transferring money from a terminal to a physical cash drawer or moving funds between different branches or office locations. Key actions include navigating the main menu, filling out mandatory transfer fields, and verifying the balance changes in the transaction history.",
     "content": [
       {
         "step": "Step 1. Opening the Transfer Window",

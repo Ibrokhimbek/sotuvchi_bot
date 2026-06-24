@@ -54,7 +54,7 @@ _MIDI_PATTERNS = [
 ]
 
 _PROTECT_PATTERNS = [
-    re.compile(r"Linko-POS", re.IGNORECASE),
+    re.compile(r"Linko POS", re.IGNORECASE),
     re.compile(r"\d[\d\s]{2,}"),       # raqamlar (narx, telefon)
     re.compile(r"https?://\S+"),        # linklar
     re.compile(r"@\w+"),                # username

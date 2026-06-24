@@ -1,9 +1,9 @@
 [
   {
-    "title": "Telegram Bot Integration for Linko-POS and Rhythm ERP",
+    "title": "Telegram Bot Integration for Linko POS and Rhythm ERP",
     "parent_section": "Телеграм бот билан интеграция / Интеграция с Телеграм ботами",
     "overall_goal": "To provide a complete setup guide for creating a Telegram bot, integrating it with the Rhythm ERP system, configuring necessary SFA synchronization parameters, and managing the end-user ordering process.",
-    "rag_description": "This documentation section explains how to integrate a Telegram bot with Linko-POS and Rhythm ERP. It starts with creating a bot using BotFather and obtaining an API token. Users learn how to add the bot into the Rhythm ERP Super Admin Panel, configure mandatory fields such as Auth Tokens and API URLs, and set up webhooks for communication between Telegram and the server. The guide also details critical configuration alignments between the bot and the Sales Force Automation (SFA) system, including Market Agent IDs, currencies, price lists, and branch IDs. Finally, it outlines the consumer ordering flow, covering product selection, SMS verification, address entry, and order confirmation to ensure orders flow correctly into the ERP and POS systems.",
+    "rag_description": "This documentation section explains how to integrate a Telegram bot with Linko POS and Rhythm ERP. It starts with creating a bot using BotFather and obtaining an API token. Users learn how to add the bot into the Rhythm ERP Super Admin Panel, configure mandatory fields such as Auth Tokens and API URLs, and set up webhooks for communication between Telegram and the server. The guide also details critical configuration alignments between the bot and the Sales Force Automation (SFA) system, including Market Agent IDs, currencies, price lists, and branch IDs. Finally, it outlines the consumer ordering flow, covering product selection, SMS verification, address entry, and order confirmation to ensure orders flow correctly into the ERP and POS systems.",
     "content": [
       {
         "step": "Step 1: Bot Creation via BotFather",
@@ -82,7 +82,7 @@
     "title": "Configuring Telegram Bot for POS Notifications",
     "parent_section": "Тейеграм бот билан интеграция / Интеграция с Телеграм ботами",
     "overall_goal": "To set up a Telegram bot integration that automatically sends POS receipt details and sale notifications to specific Telegram accounts via Rhythm ERP.",
-    "rag_description": "This section details the integration process between Linko-POS/Rhythm ERP and Telegram. It covers creating a bot using @BotFather to obtain an API token, adding the bot to the Rhythm ERP Super Admin Panel, and configuring necessary credentials such as the Rhythm auth token and API URL. Key features include setting up WebHooks and identifying user Chat IDs using @username_to_id_bot to ensure that sale notifications, including item lists and totals, are correctly routed to the designated Telegram users. This guide solves the problem of real-time remote monitoring of POS transactions through mobile messaging.",
+    "rag_description": "This section details the integration process between Linko POS/Rhythm ERP and Telegram. It covers creating a bot using @BotFather to obtain an API token, adding the bot to the Rhythm ERP Super Admin Panel, and configuring necessary credentials such as the Rhythm auth token and API URL. Key features include setting up WebHooks and identifying user Chat IDs using @username_to_id_bot to ensure that sale notifications, including item lists and totals, are correctly routed to the designated Telegram users. This guide solves the problem of real-time remote monitoring of POS transactions through mobile messaging.",
     "content": [
       {
         "step": "Step 1: Create a Bot via BotFather",
@@ -104,7 +104,7 @@
       },
       {
         "step": "Step 3: Configure WebHooks, Chat IDs, and Testing",
-        "description": "On the bot editing page, scroll to the bottom and enable the 'WebHook' checkbox. To receive notifications, enter the recipient's Chat ID in the 'Send pos notification chat id' field. You can find a Chat ID by using @username_to_id_bot in Telegram and sharing the desired contact with it. Once configured and saved, test the setup by sending /start to your bot and performing a test sale in Linko-POS; the bot should immediately send the receipt details to the specified Telegram chat.",
+        "description": "On the bot editing page, scroll to the bottom and enable the 'WebHook' checkbox. To receive notifications, enter the recipient's Chat ID in the 'Send pos notification chat id' field. You can find a Chat ID by using @username_to_id_bot in Telegram and sharing the desired contact with it. Once configured and saved, test the setup by sending /start to your bot and performing a test sale in Linko POS; the bot should immediately send the receipt details to the specified Telegram chat.",
         "images": [
           "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/88/image.png",
           "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/88/Screenshot%202025-09-19%20at%2012.14.20%E2%80%AFPM.png",
@@ -116,8 +116,8 @@
   {
     "title": "Telegram Bot Integration Configuration Requirements",
     "parent_section": "Телеграм бот билан интеграция / Интеграция с Телеграм ботами",
-    "overall_goal": "Correctly configure the system keys and parameters required for the operation and customization of the Linko-POS Telegram bot.",
-    "rag_description": "This documentation section provides a comprehensive guide to the configuration keys (CONFIG KEY) required for integrating Linko-POS Desktop with a Telegram bot. It details essential settings such as branch and warehouse identification, currency and price list assignments, and agent responsibilities for incoming orders. The section also covers user interface customization, allowing administrators to enable or disable buttons for balances, cashback, loyalty points, feedback, and order history. Additionally, it specifies order management logic including minimum order limits, daily order caps, and automatic confirmation settings. Key technical requirements are also addressed, such as updating the Web App URL to linko.uz and setting up SMS service credentials for notifications.",
+    "overall_goal": "Correctly configure the system keys and parameters required for the operation and customization of the Linko POS Telegram bot.",
+    "rag_description": "This documentation section provides a comprehensive guide to the configuration keys (CONFIG KEY) required for integrating Linko POS Desktop with a Telegram bot. It details essential settings such as branch and warehouse identification, currency and price list assignments, and agent responsibilities for incoming orders. The section also covers user interface customization, allowing administrators to enable or disable buttons for balances, cashback, loyalty points, feedback, and order history. Additionally, it specifies order management logic including minimum order limits, daily order caps, and automatic confirmation settings. Key technical requirements are also addressed, such as updating the Web App URL to linko.uz and setting up SMS service credentials for notifications.",
     "content": [
       {
         "step": "1. Configure Core Identification and Branch Settings",

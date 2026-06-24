@@ -1,6 +1,6 @@
-# Jaloliddin — Linko-POS sotuvchi bot
+# Jaloliddin — Linko POS sotuvchi bot
 
-Instagram reklamasi orqali kelgan mijozlarga Telegramda Linko-POS dasturini sotadigan AI sotuvchi bot. Gemini multimodal modeli orqali matn, ovoz va video xabarlarga tabiiy javob beradi.
+Instagram reklamasi orqali kelgan mijozlarga Telegramda Linko POS dasturini sotadigan AI sotuvchi bot. Gemini multimodal modeli orqali matn, ovoz va video xabarlarga tabiiy javob beradi.
 
 ## Texnologiyalar
 
@@ -41,6 +41,6 @@ src/
 │   └── loader.py        # pos/*.json bilim bazasini yuklash
 └── storage/
     └── db.py            # SQLite suhbat tarixi
-pos/                     # Linko-POS bilim bazasi (JSON)
+pos/                     # Linko POS bilim bazasi (JSON)
 data/                    # SQLite DB (gitignored)
 ```

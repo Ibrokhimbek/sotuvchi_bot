@@ -3,7 +3,7 @@
     "title": "Processing Returns via Sales History",
     "parent_section": "Қайтаришлар / Возврат",
     "overall_goal": "To find a past sale in the history to modify payment methods, reprint receipts, or process item returns.",
-    "rag_description": "This documentation section provides a comprehensive guide on managing past transactions in Linko-POS Desktop through the Sales History module. It details how users can locate specific receipts using date filters and search parameters like customer name or receipt number. The section covers critical administrative actions including reprinting receipts, correcting payment types (e.g., changing cash to terminal), and performing 'Type 2' returns. During a return, the user selects items from the original order, sets the refund amount, and chooses the refund method (cash, terminal, or debt reduction). This process ensures inventory is automatically restocked, cash register balances are updated, and transaction logs reflect the refund accurately.",
+    "rag_description": "This documentation section provides a comprehensive guide on managing past transactions in Linko POS Desktop through the Sales History module. It details how users can locate specific receipts using date filters and search parameters like customer name or receipt number. The section covers critical administrative actions including reprinting receipts, correcting payment types (e.g., changing cash to terminal), and performing 'Type 2' returns. During a return, the user selects items from the original order, sets the refund amount, and chooses the refund method (cash, terminal, or debt reduction). This process ensures inventory is automatically restocked, cash register balances are updated, and transaction logs reflect the refund accurately.",
     "content": [
       {
         "step": "Step 1. Accessing History",
@@ -48,7 +48,7 @@
     "title": "Returns via Client",
     "parent_section": "Қайтаришлар / Возврат",
     "overall_goal": "To process a product return from a specific customer and record the refund transaction in the system.",
-    "rag_description": "This section provides a step-by-step guide on how to perform a product return via a client in the Linko-POS Desktop system. It covers accessing the 'Return' section, selecting products from the catalog, adjusting quantities, and mandatory client identification. The guide also details the finalization process where the user selects a payment method (Cash, Terminal, or Debt Reduction) and completes the transaction. This action impacts the cash register by recording an expense and updates the customer's transaction history card.",
+    "rag_description": "This section provides a step-by-step guide on how to perform a product return via a client in the Linko POS Desktop system. It covers accessing the 'Return' section, selecting products from the catalog, adjusting quantities, and mandatory client identification. The guide also details the finalization process where the user selects a payment method (Cash, Terminal, or Debt Reduction) and completes the transaction. This action impacts the cash register by recording an expense and updates the customer's transaction history card.",
     "content": [
       {
         "step": "Step 1. Accessing the 'Return' (via client) section",
@@ -83,8 +83,8 @@
   {
     "title": "Return History Management",
     "parent_section": "Қайтаришлар / Возврат",
-    "overall_goal": "To view, search, and print receipts for processed product returns within the Linko-POS system.",
-    "rag_description": "This section explains how to manage and track product returns in the Linko-POS Desktop application using the Return History feature. It guides users through accessing the 'Returns' sub-section within the 'History' menu to view a detailed list of transactions including receipt numbers, client names, amounts, and timestamps. Users learn how to view specific return details such as items, quantities, and pricing, reprint return receipts for records, and use date filters or search functionality by client or receipt number to locate specific transactions.",
+    "overall_goal": "To view, search, and print receipts for processed product returns within the Linko POS system.",
+    "rag_description": "This section explains how to manage and track product returns in the Linko POS Desktop application using the Return History feature. It guides users through accessing the 'Returns' sub-section within the 'History' menu to view a detailed list of transactions including receipt numbers, client names, amounts, and timestamps. Users learn how to view specific return details such as items, quantities, and pricing, reprint return receipts for records, and use date filters or search functionality by client or receipt number to locate specific transactions.",
     "content": [
       {
         "step": "Step 1: Accessing the Return History section",
@@ -113,8 +113,8 @@
   {
     "title": "Returns to Suppliers",
     "parent_section": "Җайтаришар / Возврат",
-    "overall_goal": "To provide step-by-step instructions for returning products to suppliers using the Linko-POS system, including stock selection, supplier identification, and balance management.",
-    "rag_description": "This documentation section provides a comprehensive guide on performing product returns to suppliers within the Linko-POS Desktop application. It details the workflow starting from accessing the 'Returns to Suppliers' module to final payment processing. Key features explained include stock level validation (where zero-stock items are highlighted in red), the use of the shopping cart for return items, selecting specific suppliers to update their corresponding balances, and choosing payment methods like cash or terminal. This section is essential for understanding how returns impact supplier accounts, either by reducing a user's debt (minus balance) or increasing credit (plus balance) for future purchases.",
+    "overall_goal": "To provide step-by-step instructions for returning products to suppliers using the Linko POS system, including stock selection, supplier identification, and balance management.",
+    "rag_description": "This documentation section provides a comprehensive guide on performing product returns to suppliers within the Linko POS Desktop application. It details the workflow starting from accessing the 'Returns to Suppliers' module to final payment processing. Key features explained include stock level validation (where zero-stock items are highlighted in red), the use of the shopping cart for return items, selecting specific suppliers to update their corresponding balances, and choosing payment methods like cash or terminal. This section is essential for understanding how returns impact supplier accounts, either by reducing a user's debt (minus balance) or increasing credit (plus balance) for future purchases.",
     "content": [
       {
         "step": "Step 1. Access the 'Returns to Suppliers' Section",

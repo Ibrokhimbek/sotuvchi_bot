@@ -1,9 +1,9 @@
 [
   {
-    "title": "Linko-POS Desktop Version 2.0.0 Release Notes",
+    "title": "Linko POS Desktop Version 2.0.0 Release Notes",
     "parent_section": null,
     "overall_goal": "To inform users about system updates, stability improvements, and new features including payment integrations, data import tools, and performance optimizations.",
-    "rag_description": "This document outlines the updates for Linko-POS version 2.0.0, focusing on system stability and new functional capabilities. Key improvements include enhanced synchronization for inventory and sales, the introduction of a subscription management system with online payment support via Payme and Click, and batch client importing via Excel. The update also addresses receipt printing workflows—allowing intake without printing and providing more detailed return receipts—and adds performance-enhancing tools like a cache clearing button. These changes aim to stabilize hardware interactions, resolve shift-related errors, and streamline the cashback and client management processes.",
+    "rag_description": "This document outlines the updates for Linko POS version 2.0.0, focusing on system stability and new functional capabilities. Key improvements include enhanced synchronization for inventory and sales, the introduction of a subscription management system with online payment support via Payme and Click, and batch client importing via Excel. The update also addresses receipt printing workflows—allowing intake without printing and providing more detailed return receipts—and adds performance-enhancing tools like a cache clearing button. These changes aim to stabilize hardware interactions, resolve shift-related errors, and streamline the cashback and client management processes.",
     "content": [
       {
         "step": "1. Synchronization and Stability Improvements",

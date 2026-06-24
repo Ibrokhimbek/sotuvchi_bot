@@ -3,7 +3,7 @@
     "title": "General Settings Configuration",
     "parent_section": "Сазаватавадар / Бастрайби",
     "overall_goal": "To configure essential POS system parameters including printing hardware, interface scaling, and device-specific operation modes.",
-    "rag_description": "This documentation provides a guide on how to configure the general settings of the Linko-POS Desktop application. It covers navigating the side menu to access the 'Settings' module, selecting appropriate hardware for printing price tags and receipts, and adjusting the receipt tape width. Additionally, it explains how to use the interface scale slider for accessibility and how to toggle 'Computer Mode' to optimize the interface for either laptop/PC setups or monoblock/touchscreen devices (which requires an on-screen keyboard). Users can finalize their configuration by saving or canceling their changes.",
+    "rag_description": "This documentation provides a guide on how to configure the general settings of the Linko POS Desktop application. It covers navigating the side menu to access the 'Settings' module, selecting appropriate hardware for printing price tags and receipts, and adjusting the receipt tape width. Additionally, it explains how to use the interface scale slider for accessibility and how to toggle 'Computer Mode' to optimize the interface for either laptop/PC setups or monoblock/touchscreen devices (which requires an on-screen keyboard). Users can finalize their configuration by saving or canceling their changes.",
     "content": [
       {
         "step": "Step 1: Accessing the Settings Menu",
@@ -25,8 +25,8 @@
   {
     "title": "Customer Management",
     "parent_section": "Сазламалар / Настройки",
-    "overall_goal": "To provide instructions on how to access the client list, monitor customer debts, and add new client profiles to the Linko-POS system.",
-    "rag_description": "This section provides a comprehensive guide for managing customers within Linko-POS Desktop. It details the process of navigating to the 'Client List' under Settings, viewing customer details like Name, Phone Number, and Current Debt, and using sorting tools to organize entries. Additionally, it outlines the mandatory steps for adding a new customer, including filling out required fields like Name and Telephone Number, as well as managing initial debt balances and comments. This is a critical component for retail management and tracking customer-related financial data.",
+    "overall_goal": "To provide instructions on how to access the client list, monitor customer debts, and add new client profiles to the Linko POS system.",
+    "rag_description": "This section provides a comprehensive guide for managing customers within Linko POS Desktop. It details the process of navigating to the 'Client List' under Settings, viewing customer details like Name, Phone Number, and Current Debt, and using sorting tools to organize entries. Additionally, it outlines the mandatory steps for adding a new customer, including filling out required fields like Name and Telephone Number, as well as managing initial debt balances and comments. This is a critical component for retail management and tracking customer-related financial data.",
     "content": [
       {
         "step": "Step 1: Accessing the Client List",
@@ -49,8 +49,8 @@
   {
     "title": "Managing the Supplier List",
     "parent_section": "Саздаваб / Настрайки",
-    "overall_goal": "To guide users through accessing the supplier database and successfully adding new vendors to the Linko-POS system.",
-    "rag_description": "This documentation section details the supplier management workflow in Linko-POS Desktop. It instructs users on how to navigate to the 'Supplier List' within the Settings menu and explains the significance of the displayed data fields, such as Name, Contact person, and Balance (including the interpretation of positive and negative balances). Additionally, it provides a step-by-step procedure for registering a new supplier, highlighting the mandatory 'Name' field and optional contact details and comments. This information is critical for maintaining an accurate vendor database for procurement and debt tracking.",
+    "overall_goal": "To guide users through accessing the supplier database and successfully adding new vendors to the Linko POS system.",
+    "rag_description": "This documentation section details the supplier management workflow in Linko POS Desktop. It instructs users on how to navigate to the 'Supplier List' within the Settings menu and explains the significance of the displayed data fields, such as Name, Contact person, and Balance (including the interpretation of positive and negative balances). Additionally, it provides a step-by-step procedure for registering a new supplier, highlighting the mandatory 'Name' field and optional contact details and comments. This information is critical for maintaining an accurate vendor database for procurement and debt tracking.",
     "content": [
       {
         "step": "Step 1: Accessing the Supplier List",

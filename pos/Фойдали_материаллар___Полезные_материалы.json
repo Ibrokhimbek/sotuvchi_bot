@@ -3,7 +3,7 @@
     "title": "What is POS_VISITOR_ID_FOR_BRANCH and why is it needed?",
     "parent_section": "Файдаби бададар / Бададар / Файдаби бададар / Бададар",
     "overall_goal": "Configure separate visitor IDs for each branch to avoid access errors during sales and shift closures.",
-    "rag_description": "This documentation section explains how to resolve 'You don't have access' errors in Linko-POS that occur when multiple branches attempt to use the same default 'guest customer' (visitor). To fix this, administrators must define branch-specific configurations (POS_VISITOR_ID_FOR_BRANCH_X) in the Admin Panel. The guide walks through navigating to the Configurations section, adding a new key with a specific branch ID as the value, and setting the data type to integer. This ensures that each branch correctly identifies its own guest customer, preventing permission conflicts during receipt printing and shift reconciliation.",
+    "rag_description": "This documentation section explains how to resolve 'You don't have access' errors in Linko POS that occur when multiple branches attempt to use the same default 'guest customer' (visitor). To fix this, administrators must define branch-specific configurations (POS_VISITOR_ID_FOR_BRANCH_X) in the Admin Panel. The guide walks through navigating to the Configurations section, adding a new key with a specific branch ID as the value, and setting the data type to integer. This ensures that each branch correctly identifies its own guest customer, preventing permission conflicts during receipt printing and shift reconciliation.",
     "content": [
       {
         "step": "1. Access the Admin Panel",
@@ -32,7 +32,7 @@
     "title": "Changing POS mode (computer / monoblock)",
     "parent_section": "Файдабади берувчи база / Все базу",
     "overall_goal": "Configure the POS system interface to optimize it for either a standard computer with a physical keyboard or a touchscreen monoblock device.",
-    "rag_description": "This documentation section provides instructions on how to switch the Linko-POS interface mode between standard computer/laptop mode and monoblock (touchscreen) mode. It explains how users can navigate to the settings menu via their profile, locate the 'Enable computer mode' option, and understand the difference: enabling it for mouse/keyboard setups or disabling it for touchscreen devices with virtual keyboards. The section concludes with the save action to apply changes.",
+    "rag_description": "This documentation section provides instructions on how to switch the Linko POS interface mode between standard computer/laptop mode and monoblock (touchscreen) mode. It explains how users can navigate to the settings menu via their profile, locate the 'Enable computer mode' option, and understand the difference: enabling it for mouse/keyboard setups or disabling it for touchscreen devices with virtual keyboards. The section concludes with the save action to apply changes.",
     "content": [
       {
         "step": "1. Open the profile menu",
@@ -67,7 +67,7 @@
     "title": "Talent Verification",
     "parent_section": "Фидайи баргарар / Важайдайшие давайдайшие / Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий Файдавий давайдайшие файдавий / Файдавий давайдайшие файдавий Фoйдали материаллар / Полезные материалы",
     "overall_goal": "To determine whether your branch is operating on the new Talent-enabled server architecture or the legacy server architecture to ensure correct synchronization and maintenance procedures.",
-    "rag_description": "This guide details the process of identifying the server type (Talent vs. Non-Talent) for Linko-POS branches. Using the /api/v1/main/health_check/ endpoint, users can perform a health check through a web browser to determine their server's architecture. The section explains the functional differences: Talent servers (new architecture) allow for centralized configuration changes and global bug fixes that apply across all instances upon synchronization, whereas legacy (Non-Talent) servers require individual manual synchronization and branch-by-branch troubleshooting. This distinction is critical for system administrators managing multiple POS locations.",
+    "rag_description": "This guide details the process of identifying the server type (Talent vs. Non-Talent) for Linko POS branches. Using the /api/v1/main/health_check/ endpoint, users can perform a health check through a web browser to determine their server's architecture. The section explains the functional differences: Talent servers (new architecture) allow for centralized configuration changes and global bug fixes that apply across all instances upon synchronization, whereas legacy (Non-Talent) servers require individual manual synchronization and branch-by-branch troubleshooting. This distinction is critical for system administrators managing multiple POS locations.",
     "content": [
       {
         "step": "1. Access the Health Check API",
@@ -91,10 +91,10 @@
     ]
   },
   {
-    "title": "Linko-POS Light Version Configuration and Interface Management",
+    "title": "Linko POS Light Version Configuration and Interface Management",
     "parent_section": "Файдаиги архив / Все базу",
-    "overall_goal": "To configure the visibility of functional elements, menu items, and data fields within the Light version of the Linko-POS Desktop system.",
-    "rag_description": "This documentation provides a comprehensive overview of the customization options available for the Linko-POS Light version. It details how administrators can hide or display specific features during product synchronization and within the main point-of-sale interface. The section covers the visibility of UI elements such as header icons, shift management controls, and cash register (KKM) integrations. It also specifies the control over detailed product data fields (PLU, IKPU, VAT, cost, and stock balances) and the configuration of the various POS menus, including sales history, inventory revisions, supplier balances, and financial operations. This guide ensures that the POS environment can be simplified for operators by removing unnecessary complexity while maintaining access to critical business operations like returns, postings, and statistical analysis.",
+    "overall_goal": "To configure the visibility of functional elements, menu items, and data fields within the Light version of the Linko POS Desktop system.",
+    "rag_description": "This documentation provides a comprehensive overview of the customization options available for the Linko POS Light version. It details how administrators can hide or display specific features during product synchronization and within the main point-of-sale interface. The section covers the visibility of UI elements such as header icons, shift management controls, and cash register (KKM) integrations. It also specifies the control over detailed product data fields (PLU, IKPU, VAT, cost, and stock balances) and the configuration of the various POS menus, including sales history, inventory revisions, supplier balances, and financial operations. This guide ensures that the POS environment can be simplified for operators by removing unnecessary complexity while maintaining access to critical business operations like returns, postings, and statistical analysis.",
     "content": [
       {
         "step": "1. Header and Shift Synchronization Settings",
@@ -202,8 +202,8 @@
   {
     "title": "Completion Requirements",
     "parent_section": "Файдави бериш / Все давайте / Файдави бериш",
-    "overall_goal": "To define the technical and operational prerequisites necessary for the successful installation and stable functioning of the Linko-POS Desktop system.",
-    "rag_description": "This section outlines the essential technical specifications and environmental requirements for Linko-POS Desktop. It covers hardware benchmarks such as RAM and CPU performance, software dependencies including supported Windows versions and the .NET Framework, and network stability needs for cloud synchronization. This guide ensures that the user's infrastructure is adequately prepared to handle point-of-sale operations without performance bottlenecks or compatibility issues.",
+    "overall_goal": "To define the technical and operational prerequisites necessary for the successful installation and stable functioning of the Linko POS Desktop system.",
+    "rag_description": "This section outlines the essential technical specifications and environmental requirements for Linko POS Desktop. It covers hardware benchmarks such as RAM and CPU performance, software dependencies including supported Windows versions and the .NET Framework, and network stability needs for cloud synchronization. This guide ensures that the user's infrastructure is adequately prepared to handle point-of-sale operations without performance bottlenecks or compatibility issues.",
     "content": [
       {
         "step": "1. Verify Hardware Compatibility",
@@ -225,8 +225,8 @@
   {
     "title": "Currency Conversion Guides",
     "parent_section": "Файдави будагидаги асбабаар / Все давайте загрузите Файдави будагидаги асбабаар",
-    "overall_goal": "Provide instructional video materials for converting account or transaction currencies between USD and SUM within the Linko-POS system.",
-    "rag_description": "This documentation section provides visual guides for users of the Linko-POS Desktop system to perform currency conversions. It specifically covers the process of converting financial values from USD to SUM and vice versa. These video tutorials are designed to help users manage multi-currency transactions, ensuring that point-of-sale operations and reporting reflect the correct currency values. The section serves as a practical resource for staff needing to navigate the currency exchange features within the software interface.",
+    "overall_goal": "Provide instructional video materials for converting account or transaction currencies between USD and SUM within the Linko POS system.",
+    "rag_description": "This documentation section provides visual guides for users of the Linko POS Desktop system to perform currency conversions. It specifically covers the process of converting financial values from USD to SUM and vice versa. These video tutorials are designed to help users manage multi-currency transactions, ensuring that point-of-sale operations and reporting reflect the correct currency values. The section serves as a practical resource for staff needing to navigate the currency exchange features within the software interface.",
     "content": [
       {
         "step": "1. USD to SUM Conversion Video",

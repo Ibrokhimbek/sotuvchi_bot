@@ -3,7 +3,7 @@
     "title": "Creating a Price List",
     "parent_section": "Веб Ґисми / Веб часть",
     "overall_goal": "To guide the user through the process of creating and managing price lists in the web-based SFA system for use across inventory and POS operations.",
-    "rag_description": "This section explains how to manage pricing tiers within the Linko-POS SFA (Web) interface. Users learn how to log in to the administrator portal, navigate to the Stock (Склад) module, and define new price lists by specifying names, currencies, and display orders. The documentation details how these price lists are integrated into core business processes including inventory revisions, stock receipts (Oprichodovanie), and POS sales transactions. It specifically addresses the management of multiple price types like retail and wholesale. A critical technical note is included regarding the necessity of logging out and re-logging into the POS desktop application to synchronize newly created price data.",
+    "rag_description": "This section explains how to manage pricing tiers within the Linko POS SFA (Web) interface. Users learn how to log in to the administrator portal, navigate to the Stock (Склад) module, and define new price lists by specifying names, currencies, and display orders. The documentation details how these price lists are integrated into core business processes including inventory revisions, stock receipts (Oprichodovanie), and POS sales transactions. It specifically addresses the management of multiple price types like retail and wholesale. A critical technical note is included regarding the necessity of logging out and re-logging into the POS desktop application to synchronize newly created price data.",
     "content": [
       {
         "step": "Step 1: Logging into the SFA System",
@@ -37,8 +37,8 @@
   {
     "title": "Creating a Warehouse",
     "parent_section": "Веб қисми / Веб часть",
-    "overall_goal": "To guide users through the process of adding and configuring a new warehouse in the SFA web portal for use in the Linko-POS system.",
-    "rag_description": "This section provides a comprehensive guide on how to create a new warehouse within the Linko-POS SFA web system. It explains the process of logging into the web interface, navigating to the Warehouse management section, and filling out the necessary details for a new storage location, such as name, address, branch affiliation, responsible manager, and stock tracking settings. The guide concludes with crucial synchronization instructions, advising users to re-login to the desktop POS application to ensure new warehouse data is correctly reflected during inventory audits, stock-ins, and sales operations.",
+    "overall_goal": "To guide users through the process of adding and configuring a new warehouse in the SFA web portal for use in the Linko POS system.",
+    "rag_description": "This section provides a comprehensive guide on how to create a new warehouse within the Linko POS SFA web system. It explains the process of logging into the web interface, navigating to the Warehouse management section, and filling out the necessary details for a new storage location, such as name, address, branch affiliation, responsible manager, and stock tracking settings. The guide concludes with crucial synchronization instructions, advising users to re-login to the desktop POS application to ensure new warehouse data is correctly reflected during inventory audits, stock-ins, and sales operations.",
     "content": [
       {
         "step": "Step 1 - Accessing the Warehouses Section",
@@ -65,8 +65,8 @@
   {
     "title": "Adding a branch",
     "parent_section": "Веб қисми / Веб часть",
-    "overall_goal": "To guide the user through the process of adding and configuring a new branch within the Linko-POS SFA web system.",
-    "rag_description": "This section provides a detailed walkthrough for adding a new branch in the Linko-POS SFA web interface. It covers logging into the system, navigating the personnel menu to reach the branches management screen, and the configuration of specific branch parameters. Key actions involve filling out essential fields such as Branch Name, Price List (which affects POS and other modules), Currency, Debt Accounting options, and setting the branch's geographic location on a map. This ensures proper organizational structure and financial linking within the POS ecosystem.",
+    "overall_goal": "To guide the user through the process of adding and configuring a new branch within the Linko POS SFA web system.",
+    "rag_description": "This section provides a detailed walkthrough for adding a new branch in the Linko POS SFA web interface. It covers logging into the system, navigating the personnel menu to reach the branches management screen, and the configuration of specific branch parameters. Key actions involve filling out essential fields such as Branch Name, Price List (which affects POS and other modules), Currency, Debt Accounting options, and setting the branch's geographic location on a map. This ensures proper organizational structure and financial linking within the POS ecosystem.",
     "content": [
       {
         "step": "Step 1. System Login",

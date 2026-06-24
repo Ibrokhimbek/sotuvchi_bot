@@ -2,8 +2,8 @@
   {
     "title": "Sales History and Returns",
     "parent_section": "Тариф / История",
-    "overall_goal": "To provide instructions on how to navigate the Sales History section, locate specific transactions, modify payment methods, and process returns in Linko-POS Desktop.",
-    "rag_description": "This documentation section provides a comprehensive guide on managing sales records within the Linko-POS Desktop 'History' module. It covers the process of accessing the Sales sub-menu, utilizing filters such as synchronization status and date ranges, and using search functions by receipt number or customer name. It details how to view transaction specifics (items, warehouse, totals) and perform critical actions: changing payment types (cash, terminal, or debt), re-printing receipts, and executing the return process. The return workflow explained includes selecting specific items from a sale, validating available quantities, choosing refund methods, and understanding how the system automatically updates inventory levels and cash register accounting upon completion.",
+    "overall_goal": "To provide instructions on how to navigate the Sales History section, locate specific transactions, modify payment methods, and process returns in Linko POS Desktop.",
+    "rag_description": "This documentation section provides a comprehensive guide on managing sales records within the Linko POS Desktop 'History' module. It covers the process of accessing the Sales sub-menu, utilizing filters such as synchronization status and date ranges, and using search functions by receipt number or customer name. It details how to view transaction specifics (items, warehouse, totals) and perform critical actions: changing payment types (cash, terminal, or debt), re-printing receipts, and executing the return process. The return workflow explained includes selecting specific items from a sale, validating available quantities, choosing refund methods, and understanding how the system automatically updates inventory levels and cash register accounting upon completion.",
     "content": [
       {
         "step": "Step 1. Accessing History",
@@ -47,8 +47,8 @@
   {
     "title": "Return History",
     "parent_section": "Тарих / Истаарих",
-    "overall_goal": "Manage and review the history of returned goods and print return receipts in Linko-POS Desktop.",
-    "rag_description": "This documentation guide describes how to use the Return History feature in the Linko-POS Desktop software. It covers navigating to the 'Returns' section within the 'History' menu, where users can view a comprehensive list of return transactions including receipt numbers, client info, and total amounts. The guide explains how to view detailed itemized data for each return, reprint return receipts for customers, and utilize powerful filtering tools like the date range selector and search bar (capable of searching by customer name, phone, or receipt ID) to manage and audit returned inventory efficiently.",
+    "overall_goal": "Manage and review the history of returned goods and print return receipts in Linko POS Desktop.",
+    "rag_description": "This documentation guide describes how to use the Return History feature in the Linko POS Desktop software. It covers navigating to the 'Returns' section within the 'History' menu, where users can view a comprehensive list of return transactions including receipt numbers, client info, and total amounts. The guide explains how to view detailed itemized data for each return, reprint return receipts for customers, and utilize powerful filtering tools like the date range selector and search bar (capable of searching by customer name, phone, or receipt ID) to manage and audit returned inventory efficiently.",
     "content": [
       {
         "step": "1. Accessing the Return History Section",
@@ -78,7 +78,7 @@
     "title": "Returns to Suppliers History",
     "parent_section": "Тарих / Иставитства",
     "overall_goal": "To view, filter, and review the history of product returns made to suppliers and print corresponding return documents.",
-    "rag_description": "This section describes the 'Returns to Suppliers' history feature in the Linko-POS Desktop application. It provides a step-by-step guide for users to access return logs, filter transactions by synchronization status and date ranges, search for specific receipts, and view itemized details of each return transaction. Key functionalities covered include navigating the 'History' menu, interpreting the list of returned items (receipt number, supplier, amount, timestamp), and printing return receipts for physical documentation. This module is essential for tracking supply chain reversals and reconciling accounts with vendors.",
+    "rag_description": "This section describes the 'Returns to Suppliers' history feature in the Linko POS Desktop application. It provides a step-by-step guide for users to access return logs, filter transactions by synchronization status and date ranges, search for specific receipts, and view itemized details of each return transaction. Key functionalities covered include navigating the 'History' menu, interpreting the list of returned items (receipt number, supplier, amount, timestamp), and printing return receipts for physical documentation. This module is essential for tracking supply chain reversals and reconciling accounts with vendors.",
     "content": [
       {
         "step": "Step 1. Accessing the 'History → Return to Suppliers' section",
@@ -107,7 +107,7 @@
     "title": "Supply History",
     "parent_section": "Тарих / Истгава",
     "overall_goal": "To view and analyze the records of incoming goods (supplies) and adjustments made during inventory revisions.",
-    "rag_description": "This documentation section explains how to manage and review the Supply History within the Linko-POS Desktop system. It covers navigating to the History module, understanding the data table structure, and utilizing filters like date ranges, synchronization status, and search tools. Key features include distinguishing between regular supplier deliveries (Oprichodovanie) and stock adjustments (Inventory), as well as viewing granular details for each transaction such as cost price, selling price, profit margins, and specific item quantities. This section serves as a central hub for auditing warehouse movements and verifying supplier settlements.",
+    "rag_description": "This documentation section explains how to manage and review the Supply History within the Linko POS Desktop system. It covers navigating to the History module, understanding the data table structure, and utilizing filters like date ranges, synchronization status, and search tools. Key features include distinguishing between regular supplier deliveries (Oprichodovanie) and stock adjustments (Inventory), as well as viewing granular details for each transaction such as cost price, selling price, profit margins, and specific item quantities. This section serves as a central hub for auditing warehouse movements and verifying supplier settlements.",
     "content": [
       {
         "step": "Step 1: Accessing the History Section",
@@ -153,7 +153,7 @@
     "title": "Revision History",
     "parent_section": "Тарих / Истария",
     "overall_goal": "To view and analyze the history of inventory revisions (audits) performed in the warehouse, including stock differences and who conducted them.",
-    "rag_description": "This guide explains how to access and analyze the Revision History within the Linko-POS Desktop system. Users learn to navigate to the 'History' -> 'Revision' section to see a list of all inventory audits conducted. The section provides details such as receipt numbers, responsible users, warehouse locations, timestamps, and total financial differences (surplus or deficit). It also covers viewing granular details for specific revisions—comparing 'before' and 'after' stock levels for individual items—and using date range filters to locate specific inventory checks within a chosen time period. This feature is essential for warehouse transparency and auditing.",
+    "rag_description": "This guide explains how to access and analyze the Revision History within the Linko POS Desktop system. Users learn to navigate to the 'History' -> 'Revision' section to see a list of all inventory audits conducted. The section provides details such as receipt numbers, responsible users, warehouse locations, timestamps, and total financial differences (surplus or deficit). It also covers viewing granular details for specific revisions—comparing 'before' and 'after' stock levels for individual items—and using date range filters to locate specific inventory checks within a chosen time period. This feature is essential for warehouse transparency and auditing.",
     "content": [
       {
         "step": "Step 1. Accessing the Revision History section",
@@ -184,8 +184,8 @@
   {
     "title": "Shift History Management",
     "parent_section": "Тарих / Истарис",
-    "overall_goal": "To view, track, search, and print reports of past work shifts within the Linko-POS system.",
-    "rag_description": "This section guides users through the 'Shift History' module in Linko-POS Desktop. It details how to navigate the shift list, which includes critical financial data such as starting balances, income, expenses, expected vs. actual cash totals, and closing discrepancies. The instructions cover viewing expanded details for specific shifts, using the search functionality to filter records by user or transaction amount, and utilizing the print feature to generate physical or PDF reports. This is essential for financial auditing and monitoring cashier performance over time.",
+    "overall_goal": "To view, track, search, and print reports of past work shifts within the Linko POS system.",
+    "rag_description": "This section guides users through the 'Shift History' module in Linko POS Desktop. It details how to navigate the shift list, which includes critical financial data such as starting balances, income, expenses, expected vs. actual cash totals, and closing discrepancies. The instructions cover viewing expanded details for specific shifts, using the search functionality to filter records by user or transaction amount, and utilizing the print feature to generate physical or PDF reports. This is essential for financial auditing and monitoring cashier performance over time.",
     "content": [
       {
         "step": "Step 1. Accessing the Shift History section",

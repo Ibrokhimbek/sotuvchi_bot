@@ -2,8 +2,8 @@
   {
     "title": "Printer Setup",
     "parent_section": "Чеж дридтердар / Чеж дридтерр",
-    "overall_goal": "To guide the user through the process of connecting, installing drivers for, and configuring receipt and label printers for use with the Linko-POS Desktop system.",
-    "rag_description": "This guide provides detailed technical instructions for setting up and configuring receipt and label printers (specifically Sewoo and Xprinter models) with the Linko-POS Desktop application. It covers initial hardware preparation, model identification, and the process of downloading and installing specific drivers. The documentation details how to navigate Windows settings to adjust printer preferences and paper dimensions, as well as how to integrate and test the hardware within the POS software. Key user actions include driver installation, selecting printers in the Linko-POS settings menu, and performing verification tests via the order history and label printing modules.",
+    "overall_goal": "To guide the user through the process of connecting, installing drivers for, and configuring receipt and label printers for use with the Linko POS Desktop system.",
+    "rag_description": "This guide provides detailed technical instructions for setting up and configuring receipt and label printers (specifically Sewoo and Xprinter models) with the Linko POS Desktop application. It covers initial hardware preparation, model identification, and the process of downloading and installing specific drivers. The documentation details how to navigate Windows settings to adjust printer preferences and paper dimensions, as well as how to integrate and test the hardware within the POS software. Key user actions include driver installation, selecting printers in the Linko POS settings menu, and performing verification tests via the order history and label printing modules.",
     "content": [
       {
         "step": "Step 1: Preparation and Identification",
@@ -23,7 +23,7 @@
       },
       {
         "step": "Step 3: Configuring Print Settings and POS Integration",
-        "description": "Adjust paper sizes by navigating to Windows Settings -> Bluetooth & devices -> Printers & scanners. Select your printer, open 'Printing preferences', and click 'Edit' to set your desired dimensions. In the Linko-POS software, go to settings, select the installed receipt and label printers, and click 'Add'. After the system restarts, go to 'History', select an order, and click 'Print Receipt' to perform a test print.",
+        "description": "Adjust paper sizes by navigating to Windows Settings -> Bluetooth & devices -> Printers & scanners. Select your printer, open 'Printing preferences', and click 'Edit' to set your desired dimensions. In the Linko POS software, go to settings, select the installed receipt and label printers, and click 'Add'. After the system restarts, go to 'History', select an order, and click 'Print Receipt' to perform a test print.",
         "images": [
           "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/196/Screenshot%202025-09-30%20at%203.12.48%E2%80%AFPM.png",
           "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/196/1-%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%20%285%29.png"
@@ -31,7 +31,7 @@
       },
       {
         "step": "Step 4: Label Printer Testing",
-        "description": "Before testing the label printer, load the label roll correctly by opening the side button and ensuring the paper is secured with the fixator. In Linko-POS, navigate to the 'Labels' section. Adjust the label dimensions on the right side, select your desired label template via 'Choose Label', and save. Select a product from the list on the left and click 'Print Labels' to verify the output.",
+        "description": "Before testing the label printer, load the label roll correctly by opening the side button and ensuring the paper is secured with the fixator. In Linko POS, navigate to the 'Labels' section. Adjust the label dimensions on the right side, select your desired label template via 'Choose Label', and save. Select a product from the list on the left and click 'Print Labels' to verify the output.",
         "images": [
           "https://academy.linko.uz/pluginfile.php/144/mod_book/chapter/196/1-%D0%BA%D0%B0%D0%B4%D0%B0%D0%BC%20%286%29.png"
         ]

@@ -2,8 +2,8 @@
   {
     "title": "Completion Requirements for Telegram Bots",
     "parent_section": "Онлайн буюртмалар / Онлайн Заказы",
-    "overall_goal": "To set up and configure the necessary Telegram bots for receiving orders and sending system notifications within the Linko-POS Desktop environment.",
-    "rag_description": "This section details the prerequisites for integrating Telegram functionality with Linko-POS. It covers the process of establishing two distinct bots: one dedicated to receiving incoming customer orders and another for broadcasting system notifications. Additionally, it addresses the technical configuration (Configs) required to link these bots to the POS system. By completing these steps, businesses can automate order ingestion and maintain real-time awareness of system activities through Telegram.",
+    "overall_goal": "To set up and configure the necessary Telegram bots for receiving orders and sending system notifications within the Linko POS Desktop environment.",
+    "rag_description": "This section details the prerequisites for integrating Telegram functionality with Linko POS. It covers the process of establishing two distinct bots: one dedicated to receiving incoming customer orders and another for broadcasting system notifications. Additionally, it addresses the technical configuration (Configs) required to link these bots to the POS system. By completing these steps, businesses can automate order ingestion and maintain real-time awareness of system activities through Telegram.",
     "content": [
       {
         "step": "Prerequisites and Bot Creation",
@@ -24,7 +24,7 @@
       },
       {
         "step": "6.3 Configuration for bots (Configs)",
-        "description": "Access the configuration settings to input the bot tokens and parameters required for the bots to communicate correctly with the Linko-POS Desktop software.",
+        "description": "Access the configuration settings to input the bot tokens and parameters required for the bots to communicate correctly with the Linko POS Desktop software.",
         "images": []
       }
     ]

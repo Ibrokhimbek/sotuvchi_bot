@@ -2,8 +2,8 @@
   {
     "title": "Initial Setup and Registration",
     "parent_section": "Сатув / Ведега",
-    "overall_goal": "Guide the user through the initial login process, automatic database synchronization, and basic configuration for receipt creation in the Linko-POS Desktop application.",
-    "rag_description": "This section details the initial steps required to start working with Linko-POS Desktop. It covers the registration process where users must input their server name, login, and password. It also explains the automatic synchronization phase where the system updates its local database from the server, indicated by green status bars upon completion. Finally, it outlines the selection of essential parameters for initiating sales, including choosing the transaction currency, the applicable price list, and the designated warehouse for inventory tracking. This process ensures the POS system is properly synchronized and configured for daily operations.",
+    "overall_goal": "Guide the user through the initial login process, automatic database synchronization, and basic configuration for receipt creation in the Linko POS Desktop application.",
+    "rag_description": "This section details the initial steps required to start working with Linko POS Desktop. It covers the registration process where users must input their server name, login, and password. It also explains the automatic synchronization phase where the system updates its local database from the server, indicated by green status bars upon completion. Finally, it outlines the selection of essential parameters for initiating sales, including choosing the transaction currency, the applicable price list, and the designated warehouse for inventory tracking. This process ensures the POS system is properly synchronized and configured for daily operations.",
     "content": [
       {
         "step": "Step 1: Registration",
@@ -25,8 +25,8 @@
   {
     "title": "Completion Requirements and Sales Process",
     "parent_section": "Савда / Все бизаватства",
-    "overall_goal": "To guide the user through selecting products from the catalog or via scanner and completing the sale using various payment methods within the Linko-POS Desktop interface.",
-    "rag_description": "This documentation section provides a comprehensive guide to the sales workflow in Linko-POS Desktop. It covers the initial steps of opening the catalog, adding items to the basket manually or via barcode scanner, and calculating totals. The guide details the payment interface, explaining key fields such as 'Total Amount', 'To Pay', and 'Amount Received'. It specifically addresses three main payment scenarios: standard single-method payments (Cash or Terminal), using preset amount buttons for quick entry, and processing split payments where a customer uses both cash and a terminal. The section concludes with the final step of issuing a physical or digital receipt.",
+    "overall_goal": "To guide the user through selecting products from the catalog or via scanner and completing the sale using various payment methods within the Linko POS Desktop interface.",
+    "rag_description": "This documentation section provides a comprehensive guide to the sales workflow in Linko POS Desktop. It covers the initial steps of opening the catalog, adding items to the basket manually or via barcode scanner, and calculating totals. The guide details the payment interface, explaining key fields such as 'Total Amount', 'To Pay', and 'Amount Received'. It specifically addresses three main payment scenarios: standard single-method payments (Cash or Terminal), using preset amount buttons for quick entry, and processing split payments where a customer uses both cash and a terminal. The section concludes with the final step of issuing a physical or digital receipt.",
     "content": [
       {
         "step": "Step 1: Opening the Catalog and Selecting Products",
@@ -62,8 +62,8 @@
   {
     "title": "Adding a Customer for Credit Sales",
     "parent_section": "Сжтув / Ардажа",
-    "overall_goal": "To register a new customer in the Linko-POS system to enable selling goods on credit.",
-    "rag_description": "This section explains how to add a new customer to the Linko-POS Desktop database, which is a mandatory step before performing a sale on credit. It details the process of navigating from the main sales window to the customer selection interface, opening the 'Add Customer' form, and entering critical information such as the customer's name, phone number, and initial debt balance. By completing these steps, users can track credit transactions against a specific customer's profile, allowing the system to record the sales amount to their account balance when the 'On Credit' payment type is selected.",
+    "overall_goal": "To register a new customer in the Linko POS system to enable selling goods on credit.",
+    "rag_description": "This section explains how to add a new customer to the Linko POS Desktop database, which is a mandatory step before performing a sale on credit. It details the process of navigating from the main sales window to the customer selection interface, opening the 'Add Customer' form, and entering critical information such as the customer's name, phone number, and initial debt balance. By completing these steps, users can track credit transactions against a specific customer's profile, allowing the system to record the sales amount to their account balance when the 'On Credit' payment type is selected.",
     "content": [
       {
         "step": "1. Open the Customer Selection Window",
@@ -91,8 +91,8 @@
   {
     "title": "Step 1. Creating and Managing Receipts",
     "parent_section": "Сжтув / Гргдажа",
-    "overall_goal": "To guide users through the process of opening new sales receipts and managing multiple active transactions simultaneously within the Linko-POS Desktop interface.",
-    "rag_description": "This documentation provides instructions on how to initiate a sale in the Linko-POS Desktop system. It covers the 'Create receipt' function and explains the conditional selection window that appears for Currencies, Price-lists, and Warehouses if multiple options are configured. It also describes the system's behavior for single-option configurations and highlights the multi-receipt feature, which allows cashiers to manage several active customer sales by toggling between receipt entries displayed in the sidebar.",
+    "overall_goal": "To guide users through the process of opening new sales receipts and managing multiple active transactions simultaneously within the Linko POS Desktop interface.",
+    "rag_description": "This documentation provides instructions on how to initiate a sale in the Linko POS Desktop system. It covers the 'Create receipt' function and explains the conditional selection window that appears for Currencies, Price-lists, and Warehouses if multiple options are configured. It also describes the system's behavior for single-option configurations and highlights the multi-receipt feature, which allows cashiers to manage several active customer sales by toggling between receipt entries displayed in the sidebar.",
     "content": [
       {
         "step": "1.1 Initiate Receipt Creation",
@@ -130,10 +130,10 @@
     ]
   },
   {
-    "title": "Shift Management in Linko-POS Desktop",
+    "title": "Shift Management in Linko POS Desktop",
     "parent_section": "Савдо / Продажа",
     "overall_goal": "To guide users through the process of opening a shift, monitoring real-time sales statistics, generating intermediate reports, performing encashment, and closing the shift with a Z-report.",
-    "rag_description": "This section provides a comprehensive guide for managing cash register shifts in Linko-POS Desktop. It addresses the core retail process of opening a work shift to start sales, monitoring real-time performance through the shift dashboard, generating non-finalizing X-reports for interim checks, and performing secure cash transfers (encashment). The guide culminates in the closing of the shift via a Z-report, which finalizes accounting records and resets the register for the next period. Key features covered include shift status indicators, balance verification across payment methods (cash/terminal), and detailed breakdown of sales metrics like debt sales and average receipt value.",
+    "rag_description": "This section provides a comprehensive guide for managing cash register shifts in Linko POS Desktop. It addresses the core retail process of opening a work shift to start sales, monitoring real-time performance through the shift dashboard, generating non-finalizing X-reports for interim checks, and performing secure cash transfers (encashment). The guide culminates in the closing of the shift via a Z-report, which finalizes accounting records and resets the register for the next period. Key features covered include shift status indicators, balance verification across payment methods (cash/terminal), and detailed breakdown of sales metrics like debt sales and average receipt value.",
     "content": [
       {
         "step": "Step 1. Opening the Shift",
@@ -168,10 +168,10 @@
     ]
   },
   {
-    "title": "Applying and Setting Up Discounts in Linko-POS",
+    "title": "Applying and Setting Up Discounts in Linko POS",
     "parent_section": "Сатиш / Варағавий савди",
     "overall_goal": "To provide instructions on applying manual discounts at the checkout and configuring automated marketing promotions through the web management portal.",
-    "rag_description": "This documentation section covers the procedures for managing discounts within the Linko-POS system. It details three main processes: applying manual discounts during a sale, using automated discounts at the point of sale, and setting up marketing promotions in the SFA/web-cabinet. Key actions include navigating the POS sales screen, selecting discount types (percentage vs. fixed UZS amount), and configuring promotion parameters like duration and product eligibility in the web interface. This solves the problem of how to handle price reductions both on-the-fly and through centralized marketing campaigns.",
+    "rag_description": "This documentation section covers the procedures for managing discounts within the Linko POS system. It details three main processes: applying manual discounts during a sale, using automated discounts at the point of sale, and setting up marketing promotions in the SFA/web-cabinet. Key actions include navigating the POS sales screen, selecting discount types (percentage vs. fixed UZS amount), and configuring promotion parameters like duration and product eligibility in the web interface. This solves the problem of how to handle price reductions both on-the-fly and through centralized marketing campaigns.",
     "content": [
       {
         "step": "Step 1: Applying a Manual Discount",
@@ -201,8 +201,8 @@
   {
     "title": "Two-Monitor Mode in Sales",
     "parent_section": "Сатув / Буйртма",
-    "overall_goal": "To explain how to utilize the dual-monitor setup in Linko-POS for improved checkout transparency and cashier efficiency.",
-    "rag_description": "The Two-Monitor Mode in the Sales section of Linko-POS Desktop is a feature designed to create a transparent and efficient checkout environment by utilizing separate displays for the cashier and the customer. The cashier operates on the primary monitor to manage customer selection, product entry, and payment processing, while the secondary monitor provides the customer with real-time feedback on their purchase, including product names, quantities, individual pricing, and the total amount due. This section details how these two interfaces interact during a transaction.",
+    "overall_goal": "To explain how to utilize the dual-monitor setup in Linko POS for improved checkout transparency and cashier efficiency.",
+    "rag_description": "The Two-Monitor Mode in the Sales section of Linko POS Desktop is a feature designed to create a transparent and efficient checkout environment by utilizing separate displays for the cashier and the customer. The cashier operates on the primary monitor to manage customer selection, product entry, and payment processing, while the secondary monitor provides the customer with real-time feedback on their purchase, including product names, quantities, individual pricing, and the total amount due. This section details how these two interfaces interact during a transaction.",
     "content": [
       {
         "step": "1. Introduction to Two-Monitor Mode",

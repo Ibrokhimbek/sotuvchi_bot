@@ -3,7 +3,7 @@
     "title": "Inventory Posting Process",
     "parent_section": "Кирим қилиш / Оприходование",
     "overall_goal": "To register incoming goods into the system, set their purchase and retail prices, assign a supplier, and record the payment transaction.",
-    "rag_description": "This section explains the inventory posting (Oprichodovanie) workflow in Linko-POS Desktop, which is used to add stock to the warehouse and record procurement expenses. The process involves navigating to the Posting module, selecting products, and configuring quantity, purchase prices, and retail prices. It covers mandatory supplier selection and the creation of new supplier profiles if they are missing from the system. Finally, it details the payment stage where users select a payment method and finalize the posting, resulting in updated inventory levels and transaction records in the Cashier Expense module.",
+    "rag_description": "This section explains the inventory posting (Oprichodovanie) workflow in Linko POS Desktop, which is used to add stock to the warehouse and record procurement expenses. The process involves navigating to the Posting module, selecting products, and configuring quantity, purchase prices, and retail prices. It covers mandatory supplier selection and the creation of new supplier profiles if they are missing from the system. Finally, it details the payment stage where users select a payment method and finalize the posting, resulting in updated inventory levels and transaction records in the Cashier Expense module.",
     "content": [
       {
         "step": "Step 1. Accessing the Posting Section",
@@ -44,7 +44,7 @@
     "title": "Supplier Management in Inventory Inbound",
     "parent_section": "Автаризациссиз ва Базага убагаб бериш / Автаризациссиз ва Базага убагаб бериш",
     "overall_goal": "Learn how to select, create, and manage suppliers and their financial balances during the inventory inbound process.",
-    "rag_description": "This documentation provides a comprehensive guide on managing suppliers within the Linko-POS Desktop inventory inbound module. It explains how to open the supplier selection window, add new suppliers by entering their name, phone number, and contact person, and differentiates between various debt types. Key features covered include the 'Realization' mode (payment after sale) and 'Consignment' mode (items remain supplier property), as well as how to interpret supplier balances where negative values indicate debt and positive values indicate overpayments. This section is essential for users handling procurement and stock management.",
+    "rag_description": "This documentation provides a comprehensive guide on managing suppliers within the Linko POS Desktop inventory inbound module. It explains how to open the supplier selection window, add new suppliers by entering their name, phone number, and contact person, and differentiates between various debt types. Key features covered include the 'Realization' mode (payment after sale) and 'Consignment' mode (items remain supplier property), as well as how to interpret supplier balances where negative values indicate debt and positive values indicate overpayments. This section is essential for users handling procurement and stock management.",
     "content": [
       {
         "step": "Step 1. Opening the Supplier List",
@@ -77,8 +77,8 @@
   {
     "title": "Product Card Display and Sorting Configuration",
     "parent_section": "Абрабативаетсссс... Абрабативаетсссс... Абрабативаетсссс... Абрабативаетсссс...",
-    "overall_goal": "Configure how products are displayed and sorted within the Linko-POS system to improve efficiency during stock intake and sales.",
-    "rag_description": "This documentation section explains how to customize the visual representation and organization of items in the Linko-POS Desktop interface. It details the process of using the 'Product Card Settings' menu, accessible from the Incoming (Oprichodovanie) or Sales windows, to toggle specific data fields like product names, stock levels, and prices. It also describes how to switch between grid and list views. Furthermore, the guide covers the sorting feature, which allows users to rank products based on various parameters such as addition date, alphabetical order, remaining quantity, or price. By adjusting these settings, users can optimize their workspace to better suit their specific operational needs.",
+    "overall_goal": "Configure how products are displayed and sorted within the Linko POS system to improve efficiency during stock intake and sales.",
+    "rag_description": "This documentation section explains how to customize the visual representation and organization of items in the Linko POS Desktop interface. It details the process of using the 'Product Card Settings' menu, accessible from the Incoming (Oprichodovanie) or Sales windows, to toggle specific data fields like product names, stock levels, and prices. It also describes how to switch between grid and list views. Furthermore, the guide covers the sorting feature, which allows users to rank products based on various parameters such as addition date, alphabetical order, remaining quantity, or price. By adjusting these settings, users can optimize their workspace to better suit their specific operational needs.",
     "content": [
       {
         "step": "Step 1. Changing the product card view",
