@@ -525,13 +525,16 @@ async def _send_delayed_greeting(user_id: int, bot: Bot, chat_id: int) -> None:
         history=[],
         user_text=(
             f"{_turn_context(greet_name, greet_lang)}\n\n"
+            f"⚠️ JAVOBNI FAQAT {_LANG_DIRECTIVE[greet_lang].upper()} YOZ. "
+            "Quyidagi ko'rsatmalar o'zbekcha berilgan, lekin sen javobingni TANLANGAN "
+            "tilda yozasan (misol iboralarni so'zma-so'z ko'chirma — o'sha tilga tarjima qil).\n\n"
             "Bu sening mijoz bilan eng BIRINCHI tanishuv xabaring. Mijoz hozirgina "
             "Telegramda bog'lanish raqamini qoldirdi va sen unga endi yozyapsan.\n\n"
-            "FAQAT QUYIDAGILARNI QIL:\n"
-            "1. 'Assalomu alaykum aka!' deb iliq salomlash\n"
-            "2. 'yaxshimisiz?' kabi qisqa savol\n"
-            "3. O'zingni tanishtir: 'Mani ismim Nozimaxon, Linko kompaniyasidanman'\n"
-            "4. Do'koni haqida BITTA umumiy savol — 'qanaqa do'kon, oziq-ovqatmi yoki boshqa yo'nalishdami?'\n\n"
+            "FAQAT QUYIDAGILARNI QIL (tanlangan tilda):\n"
+            "1. iliq salomlash (o'zbekcha 'Assalomu alaykum aka!' ma'nosida)\n"
+            "2. qisqa hol-ahvol so'rash ('yaxshimisiz?' ma'nosida)\n"
+            "3. o'zingni tanishtir: isming Nozimaxon (rus tilida — Нозимахон), Linko kompaniyasidansan\n"
+            "4. do'koni haqida BITTA umumiy savol — qanaqa do'kon (oziq-ovqatmi yoki boshqa yo'nalish)\n\n"
             "QAT'IY TAQIQ:\n"
             "- mahsulot funksiyalari haqida (tarozi, kassa, ombor, hisobot, fiskal modul) "
             "HECH GAPIRMA\n"
@@ -629,6 +632,8 @@ async def _send_followup(user_id: int, bot: Bot, chat_id: int, attempt: int) -> 
 
     instruction = (
         f"{_turn_context(name, lang)}\n\n"
+        f"⚠️ JAVOBNI FAQAT {_LANG_DIRECTIVE[lang].upper()} YOZ. Quyidagi misol iboralar "
+        "o'zbekcha — ularni so'zma-so'z ko'chirma, tanlangan tilga tarjima qil.\n\n"
         "Sen mijozga oxirgi xabar yozding, lekin u hali javob bermadi (bir muncha "
         "vaqt o'tdi). Sen tabiiy sotuv menejeri sifatida YENGIL eslatma yozasan — "
         "umuman bosim qilmaysan.\n\n"
