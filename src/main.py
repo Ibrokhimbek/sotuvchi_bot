@@ -9,6 +9,7 @@ from aiogram import Bot, Dispatcher
 from aiohttp import web
 
 from src.ai.gemini import GeminiAgent
+from src.ai.observability import Observability
 from src.ai.prompts import build_system_prompt
 from src.bot import handlers
 from src.bot.handoff import HandoffNotifier
@@ -42,11 +43,18 @@ async def _setup(dev_mode: bool):
     storage = Storage(settings.db_path)
     await storage.init()
 
+    observability = Observability(
+        public_key=settings.langfuse_public_key,
+        secret_key=settings.langfuse_secret_key,
+        host=settings.langfuse_host,
+    )
+
     agent = GeminiAgent(
         api_key=settings.gemini_key,
         model=settings.gemini_model,
         system_instruction=build_system_prompt(knowledge),
         enable_cache=settings.enable_gemini_cache,
+        observability=observability,
     )
     await agent.warm_cache()
     agent.start_auto_refresh()
@@ -121,11 +129,11 @@ async def _setup(dev_mode: bool):
     dp.message.middleware(ThrottleMiddleware(min_interval=settings.throttle_seconds))
     dp.include_router(handlers.router)
 
-    return logger, bot, dp, agent, amocrm, chats
+    return logger, bot, dp, agent, amocrm, chats, observability
 
 
 async def run_polling(dev_mode: bool) -> None:
-    logger, bot, dp, agent, amocrm, chats = await _setup(dev_mode)
+    logger, bot, dp, agent, amocrm, chats, observability = await _setup(dev_mode)
 
     # Polling — webhook bo'lsa o'chirib tashlaymiz
     try:
@@ -153,10 +161,11 @@ async def run_polling(dev_mode: bool) -> None:
         await agent.stop_auto_refresh()
         await amocrm.close()
         await chats.close()
+        observability.shutdown()
 
 
 async def run_webhook(dev_mode: bool) -> None:
-    logger, bot, dp, agent, amocrm, chats = await _setup(dev_mode)
+    logger, bot, dp, agent, amocrm, chats, observability = await _setup(dev_mode)
 
     if not settings.webhook_url:
         raise RuntimeError(
@@ -272,6 +281,7 @@ async def run_webhook(dev_mode: bool) -> None:
         await agent.stop_auto_refresh()
         await amocrm.close()
         await chats.close()
+        observability.shutdown()
 
 
 def sheets_enabled() -> bool:

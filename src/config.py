@@ -52,6 +52,9 @@ class Settings:
     webhook_port: int
     webhook_secret: str | None
     amocrm_telegram_webhook_url: str | None
+    langfuse_public_key: str | None
+    langfuse_secret_key: str | None
+    langfuse_host: str | None
 
     @classmethod
     def load(cls) -> "Settings":
@@ -104,6 +107,11 @@ class Settings:
             amocrm_telegram_webhook_url=_get(
                 "amocrm_telegram_webhook_url", "AMOCRM_TELEGRAM_WEBHOOK_URL"
             ),
+            langfuse_public_key=_get("langfuse_public_key", "LANGFUSE_PUBLIC_KEY"),
+            langfuse_secret_key=_get("langfuse_secret_key", "LANGFUSE_SECRET_KEY"),
+            langfuse_host=_get(
+                "langfuse_host", "LANGFUSE_HOST", "langfuse_base_url", "LANGFUSE_BASE_URL"
+            ) or "https://us.cloud.langfuse.com",
         )
 
 

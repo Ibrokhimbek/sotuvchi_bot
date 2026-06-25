@@ -8,6 +8,8 @@ from typing import Awaitable, Callable
 from google import genai
 from google.genai import types
 
+from src.ai.observability import Observability
+
 logger = logging.getLogger(__name__)
 
 CACHE_TTL_SECONDS = 3600
@@ -68,6 +70,16 @@ _REQUEST_OPERATOR_DECL = {
 }
 
 
+def _trace_input(history, user_text, media) -> list[dict]:
+    """Langfuse uchun yengil input tasviri (media baytlarisiz)."""
+    msgs = [{"role": t.role, "content": t.text} for t in history]
+    cur: dict = {"role": "user", "content": user_text or ""}
+    if media:
+        cur["media"] = f"{len(media)} ta fayl"
+    msgs.append(cur)
+    return msgs
+
+
 def _looks_like_cache_error(exc: BaseException) -> bool:
     msg = str(exc).lower()
     return any(token in msg for token in ("cachedcontent", "cached_content", "cached content"))
@@ -81,10 +93,12 @@ class GeminiAgent:
         system_instruction: str,
         enable_cache: bool = True,
         cache_refresh_interval: float = CACHE_REFRESH_INTERVAL,
+        observability: Observability | None = None,
     ) -> None:
         self._client = genai.Client(api_key=api_key)
         self._model = model
         self._system = system_instruction
+        self._obs = observability or Observability(None, None, None)
         self._tools = [
             types.Tool(function_declarations=[_SAVE_LEAD_DECL, _REQUEST_OPERATOR_DECL])
         ]
@@ -209,67 +223,99 @@ class GeminiAgent:
         # Model bitta javobda matn + function_call'ni BIRGA qaytarishi mumkin.
         # Matnni yo'qotmaslik uchun har iteratsiyada yig'ib boramiz.
         collected_text: list[str] = []
+        tools_called: list[str] = []
+        last_finish: str | None = None
+        tok_in = tok_out = tok_total = tok_cached = 0
 
-        for _ in range(3):
-            response = await self._generate(contents)
-            self._log_usage(response)
+        with self._obs.generation(
+            name="nozimaxon-reply",
+            model=self._model,
+            input=_trace_input(history, user_text, media),
+            model_parameters={
+                "temperature": 0.7, "top_p": 0.9,
+                "max_output_tokens": 700, "thinking_budget": 0,
+            },
+        ) as gen:
+            for _ in range(3):
+                response = await self._generate(contents)
+                self._log_usage(response)
+                usage = getattr(response, "usage_metadata", None)
+                if usage:
+                    tok_in += getattr(usage, "prompt_token_count", 0) or 0
+                    tok_out += getattr(usage, "candidates_token_count", 0) or 0
+                    tok_total += getattr(usage, "total_token_count", 0) or 0
+                    tok_cached += getattr(usage, "cached_content_token_count", 0) or 0
 
-            candidate = response.candidates[0] if response.candidates else None
-            finish_reason = getattr(candidate, "finish_reason", None) if candidate else None
-            if not candidate or not candidate.content or not candidate.content.parts:
-                logger.warning(
-                    "Gemini bo'sh javob qaytardi: finish_reason=%s, collected=%r",
-                    finish_reason, collected_text,
+                candidate = response.candidates[0] if response.candidates else None
+                finish_reason = getattr(candidate, "finish_reason", None) if candidate else None
+                last_finish = getattr(finish_reason, "name", str(finish_reason)) if finish_reason else last_finish
+                if not candidate or not candidate.content or not candidate.content.parts:
+                    logger.warning(
+                        "Gemini bo'sh javob qaytardi: finish_reason=%s, collected=%r",
+                        finish_reason, collected_text,
+                    )
+                    break
+
+                # SAFETY / RECITATION → model bloklangan, bo'sh kelishi mumkin.
+                # MAX_TOKENS → matn bor lekin uzilgan, uni baribir olamiz.
+                if last_finish in ("SAFETY", "RECITATION"):
+                    logger.warning("Gemini javobi bloklandi: finish_reason=%s", last_finish)
+
+                parts = candidate.content.parts
+
+                # Matn qismlarini yig'amiz — function_call bilan birga kelsa ham yo'qotmaymiz.
+                for p in parts:
+                    ptext = getattr(p, "text", None)
+                    if ptext and ptext.strip():
+                        collected_text.append(ptext.strip())
+
+                function_calls = [p.function_call for p in parts if p.function_call]
+
+                if not function_calls:
+                    # Model gapini tugatdi — yig'ilgan matnni qaytaramiz.
+                    break
+
+                contents.append(candidate.content)
+                response_parts: list[types.Part] = []
+                for fc in function_calls:
+                    tools_called.append(fc.name)
+                    args = dict(fc.args or {})
+                    try:
+                        if fc.name == "save_lead" and on_save_lead:
+                            await on_save_lead(args)
+                            result = {"ok": True}
+                        elif fc.name == "request_operator" and on_request_operator:
+                            await on_request_operator(args.get("reason", ""))
+                            result = {"ok": True}
+                        else:
+                            result = {"ok": False, "error": "unknown tool"}
+                    except Exception as e:
+                        logger.exception("Tool xato: %s", fc.name)
+                        result = {"ok": False, "error": str(e)}
+                    response_parts.append(
+                        types.Part.from_function_response(name=fc.name, response=result)
+                    )
+                contents.append(types.Content(role="user", parts=response_parts))
+
+            final_text = "\n".join(collected_text).strip()
+            if not final_text:
+                logger.warning("Gemini hech qanday matn bermadi — fallback ishlatilmoqda")
+                final_text = "ha aytavering, eshityapman 🙂"
+
+            if gen:
+                gen.update(
+                    output=final_text,
+                    usage_details={
+                        "input": tok_in, "output": tok_out, "total": tok_total,
+                        "cache_read_input_tokens": tok_cached,
+                    },
+                    metadata={
+                        "finish_reason": last_finish,
+                        "tools_called": tools_called,
+                        "cached_prompt": bool(self._cache_name),
+                    },
                 )
-                break
-
-            # SAFETY / RECITATION → model bloklangan, bo'sh kelishi mumkin.
-            # MAX_TOKENS → matn bor lekin uzilgan, uni baribir olamiz.
-            fr_name = getattr(finish_reason, "name", str(finish_reason))
-            if fr_name in ("SAFETY", "RECITATION"):
-                logger.warning("Gemini javobi bloklandi: finish_reason=%s", fr_name)
-
-            parts = candidate.content.parts
-
-            # Matn qismlarini yig'amiz — function_call bilan birga kelsa ham yo'qotmaymiz.
-            for p in parts:
-                ptext = getattr(p, "text", None)
-                if ptext and ptext.strip():
-                    collected_text.append(ptext.strip())
-
-            function_calls = [p.function_call for p in parts if p.function_call]
-
-            if not function_calls:
-                # Model gapini tugatdi — yig'ilgan matnni qaytaramiz.
-                break
-
-            contents.append(candidate.content)
-            response_parts: list[types.Part] = []
-            for fc in function_calls:
-                args = dict(fc.args or {})
-                try:
-                    if fc.name == "save_lead" and on_save_lead:
-                        await on_save_lead(args)
-                        result = {"ok": True}
-                    elif fc.name == "request_operator" and on_request_operator:
-                        await on_request_operator(args.get("reason", ""))
-                        result = {"ok": True}
-                    else:
-                        result = {"ok": False, "error": "unknown tool"}
-                except Exception as e:
-                    logger.exception("Tool xato: %s", fc.name)
-                    result = {"ok": False, "error": str(e)}
-                response_parts.append(
-                    types.Part.from_function_response(name=fc.name, response=result)
-                )
-            contents.append(types.Content(role="user", parts=response_parts))
-
-        final_text = "\n".join(collected_text).strip()
-        if final_text:
             return final_text
-
-        logger.warning("Gemini hech qanday matn bermadi — fallback ishlatilmoqda")
-        return "ha aytavering, eshityapman 🙂"
 
     @staticmethod
     def _log_usage(response) -> None:
