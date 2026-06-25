@@ -110,12 +110,12 @@ _LANG_DIRECTIVE = {
 # Statik (AI emas) xabarlarning tarjimalari
 _CONTACT_REQUEST = {
     "uz": (
-        "Linko-POS kompaniyasiga xush kelibsiz. Sotuv menejerimiz siz bilan "
+        "Linko kompaniyasiga xush kelibsiz. Sotuv menejerimiz siz bilan "
         "bog'lanishini xohlaysizmi?\n\n"
         "Pastdagi tugmani bosib raqamingizni qoldiring — Hodimimiz tez orada o'zi yozadi 🙏"
     ),
     "ru": (
-        "Добро пожаловать в компанию Linko-POS. Хотите, чтобы наш менеджер по продажам "
+        "Добро пожаловать в компанию Linko. Хотите, чтобы наш менеджер по продажам "
         "связался с вами?\n\n"
         "Нажмите кнопку ниже и оставьте свой номер — наш сотрудник скоро напишет вам 🙏"
     ),
@@ -135,6 +135,21 @@ _THANK_YOU = {
     ),
 }
 _CHOOSE_LANG_TEXT = "Iltimos, suhbat tilini tanlang:\nПожалуйста, выберите язык общения:"
+
+# Salomlashish uchun har til bo'yicha TABIIY namuna (model kalka qilmasligi uchun anchor).
+# So'zma-so'z ko'chirilmaydi, lekin to'g'ri tabiiy ohangni ko'rsatadi.
+_GREETING_STYLE_HINT = {
+    "uz": (
+        "Tabiiy o'zbekcha namuna (so'zma-so'z ko'chirma, shu ohangda yoz):\n"
+        "Assalomu alaykum aka!~~~yaxshimisiz?~~~Mani ismim Nozimaxon, Linko "
+        "kompaniyasidanman~~~do'koniz qanaqa, oziq-ovqatmi yoki boshqa yo'nalishdami?"
+    ),
+    "ru": (
+        "Естественный образец на русском (не копируй дословно, пиши в таком тоне):\n"
+        "Здравствуйте!~~~Как ваши дела?~~~Меня зовут Нозимахон, я из компании "
+        "Linko~~~у вас магазин какого типа — продуктовый или другое направление?"
+    ),
+}
 _ERROR_TECH = {
     "uz": "biroz texnik nuqson chiqdi, bir lahzadan keyin yana yozasizmi 🙏",
     "ru": "произошёл небольшой сбой, напишите ещё раз через мгновение 🙏",
@@ -525,9 +540,11 @@ async def _send_delayed_greeting(user_id: int, bot: Bot, chat_id: int) -> None:
         history=[],
         user_text=(
             f"{_turn_context(greet_name, greet_lang)}\n\n"
-            f"⚠️ JAVOBNI FAQAT {_LANG_DIRECTIVE[greet_lang].upper()} YOZ. "
-            "Quyidagi ko'rsatmalar o'zbekcha berilgan, lekin sen javobingni TANLANGAN "
-            "tilda yozasan (misol iboralarni so'zma-so'z ko'chirma — o'sha tilga tarjima qil).\n\n"
+            f"⚠️ JAVOBNI FAQAT {_LANG_DIRECTIVE[greet_lang].upper()} YOZ — TABIIY, "
+            "TO'G'RI o'sha tilda. O'zbekchadan so'zma-so'z KALKA qilma (masalan rus "
+            "tilida 'Мен' EMAS, 'Меня зовут' yoki 'Я' deb yoz).\n\n"
+            f"{_GREETING_STYLE_HINT[greet_lang]}\n\n"
+            "Quyidagi ko'rsatmalar o'zbekcha, lekin javobingni TANLANGAN tilda yozasan.\n\n"
             "Bu sening mijoz bilan eng BIRINCHI tanishuv xabaring. Mijoz hozirgina "
             "Telegramda bog'lanish raqamini qoldirdi va sen unga endi yozyapsan.\n\n"
             "FAQAT QUYIDAGILARNI QIL (tanlangan tilda):\n"
