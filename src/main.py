@@ -176,6 +176,11 @@ async def run_webhook(dev_mode: bool) -> None:
         Shu sababli butun jarayonni crash qildirmaymiz — server ishlab turaveradi
         (/healthz javob beradi), webhook esa domen tayyor bo'lishi bilan o'rnatiladi.
         """
+        # MUHIM: allowed_updates'ni aniq beramiz. Berilmasa Telegram oldingi
+        # sozlamani saqlaydi — avval callback_query handler bo'lmagani uchun
+        # til tanlash tugmalari (callback_query) botga yetib kelmasdi.
+        allowed = dp.resolve_used_update_types()
+        logger.info("Webhook allowed_updates: %s", allowed)
         delay = 5
         while True:
             try:
@@ -183,6 +188,7 @@ async def run_webhook(dev_mode: bool) -> None:
                     url=full_url,
                     secret_token=settings.webhook_secret or None,
                     drop_pending_updates=True,
+                    allowed_updates=allowed,
                 )
                 logger.info("Telegram webhook o'rnatildi: %s", full_url)
                 return
